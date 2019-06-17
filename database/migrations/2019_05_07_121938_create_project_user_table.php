@@ -17,7 +17,6 @@ class CreateProjectUserTable extends Migration
             $table->bigIncrements('project_user_id');
             $table->bigInteger('project_id');
             $table->bigInteger('user_id');
-            $table->timestamps();
         });
     }
 

@@ -16,9 +16,7 @@ class CreateSprintTable extends Migration
         Schema::create('sprint', function (Blueprint $table) {
             $table->bigIncrements('sprint_id');
             $table->dateTime('start_date');
-            $table->bigInteger('length');
-            $table->bigInteger('project_id');
-            $table->bigInteger('points');
+            $table->bigInteger('sprint_info_id');
             $table->timestamps();
         });
     }
