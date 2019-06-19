@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('project', 'Admin\ProjectController')->except(['update']);
+Route::resource('user', 'Admin\UserController')->except(['update']);
