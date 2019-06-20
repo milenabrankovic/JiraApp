@@ -53,7 +53,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {   
 
-        $project = $request->isMethod('put')? Project::findOrFail($request->project_id) : $this->project;
+        $project = $this->project;
 
         $project->name = $request->input('name');
         $project->description = $request->input('description');
@@ -102,6 +102,69 @@ class ProjectController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {   
+        $project = Project::findOrFail($id);
+        
+        $project->name = $request->input('name');
+        $project->description = $request->input('description');
+        $project->start_date = $request->input('start_date');
+        
+        if($project->save())
+        {
+            //return new ProjectResource($project);
+            
+            if($request->input('users') != null) //users je name attr; provera da li je projekat dodeljen zaposlenom
+            {
+                $users_new = $request->input('users');
+                $users_old = \DB::table('project_user')->select('user_id')->where('project_id', $project->project_id)->get()->toArray();
+
+                $array_new = [];
+                $array_old = [];
+
+                foreach($users_old as $old){
+                    $array_old [] = $old->user_id;
+                }
+
+                foreach($users_new as $new){
+                    $array_new [] = $new['user_id'];
+                }
+                
+                $result_delete = array_diff($array_old,$array_new);
+                $result_add = array_diff($array_new,$array_old);
+
+                $data_delete = [];
+                $data_add = [];
+                
+                foreach($result_delete as $id_delete)
+                {
+                    \DB::table('project_user')
+                    ->where([
+                        ['project_id', $project->project_id],
+                        ['user_id', $id_delete]
+                    ])->delete();
+                }
+                foreach($result_add as $id_add)
+                {
+                    $data_add[] = [
+                        'project_id' => $project->project_id,
+                        'user_id' => $id_add
+                    ];
+                }
+
+                \DB::table('project_user')->insert($data_add);
+                
+            }
+        }
     }
 
     /**

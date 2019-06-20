@@ -47,8 +47,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   dd($request);
-        $user = $request->isMethod('put')? User::findOrFail($request->user_id) : $this->user;
+    {   
+        $user = $this->user;
 
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
@@ -95,7 +95,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->role_id = $request->input('role_id');
+        $user->parent_id = $request->input('parent_id');
+        
+        if($user->save()){
+
+            return new UserResource($user);
+        }
     }
 
     /**
@@ -106,6 +119,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        if($user->delete())
+        {
+            return new UserResource($user);
+        }
     }
 }
