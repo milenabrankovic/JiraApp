@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 @section('title')
-    Dashboard
+    Projects
 @endsection
 
 @section('content')
-    content
+    <project-component></project-component>
 @endsection
