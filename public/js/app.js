@@ -1720,11 +1720,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      info: []
+      info: {
+        company_name: '',
+        sprint_length: '',
+        sprint_points: ''
+      }
     };
   },
   created: function created() {
-    this.loading = false;
     this.fetchData();
   },
   methods: {
@@ -1732,7 +1735,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('http://jira-app.com/api/info').then(function (response) {
-        return _this.info = response.data.info;
+        _this.info.company_name = response.data.info.company.name;
+        _this.info.sprint_length = response.data.info.sprint.length;
+        _this.info.sprint_points = response.data.info.sprint.points;
       });
     }
   }
@@ -37160,7 +37165,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("form", [
+    _c("form", { attrs: { action: "", method: "POST" } }, [
       _c("div", { staticClass: "form-group" }, [
         _c("label", { attrs: { for: "company_name" } }, [
           _vm._v("Company name")
@@ -37171,23 +37176,24 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.info.company.name,
-              expression: "info.company.name"
+              value: _vm.info.company_name,
+              expression: "info.company_name"
             }
           ],
           staticClass: "form-control",
           attrs: {
             type: "text",
             id: "company_name",
+            name: "company_name",
             placeholder: "Enter company name"
           },
-          domProps: { value: _vm.info.company.name },
+          domProps: { value: _vm.info.company_name },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.info.company, "name", $event.target.value)
+              _vm.$set(_vm.info, "company_name", $event.target.value)
             }
           }
         })
@@ -37203,23 +37209,24 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.info.sprint.length,
-              expression: "info.sprint.length"
+              value: _vm.info.sprint_length,
+              expression: "info.sprint_length"
             }
           ],
           staticClass: "form-control",
           attrs: {
             type: "number",
             id: "sprint_length",
+            name: "sprint_length",
             placeholder: "Enter sprint length"
           },
-          domProps: { value: _vm.info.sprint.length },
+          domProps: { value: _vm.info.sprint_length },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.info.sprint, "length", $event.target.value)
+              _vm.$set(_vm.info, "sprint_length", $event.target.value)
             }
           }
         })
@@ -37235,23 +37242,24 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.info.sprint.points,
-              expression: "info.sprint.points"
+              value: _vm.info.sprint_points,
+              expression: "info.sprint_points"
             }
           ],
           staticClass: "form-control",
           attrs: {
             type: "number",
             id: "sprint_points",
+            name: "sprint_points",
             placeholder: "Enter sprint points"
           },
-          domProps: { value: _vm.info.sprint.points },
+          domProps: { value: _vm.info.sprint_points },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.info.sprint, "points", $event.target.value)
+              _vm.$set(_vm.info, "sprint_points", $event.target.value)
             }
           }
         })
@@ -37260,7 +37268,7 @@ var render = function() {
       _c(
         "button",
         { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("Submit")]
+        [_vm._v("Save")]
       )
     ])
   ])

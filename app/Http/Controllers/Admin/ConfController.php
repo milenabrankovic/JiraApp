@@ -32,4 +32,16 @@ class ConfController extends Controller
 
         return $this->data;
     }
+
+    public function save(Request $request)
+    {
+        $company = Company::all()->first();
+
+        $company->name = $request->input('company_name');
+        
+
+        $sprint_info = Sprint_Info::all()->where('active', 1)->first();
+        $sprint_info->length = $request->input('sprint_length');
+        $sprint_info->points = $request->input('sprint_points');
+    }
 }
