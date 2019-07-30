@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('/projects', 'FrontendController@projects')->name('projects');
+Route::get('/configuration', 'FrontendController@configuration')->name('configuration');

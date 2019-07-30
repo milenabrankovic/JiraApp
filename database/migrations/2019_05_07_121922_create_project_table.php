@@ -18,7 +18,7 @@ class CreateProjectTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->dateTime('start_date');
-            $table->bigInteger('company_id');	
+            $table->integer('company_id');	
             $table->timestamps();
         });
     }

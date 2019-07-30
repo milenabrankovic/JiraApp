@@ -34,7 +34,6 @@ export default {
         fetchData(){
             axios.get('http://jira-app.com/api/project')
                  .then(response => this.projects = response.data['data']);
-            console.log("projects");
         }
     }
 }

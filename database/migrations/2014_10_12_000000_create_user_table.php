@@ -20,8 +20,8 @@ class CreateUserTable extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->bigInteger('role_id');
-            $table->bigInteger('parent_id')->nullable();
+            $table->integer('role_id');
+            $table->integer('parent_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -10,4 +10,9 @@ class FrontendController extends Controller
     {
         return view('projects');
     }
+
+    public function configuration()
+    {
+        return view('configuration');
+    }
 }

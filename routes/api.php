@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('project', 'Admin\ProjectController');
 Route::resource('user', 'Admin\UserController');
 Route::get('company', 'Admin\ConfController@company');
+Route::get('info', 'Admin\ConfController@info');

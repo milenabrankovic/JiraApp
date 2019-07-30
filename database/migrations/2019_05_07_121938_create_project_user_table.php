@@ -15,8 +15,8 @@ class CreateProjectUserTable extends Migration
     {
         Schema::create('project_user', function (Blueprint $table) {
             $table->bigIncrements('project_user_id');
-            $table->bigInteger('project_id');
-            $table->bigInteger('user_id');
+            $table->integer('project_id');
+            $table->integer('user_id');
         });
     }
 

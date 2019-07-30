@@ -17,12 +17,12 @@ class CreateTaskTable extends Migration
             $table->bigIncrements('task_id');
             $table->string('title');
             $table->text('description');   
-            $table->bigInteger('project_id');
-            $table->bigInteger('status_id');
-            $table->bigInteger('user_id');
-            $table->bigInteger('parent_id');
-            $table->bigInteger('points');
-            $table->bigInteger('sprint_id');
+            $table->integer('project_id');
+            $table->integer('status_id');
+            $table->integer('user_id');
+            $table->integer('parent_id');
+            $table->integer('points');
+            $table->integer('sprint_id');
             $table->timestamps();
         });
     }

@@ -13,13 +13,15 @@ class ConfigurationSeeder extends Seeder
     {
         DB::table('company')->insert([
             [
-                'name' => 'Energoprojekt Entel'
+                'name' => 'Energoprojekt Entel',
+                'active' => 1
             ]
          ]);
          DB::table('sprint_info')->insert([
             [
                 'length' => 14, //two weeks is default duration
-                'points' => 55
+                'points' => 55,
+                'active' => 1
             ]
          ]);
     }
