@@ -21,3 +21,5 @@ Route::resource('project', 'Admin\ProjectController');
 Route::resource('user', 'Admin\UserController');
 Route::get('company', 'Admin\ConfController@company');
 Route::get('info', 'Admin\ConfController@info');
+Route::post('info_update', 'Admin\ConfController@save');
+

@@ -35,13 +35,23 @@ class ConfController extends Controller
 
     public function save(Request $request)
     {
+        
         $company = Company::all()->first();
 
-        $company->name = $request->input('company_name');
+        $company->name = $request->info['company_name'];
         
-
+        
         $sprint_info = Sprint_Info::all()->where('active', 1)->first();
-        $sprint_info->length = $request->input('sprint_length');
-        $sprint_info->points = $request->input('sprint_points');
+        
+        // $sprint_info->length = $request->input('sprint_length');
+        // $sprint_info->points = $request->input('sprint_points');
+
+        $sprint_info->length = $request->info['sprint_length'];
+        $sprint_info->points = $request->info['sprint_points'];
+        
+        if($sprint_info->save() && $company->save())
+        {
+            return redirect()->back();
+        }
     }
 }

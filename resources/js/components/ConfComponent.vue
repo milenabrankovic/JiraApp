@@ -1,6 +1,8 @@
 <template>
     <div class="container">
-        <form action="" method="POST">
+        <form  @submit.prevent="updateInfo" method="POST">
+        <input type="hidden" name="_token" :value="csrf">
+        
         <div class="form-group">
             <label for="company_name">Company name</label>
             <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Enter company name" v-model="info.company_name">
@@ -26,8 +28,8 @@ export default {
                 company_name: '',
                 sprint_length: '',
                 sprint_points: ''
-            }
-            
+            },
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')   
         }
     },
     created(){
@@ -43,8 +45,22 @@ export default {
                     this.info.sprint_points = response.data.info.sprint.points;
                     
                 });
-        }
-    }
+        },
+        updateInfo(){
+
+            const currentObject = this;
+
+            axios.post('http://jira-app.com/api/info_update', {info: currentObject.info})
+            .then(function (response) {
+                alert("Updated successfully");
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }   
+    },
+    
 }
 </script>
 

@@ -1717,6 +1717,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1724,7 +1726,8 @@ __webpack_require__.r(__webpack_exports__);
         company_name: '',
         sprint_length: '',
         sprint_points: ''
-      }
+      },
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
   created: function created() {
@@ -1738,6 +1741,17 @@ __webpack_require__.r(__webpack_exports__);
         _this.info.company_name = response.data.info.company.name;
         _this.info.sprint_length = response.data.info.sprint.length;
         _this.info.sprint_points = response.data.info.sprint.points;
+      });
+    },
+    updateInfo: function updateInfo() {
+      var currentObject = this;
+      axios.post('http://jira-app.com/api/info_update', {
+        info: currentObject.info
+      }).then(function (response) {
+        alert("Updated successfully");
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
       });
     }
   }
@@ -37165,112 +37179,129 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("form", { attrs: { action: "", method: "POST" } }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "company_name" } }, [
-          _vm._v("Company name")
+    _c(
+      "form",
+      {
+        attrs: { method: "POST" },
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.updateInfo($event)
+          }
+        }
+      },
+      [
+        _c("input", {
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.csrf }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "company_name" } }, [
+            _vm._v("Company name")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.info.company_name,
+                expression: "info.company_name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "company_name",
+              name: "company_name",
+              placeholder: "Enter company name"
+            },
+            domProps: { value: _vm.info.company_name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.info, "company_name", $event.target.value)
+              }
+            }
+          })
         ]),
         _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.info.company_name,
-              expression: "info.company_name"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "company_name",
-            name: "company_name",
-            placeholder: "Enter company name"
-          },
-          domProps: { value: _vm.info.company_name },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "sprint_length" } }, [
+            _vm._v("Sprint length")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.info.sprint_length,
+                expression: "info.sprint_length"
               }
-              _vm.$set(_vm.info, "company_name", $event.target.value)
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "number",
+              id: "sprint_length",
+              name: "sprint_length",
+              placeholder: "Enter sprint length"
+            },
+            domProps: { value: _vm.info.sprint_length },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.info, "sprint_length", $event.target.value)
+              }
             }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "sprint_length" } }, [
-          _vm._v("Sprint length")
+          })
         ]),
         _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.info.sprint_length,
-              expression: "info.sprint_length"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: {
-            type: "number",
-            id: "sprint_length",
-            name: "sprint_length",
-            placeholder: "Enter sprint length"
-          },
-          domProps: { value: _vm.info.sprint_length },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "sprint_points" } }, [
+            _vm._v("Sprint points")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.info.sprint_points,
+                expression: "info.sprint_points"
               }
-              _vm.$set(_vm.info, "sprint_length", $event.target.value)
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "number",
+              id: "sprint_points",
+              name: "sprint_points",
+              placeholder: "Enter sprint points"
+            },
+            domProps: { value: _vm.info.sprint_points },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.info, "sprint_points", $event.target.value)
+              }
             }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "sprint_points" } }, [
-          _vm._v("Sprint points")
+          })
         ]),
         _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.info.sprint_points,
-              expression: "info.sprint_points"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: {
-            type: "number",
-            id: "sprint_points",
-            name: "sprint_points",
-            placeholder: "Enter sprint points"
-          },
-          domProps: { value: _vm.info.sprint_points },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.info, "sprint_points", $event.target.value)
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("Save")]
-      )
-    ])
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Save")]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = []
