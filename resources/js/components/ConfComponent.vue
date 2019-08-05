@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <form  @submit.prevent="updateInfo" method="POST">
+        <form  @submit.prevent="updateInfo" method="POST" role="form">
         <input type="hidden" name="_token" :value="csrf">
         
         <div class="form-group">
@@ -16,6 +16,8 @@
             <input type="number" class="form-control" id="sprint_points" name="sprint_points" placeholder="Enter sprint points" v-model="info.sprint_points">
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
+
+
         </form>
     </div>
 </template>
