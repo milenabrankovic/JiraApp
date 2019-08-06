@@ -30,7 +30,8 @@
             <div class="page-wrapper">
                 <nav-component></nav-component>
                 <div class="container">
-                    @yield('content')
+                    <br/><br/>
+                    <router-view></router-view>
                 </div>
             </div>
         </div>
@@ -53,6 +54,7 @@
         <script src="{{asset('/')}}assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
         <!-- END THEME LAYOUT SCRIPTS -->
         <script src="{{ asset('js/app.js') }}"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @show
 </body>
 </html>

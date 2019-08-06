@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Projects
+    Project List
 @endsection
 
 @section('content')

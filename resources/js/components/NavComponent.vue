@@ -61,10 +61,10 @@
                                         <!-- BEGIN USER LOGIN DROPDOWN -->
                                         <li class="dropdown dropdown-user dropdown-dark">
                                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                                <img alt="" class="img-circle" src="/assets/layouts/layout3/img/avatar9.jpg">
+                                               
                                                 <span class="username username-hide-mobile">Nick</span>
                                             </a>
-                                            <ul class="dropdown-menu dropdown-menu-default">
+                                            <ul class="dropdown-menu dropdown-menu-default"  style="margin-top:30px;margin-left:auto;" >
                                                 <li>
                                                     <a href="page_user_profile_1.html">
                                                         <i class="icon-user"></i> My Profile </a>
@@ -112,37 +112,32 @@
                                             </a>
                                             <ul class="dropdown-menu pull-left">
                                                 <li aria-haspopup="true" class=" ">
-                                                    <a href="/projects" class="nav-link  ">
-                                                        <i class="icon-bar-chart"></i> List
-                                                    </a>
-                                                </li>
-                                                <li aria-haspopup="true" class=" ">
-                                                    <a href="" class="nav-link  ">
+                                                    <router-link to="/projects/assignment" class="nav-link  ">
                                                         <i class="icon-bar-chart"></i> Assignement
-                                                    </a>
+                                                    </router-link>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
-                                                    <a href="" class="nav-link  ">
+                                                    <router-link to="/projects" class="nav-link  ">
                                                         <i class="icon-bar-chart"></i> CRUD
-                                                    </a>
+                                                    </router-link>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
-                                            <a href="javascript:;"> Users
+                                            <router-link to="javascript:;"> Users
                                                 <span class="arrow"></span>
-                                            </a>
+                                            </router-link>
                                             <ul class="dropdown-menu pull-left">
                                                 <li aria-haspopup="true" class=" ">
-                                                    <a href="index.html" class="nav-link  ">
+                                                    <router-link to="/projects" class="nav-link  ">
                                                         <i class="icon-bar-chart"></i> CRUD
-                                                    </a>
+                                                    </router-link>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
-                                            <a href="/configuration"> Configuration
-                                            </a>
+                                            <router-link to="/configuration"> Configuration
+                                            </router-link>
                                         </li>
                                     </ul>
                                 </div>

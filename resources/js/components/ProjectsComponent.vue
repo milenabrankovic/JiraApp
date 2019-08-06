@@ -1,6 +1,5 @@
 <template>
     <div class="accordion" id="accordionExample">
-        <br/>
   <div class="card" v-for="project in projects" v-bind:key="project.project_id"> 
     <div class="card-header" v-bind:id="'heading'+project.project_id">
       <h5 class="mb-0">
