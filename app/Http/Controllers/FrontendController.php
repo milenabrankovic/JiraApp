@@ -6,9 +6,19 @@ use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
-    public function projects()
+    public function projects_list()
     {
-        return view('projects');
+        return view('projects.projects_list');
+    }
+
+    public function projects_assignment()
+    {
+        return view('projects.projects_assignment');
+    }
+
+    public function projects_crud()
+    {
+        return view('projects.projects_crud');
     }
 
     public function configuration()

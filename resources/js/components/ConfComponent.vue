@@ -1,6 +1,9 @@
 <template>
-    <div class="container">
-        <form  @submit.prevent="updateInfo" method="POST">
+    <div class="portlet light ">
+        <div class="portlet-title">
+            <div id="prefix_1438324840626" class="custom-alerts alert alert-success">Here you can configure your company name and sprint properties.</div>
+        </div>
+        <form  @submit.prevent="updateInfo" method="POST" role="form">
         <input type="hidden" name="_token" :value="csrf">
         
         <div class="form-group">
@@ -52,7 +55,7 @@ export default {
 
             axios.post('http://jira-app.com/api/info_update', {info: currentObject.info})
             .then(function (response) {
-                alert("Updated successfully");
+                swal("Saved","", "success");
                 console.log(response);
             })
             .catch(function (error) {

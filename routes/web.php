@@ -15,5 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/projects', 'FrontendController@projects')->name('projects');
+Route::get('/projects', 'FrontendController@projects_crud')->name('projects_crud');
+Route::get('/projects/assignment', 'FrontendController@projects_assignment')->name('projects_assignment');
 Route::get('/configuration', 'FrontendController@configuration')->name('configuration');
