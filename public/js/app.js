@@ -2046,7 +2046,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      projects: []
+    };
+  },
+  created: function created() {
+    this.fetchData();
+  },
+  methods: {
+    fetchData: function fetchData() {
+      var _this = this;
+
+      axios.get('http://jira-app.com/api/project').then(function (response) {
+        return _this.projects = response.data['data'];
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -37884,82 +37933,149 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "portlet light " }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "portlet-body" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "tab-content" }, [
+        _c(
+          "div",
+          { staticClass: "tab-pane fade active in", attrs: { id: "tab_1_1" } },
+          [
+            _c("div", { staticClass: "portlet light portlet-fit " }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "portlet-body" }, [
+                _c("div", { staticClass: "table-scrollable" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table table-bordered table-hover" },
+                    [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.projects, function(project) {
+                          return _c("tr", { key: project.project_id }, [
+                            _c("td", [
+                              _vm._v(" " + _vm._s(project.name) + " ")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(" " + _vm._s(project.description) + " ")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(" " + _vm._s(project.start_date) + " ")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(" makr124 ")])
+                          ])
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "tab-pane fade", attrs: { id: "tab_1_2" } }, [
+          _vm._v("\n               CREATE\n            ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "tab-pane fade", attrs: { id: "tab_1_3" } }, [
+          _vm._v("\n                EDIT\n            ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "tab-pane fade", attrs: { id: "tab_1_4" } }, [
+          _vm._v("\n                DELETE\n            ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "clearfix margin-bottom-20" })
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "portlet light " }, [
-      _c("div", { staticClass: "portlet-title" }, [
-        _c(
-          "div",
-          {
-            staticClass: "custom-alerts alert alert-success",
-            attrs: { id: "prefix_1438324840626" }
-          },
-          [_vm._v("Here you can do CRUD actions on projects.")]
-        )
+    return _c("div", { staticClass: "portlet-title" }, [
+      _c(
+        "div",
+        {
+          staticClass: "custom-alerts alert alert-success",
+          attrs: { id: "prefix_1438324840626" }
+        },
+        [_vm._v("Here you can do CRUD actions on projects.")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "nav nav-tabs" }, [
+      _c("li", { staticClass: "active" }, [
+        _c("a", { attrs: { href: "#tab_1_1", "data-toggle": "tab" } }, [
+          _vm._v(" List ")
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "portlet-body" }, [
-        _c("ul", { staticClass: "nav nav-tabs" }, [
-          _c("li", { staticClass: "active" }, [
-            _c("a", { attrs: { href: "#tab_1_1", "data-toggle": "tab" } }, [
-              _vm._v(" List ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#tab_1_2", "data-toggle": "tab" } }, [
-              _vm._v(" Create ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#tab_1_3", "data-toggle": "tab" } }, [
-              _vm._v(" Edit ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#tab_1_4", "data-toggle": "tab" } }, [
-              _vm._v(" Delete ")
-            ])
-          ])
-        ]),
+      _c("li", [
+        _c("a", { attrs: { href: "#tab_1_2", "data-toggle": "tab" } }, [
+          _vm._v(" Create ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", { attrs: { href: "#tab_1_3", "data-toggle": "tab" } }, [
+          _vm._v(" Edit ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", { attrs: { href: "#tab_1_4", "data-toggle": "tab" } }, [
+          _vm._v(" Delete ")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "portlet-title" }, [
+      _c("div", { staticClass: "caption" }, [
+        _c("i", { staticClass: "icon-list font-dark" }),
         _vm._v(" "),
-        _c("div", { staticClass: "tab-content" }, [
-          _c(
-            "div",
-            {
-              staticClass: "tab-pane fade active in",
-              attrs: { id: "tab_1_1" }
-            },
-            [_vm._v("\n                LIST\n            ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "tab-pane fade", attrs: { id: "tab_1_2" } },
-            [_vm._v("\n               CREATE\n            ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "tab-pane fade", attrs: { id: "tab_1_3" } },
-            [_vm._v("\n                EDIT\n            ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "tab-pane fade", attrs: { id: "tab_1_4" } },
-            [_vm._v("\n                DELETE\n            ")]
-          )
-        ]),
+        _c(
+          "span",
+          { staticClass: "caption-subject font-dark bold uppercase" },
+          [_vm._v("Projects")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v(" Project Name ")]),
         _vm._v(" "),
-        _c("div", { staticClass: "clearfix margin-bottom-20" })
+        _c("th", [_vm._v(" Description ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v(" Start Date ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v(" Project Manager ")])
       ])
     ])
   }
@@ -38087,7 +38203,7 @@ function normalizeComponent (
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /*!
-  * vue-router v3.1.0
+  * vue-router v3.1.1
   * (c) 2019 Evan You
   * @license MIT
   */
@@ -39083,6 +39199,8 @@ function normalizeLocation (
 var toTypes = [String, Object];
 var eventTypes = [String, Array];
 
+var noop = function () {};
+
 var Link = {
   name: 'RouterLink',
   props: {
@@ -39147,9 +39265,9 @@ var Link = {
     var handler = function (e) {
       if (guardEvent(e)) {
         if (this$1.replace) {
-          router.replace(location);
+          router.replace(location, null, noop);
         } else {
-          router.push(location);
+          router.push(location, null, noop);
         }
       }
     };
@@ -40920,7 +41038,7 @@ function createHref (base, fullPath, mode) {
 }
 
 VueRouter.install = install;
-VueRouter.version = '3.1.0';
+VueRouter.version = '3.1.1';
 
 if (inBrowser && window.Vue) {
   window.Vue.use(VueRouter);
