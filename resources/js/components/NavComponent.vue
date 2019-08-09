@@ -38,117 +38,32 @@
   </div> 
 
 </nav> -->
-<div class="page-wrapper-row">
-<div class="page-wrapper-top">
-                    <!-- BEGIN HEADER -->
-                    <div class="page-header">
-                        <!-- BEGIN HEADER TOP -->
-                        <div class="page-header-top">
-                            <div class="container">
-                                <!-- BEGIN LOGO -->
-                                <div class="page-logo">
-                                    <a href="index.html">
-                                        <img src="/assets/layouts/layout3/img/logo-default.jpg" alt="logo" class="logo-default">
-                                    </a>
-                                </div>
-                                <!-- END LOGO -->
-                                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-                                <a href="javascript:;" class="menu-toggler"></a>
-                                <!-- END RESPONSIVE MENU TOGGLER -->
-                                <!-- BEGIN TOP NAVIGATION MENU -->
-                                <div class="top-menu">
-                                    <ul class="nav navbar-nav pull-right">
-                                        <!-- BEGIN USER LOGIN DROPDOWN -->
-                                        <li class="dropdown dropdown-user dropdown-dark">
-                                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                               
-                                                <span class="username username-hide-mobile">Nick</span>
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-default"  style="margin-top:30px;margin-left:auto;" >
-                                                <li>
-                                                    <a href="page_user_profile_1.html">
-                                                        <i class="icon-user"></i> My Profile </a>
-                                                </li>
-                                                <li>
-                                                    <a href="app_calendar.html">
-                                                        <i class="icon-calendar"></i> My Calendar </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <!-- END USER LOGIN DROPDOWN -->
-                                    </ul>
-                                </div>
-                                <!-- END TOP NAVIGATION MENU -->
-                            </div>
-                        </div>
-                        <!-- END HEADER TOP -->
-                        <!-- BEGIN HEADER MENU -->
-                        <div class="page-header-menu">
-                            <div class="container">
-                                <!-- BEGIN HEADER SEARCH BOX -->
-                                <form class="search-form" action="page_general_search.html" method="GET">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search" name="query">
-                                        <span class="input-group-btn">
-                                            <a href="javascript:;" class="btn submit">
-                                            </a>
-                                        </span>
-                                    </div>
-                                </form>
-                                <!-- END HEADER SEARCH BOX -->
-                                <!-- BEGIN MEGA MENU -->
-                                <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
-                                <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
-                                <div class="hor-menu  ">
-                                    <ul class="nav navbar-nav">
-                                        <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
-                                            <a href="/"> Dashboard
-                                                <span class="arrow"></span>
-                                            </a>
-                                        </li>
-                                        <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
-                                            <a href="javascript:;"> Projects
-                                                <span class="arrow"></span>
-                                            </a>
-                                            <ul class="dropdown-menu pull-left">
-                                                <li aria-haspopup="true" class=" ">
-                                                    <router-link to="/projects/assignment" class="nav-link  ">
-                                                        <i class="icon-bar-chart"></i> Assignement
-                                                    </router-link>
-                                                </li>
-                                                <li aria-haspopup="true" class=" ">
-                                                    <router-link to="/projects" class="nav-link  ">
-                                                        <i class="icon-bar-chart"></i> CRUD
-                                                    </router-link>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
-                                            <router-link to="javascript:;"> Users
-                                                <span class="arrow"></span>
-                                            </router-link>
-                                            <ul class="dropdown-menu pull-left">
-                                                <li aria-haspopup="true" class=" ">
-                                                    <router-link to="/projects" class="nav-link  ">
-                                                        <i class="icon-bar-chart"></i> CRUD
-                                                    </router-link>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
-                                            <router-link to="/configuration"> Configuration
-                                            </router-link>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- END MEGA MENU -->
-                            </div>
-                        </div>
-                        <!-- END HEADER MENU -->
-                    </div>
-                    <!-- END HEADER -->
+<!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar-wrapper">
+                <!-- BEGIN SIDEBAR -->
+                <div class="page-sidebar">
+                    <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                        <li class="nav-item start">
+                            <router-link to="/projects" class="nav-link nav-toggle">
+                                <i class="icon-list"></i>
+                                <span class="title">Projects</span>
+                                <span class="selected"></span>
+                            </router-link>
+                        </li>
+                        <li class="nav-item start">
+                             <router-link to="/configuration" class="nav-link nav-toggle">
+                                <i class="icon-settings"></i>
+                                <span class="title">Configuration</span>
+                                <span class="selected"></span>
+                            </router-link>
+                        </li>
+                        
+                    </ul>
+                    <!-- END SIDEBAR MENU -->
                 </div>
-           </div>
+                <!-- END SIDEBAR -->
+            </div>
+            <!-- END SIDEBAR -->
 </template>
 
 <script>
@@ -169,4 +84,13 @@ export default {
     }
 }
 </script>
+
+<style>
+    .router-link-active{
+        border-left: 3px solid #5C9ACF!important;
+        margin-left: -3px;
+        padding-left: 15px;
+        background: #f2f6f9;
+    }
+</style>
 

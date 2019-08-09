@@ -18,6 +18,7 @@ const router = new VueRouter({
 })
 
 Vue.component('nav-component', require('./components/NavComponent.vue').default);
+Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 Vue.component('project-component', require('./components/ProjectsComponent.vue').default);
 Vue.component('project-crud', require('./components/ProjectsCrudComponent.vue').default);
 Vue.component('conf-component', require('./components/ConfComponent.vue').default);
