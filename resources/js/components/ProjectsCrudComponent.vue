@@ -70,7 +70,7 @@
                     <div class="row">
                         <div>
                             <!-- BEGIN SAMPLE FORM PORTLET-->
-                            <div class="portlet light bordered">
+                            <div class="portlet light">
                                 <div class="portlet-title">
                                     <div class="caption font-red-sunglo">
                                         <i class="icon-plus font-red-sunglo"></i>
@@ -78,38 +78,21 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body form">
-                                    <form role="form">
+                                   <form role="form" method="post" @submit="createProject">
+                                       <input type="hidden" name="_token" :value="csrf">
                                         <div class="form-group">
-                                            <label>Project Name</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon input-circle-left">
-                                                    <i class="fa fa-envelope"></i>
-                                                </span>
-                                                <input type="text" class="form-control input-circle-right" placeholder="Project Name">
-                                             </div>
+                                            <label for="labelProjectName">Project Name</label>
+                                            <input type="text" class="form-control" id="labelProjectName" name="project_name" placeholder="Enter project name" v-model="project.project_name">
                                         </div>
                                         <div class="form-group">
-                                             <label>Project Description</label>
-                                             <div class="input-group">
-                                                <span class="input-group-addon input-circle-left">
-                                                    <i class="fa fa-envelope"></i>
-                                                </span>
-                                                <textarea class="form-control input-circle-right" placeholder="Project Description"></textarea>
-                                             </div>
+                                            <label for="labelProjectDesc">Project Description</label>
+                                            <textarea class="form-control" id="labelProjectDesc" name="project_description" placeholder="Enter project description" v-model="project.project_description"></textarea>
                                         </div>
                                         <div class="form-group">
-                                             <label>Start Date</label>
-                                             <div class="input-group">
-                                                <span class="input-group-addon input-circle-left">
-                                                    <i class="fa fa-envelope"></i>
-                                                </span>
-                                                <input type="text" class="form-control input-circle-right" placeholder="Project Name">
-                                            </div>
+                                            <label for="labelStartDate">Start Date</label>
+                                            <input type="date"  class="form-control" id="labelStartDate" name="start_date" size="16" v-model="project.start_date">
                                         </div>
-                                        <div class="form-actions">
-                                            <button type="submit" class="btn blue">Submit</button>
-                                            <button type="button" class="btn default">Cancel</button>
-                                        </div>
+                                        <button type="submit" class="btn btn-primary">Create</button>
                                     </form>
                                 </div>
                             </div>
@@ -134,7 +117,13 @@
 export default {
 data(){
         return{
-            projects: []
+            projects: [],
+            project: {
+                project_name: '',
+                project_description: '',
+                start_date: ''
+            },
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content') 
         }
     },
     created(){
@@ -144,7 +133,17 @@ data(){
         fetchData(){
             axios.get('http://jira-app.com/api/project')
                  .then(response => this.projects = response.data['data']);
-        }
+        },
+        createProject(){
+            axios.post('http://jira-app.com/api/project')
+            .then(function (response) {
+                //swal("Saved","", "success");
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }  
     }
 }
 </script>

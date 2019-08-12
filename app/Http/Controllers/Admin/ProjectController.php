@@ -52,13 +52,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {   
-
+        dd($request);
         $project = $this->project;
 
-        $project->name = $request->input('name');
-        $project->description = $request->input('description');
-        $project->start_date = $request->input('start_date');
-        
+        $project->name = $request->project('project_name');
+        $project->description = $request->project('project_description');
+        $project->start_date = $request->project('start_date');
         if($project->save())
         {
             //return new ProjectResource($project);

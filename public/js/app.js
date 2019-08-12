@@ -2037,27 +2037,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      projects: []
+      projects: [],
+      project: {
+        project_name: '',
+        project_description: '',
+        start_date: ''
+      },
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
   created: function created() {
@@ -2069,6 +2058,14 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('http://jira-app.com/api/project').then(function (response) {
         return _this.projects = response.data['data'];
+      });
+    },
+    createProject: function createProject() {
+      axios.post('http://jira-app.com/api/project').then(function (response) {
+        //swal("Saved","", "success");
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
       });
     }
   }
@@ -39339,7 +39336,160 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm._m(5),
+          _c(
+            "div",
+            { staticClass: "tab-pane fade", attrs: { id: "tab_1_2" } },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", [
+                  _c("div", { staticClass: "portlet light" }, [
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "portlet-body form" }, [
+                      _c(
+                        "form",
+                        {
+                          attrs: { role: "form", method: "post" },
+                          on: { submit: _vm.createProject }
+                        },
+                        [
+                          _c("input", {
+                            attrs: { type: "hidden", name: "_token" },
+                            domProps: { value: _vm.csrf }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              { attrs: { for: "labelProjectName" } },
+                              [_vm._v("Project Name")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.project.project_name,
+                                  expression: "project.project_name"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                id: "labelProjectName",
+                                name: "project_name",
+                                placeholder: "Enter project name"
+                              },
+                              domProps: { value: _vm.project.project_name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.project,
+                                    "project_name",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              { attrs: { for: "labelProjectDesc" } },
+                              [_vm._v("Project Description")]
+                            ),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.project.project_description,
+                                  expression: "project.project_description"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                id: "labelProjectDesc",
+                                name: "project_description",
+                                placeholder: "Enter project description"
+                              },
+                              domProps: {
+                                value: _vm.project.project_description
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.project,
+                                    "project_description",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "labelStartDate" } }, [
+                              _vm._v("Start Date")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.project.start_date,
+                                  expression: "project.start_date"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "date",
+                                id: "labelStartDate",
+                                name: "start_date",
+                                size: "16"
+                              },
+                              domProps: { value: _vm.project.start_date },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.project,
+                                    "start_date",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              attrs: { type: "submit" }
+                            },
+                            [_vm._v("Create")]
+                          )
+                        ]
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c(
             "div",
@@ -39451,98 +39601,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "tab-pane fade", attrs: { id: "tab_1_2" } },
-      [
-        _c("div", { staticClass: "row" }, [
-          _c("div", [
-            _c("div", { staticClass: "portlet light bordered" }, [
-              _c("div", { staticClass: "portlet-title" }, [
-                _c("div", { staticClass: "caption font-red-sunglo" }, [
-                  _c("i", { staticClass: "icon-plus font-red-sunglo" }),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    { staticClass: "caption-subject bold uppercase" },
-                    [_vm._v(" Create Project")]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "portlet-body form" }, [
-                _c("form", { attrs: { role: "form" } }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("Project Name")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group" }, [
-                      _c(
-                        "span",
-                        { staticClass: "input-group-addon input-circle-left" },
-                        [_c("i", { staticClass: "fa fa-envelope" })]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control input-circle-right",
-                        attrs: { type: "text", placeholder: "Project Name" }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("Project Description")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group" }, [
-                      _c(
-                        "span",
-                        { staticClass: "input-group-addon input-circle-left" },
-                        [_c("i", { staticClass: "fa fa-envelope" })]
-                      ),
-                      _vm._v(" "),
-                      _c("textarea", {
-                        staticClass: "form-control input-circle-right",
-                        attrs: { placeholder: "Project Description" }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("Start Date")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group" }, [
-                      _c(
-                        "span",
-                        { staticClass: "input-group-addon input-circle-left" },
-                        [_c("i", { staticClass: "fa fa-envelope" })]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control input-circle-right",
-                        attrs: { type: "text", placeholder: "Project Name" }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-actions" }, [
-                    _c(
-                      "button",
-                      { staticClass: "btn blue", attrs: { type: "submit" } },
-                      [_vm._v("Submit")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      { staticClass: "btn default", attrs: { type: "button" } },
-                      [_vm._v("Cancel")]
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ])
+    return _c("div", { staticClass: "portlet-title" }, [
+      _c("div", { staticClass: "caption font-red-sunglo" }, [
+        _c("i", { staticClass: "icon-plus font-red-sunglo" }),
+        _vm._v(" "),
+        _c("span", { staticClass: "caption-subject bold uppercase" }, [
+          _vm._v(" Create Project")
         ])
-      ]
-    )
+      ])
+    ])
   }
 ]
 render._withStripped = true
