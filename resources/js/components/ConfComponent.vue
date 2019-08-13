@@ -1,5 +1,10 @@
 <template>
     <div class="portlet light">
+        <div class="page-head">
+            <div class="page-title">
+                <h1>Configuration</h1>
+            </div>
+            </div>
         <div class="portlet-title">
             <div id="prefix_1438324840626" class="custom-alerts alert alert-success">Here you can configure your company name and sprint properties.</div>
         </div>

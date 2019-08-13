@@ -52,33 +52,53 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {   
-        dd($request);
+        
         $project = $this->project;
 
-        $project->name = $request->project('project_name');
-        $project->description = $request->project('project_description');
-        $project->start_date = $request->project('start_date');
+        $project->name = $request->project['project_name'];
+        $project->description = $request->project['project_description'];
+        $project->start_date = $request->project['start_date'];
+        
         if($project->save())
         {
             //return new ProjectResource($project);
             
-            if($request->input('users') != null) //users je name attr; provera da li je projekat dodeljen zaposlenom
+            if($request->selectedUsers != null && count($request->selectedUsers)>0) //users je name attr; provera da li je projekat dodeljen zaposlenom
             {
-                $users = $request->input('users');
+              // $this->assign_employee($request, $project->project_id);
+                $users = $request->selectedUsers;
                 $data = [];
-               
+                
                 foreach($users as $user)
                 { 
-                    $data = [
-                        "user_id" => $user['user_id'],
+                    $data[] = [
+                        "user_id" => $user,
                         "project_id" => $project->project_id
                     ];
                 }
-
+                
                 \DB::table('project_user')->insert($data);
             }
         }
         
+    }
+
+    public function assign_employee(Request $request)
+    {
+        return($request);
+        $users = $request->selectedUsers;
+
+        $data = [];
+        return $users;
+        foreach($users as $user)
+        { 
+            $data = [
+                "user_id" => $user,
+                "project_id" => $project_id
+            ];
+        }
+
+        \DB::table('project_user')->insert($data);
     }
 
     /**
