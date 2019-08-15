@@ -21,6 +21,11 @@ class FrontendController extends Controller
         return view('projects.projects_crud');
     }
 
+    public function users_crud()
+    {
+        return view('users_crud');
+    }
+
     public function configuration()
     {
         return view('configuration');

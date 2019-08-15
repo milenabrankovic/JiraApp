@@ -25,10 +25,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-
-        return UserResource::collection($users);
+        //$users = User::all();
+        $users = \DB::table('user')->join('role', 'role.role_id', 'user.role_id')->get();
+        
+        return $users;
     }
+
 
     /**
      * Show the form for creating a new resource.

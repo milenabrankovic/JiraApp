@@ -8,7 +8,8 @@ Vue.use(VueRouter)
 
 let routes = [
     { path: '/projects', component: require('./components/ProjectsCrudComponent.vue').default },
-    { path: '/configuration', component: require('./components/ConfComponent.vue').default }
+    { path: '/configuration', component: require('./components/ConfComponent.vue').default },
+    { path: '/users', component: require('./components/UserComponent.vue').default }
 
   ]
 
@@ -22,6 +23,7 @@ Vue.component('header-component', require('./components/HeaderComponent.vue').de
 Vue.component('project-component', require('./components/ProjectsComponent.vue').default);
 Vue.component('project-crud', require('./components/ProjectsCrudComponent.vue').default);
 Vue.component('conf-component', require('./components/ConfComponent.vue').default);
+Vue.component('user-component', require('./components/UserComponent.vue').default);
 
 const app = new Vue({
     el: '#app',

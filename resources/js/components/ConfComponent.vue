@@ -13,15 +13,15 @@
         
         <div class="form-group">
             <label for="company_name">Company name</label>
-            <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Enter company name" v-model="info.company_name">
+            <input type="text" required class="form-control" id="company_name" name="company_name" placeholder="Enter company name" v-model="info.company_name">
         </div>
         <div class="form-group">
             <label for="sprint_length">Sprint length</label>
-            <input type="number" class="form-control" id="sprint_length" name="sprint_length" placeholder="Enter sprint length" v-model="info.sprint_length">
+            <input type="number" required class="form-control" id="sprint_length" name="sprint_length" placeholder="Enter sprint length" v-model="info.sprint_length">
         </div>
         <div class="form-group">
             <label for="sprint_points">Sprint points</label>
-            <input type="number" class="form-control" id="sprint_points" name="sprint_points" placeholder="Enter sprint points" v-model="info.sprint_points">
+            <input type="number" required class="form-control" id="sprint_points" name="sprint_points" placeholder="Enter sprint points" v-model="info.sprint_points">
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
         </form>
@@ -60,7 +60,11 @@ export default {
 
             axios.post('http://jira-app.com/api/info_update', {info: currentObject.info})
             .then(function (response) {
-                swal("Saved","", "success");
+                swal({
+                    title: "Good job!",
+                    text: "You clicked the button!",
+                    icon: "success",
+                });
                 console.log(response);
             })
             .catch(function (error) {

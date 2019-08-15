@@ -29,9 +29,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::with('users')->get()->toArray();
 
-        return ProjectResource::collection($projects);
+        return ($projects);
     }
 
     /**
@@ -132,19 +132,19 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {   
+        
         $project = Project::findOrFail($id);
         
-        $project->name = $request->input('name');
-        $project->description = $request->input('description');
-        $project->start_date = $request->input('start_date');
+        $project->name = $request->project['project_name'];
+        $project->description = $request->project['project_description'];
+        $project->start_date = $request->project['start_date'];
         
         if($project->save())
         {
-            //return new ProjectResource($project);
             
-            if($request->input('users') != null) //users je name attr; provera da li je projekat dodeljen zaposlenom
+            if($request->selectedUsers != null && count($request->selectedUsers)>0) //users je name attr; provera da li je projekat dodeljen zaposlenom
             {
-                $users_new = $request->input('users');
+                $users_new = $request->selectedUsers;
                 $users_old = \DB::table('project_user')->select('user_id')->where('project_id', $project->project_id)->get()->toArray();
 
                 $array_new = [];
@@ -155,9 +155,9 @@ class ProjectController extends Controller
                 }
 
                 foreach($users_new as $new){
-                    $array_new [] = $new['user_id'];
+                    $array_new [] = $new;
                 }
-                
+               
                 $result_delete = array_diff($array_old,$array_new);
                 $result_add = array_diff($array_new,$array_old);
 
@@ -182,6 +182,7 @@ class ProjectController extends Controller
 
                 \DB::table('project_user')->insert($data_add);
                 
+                //return new ProjectResource($project);
             }
         }
     }
@@ -195,9 +196,10 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         $project = Project::find($id);
-
+        
         if($project->delete())
-        {
+        { 
+            \DB::table('project_user')->where('project_id', $id)->delete();
             return new ProjectResource($project);
         }
     }
