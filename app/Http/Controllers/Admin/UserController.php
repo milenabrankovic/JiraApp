@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Role;
 use App\Http\Resources\User as UserResource;
 use Illuminate\Support\Facades\Hash;
 
@@ -31,6 +32,12 @@ class UserController extends Controller
         return $users;
     }
 
+    public function roles()
+    {
+        $roles = Role::all();
+        
+        return $roles;
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -52,13 +59,13 @@ class UserController extends Controller
     {   
         $user = $this->user;
 
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        $user->username = $request->input('username');
-        $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
-        $user->role_id = $request->input('role_id');
-        $user->parent_id = $request->input('parent_id');
+        $user->first_name = $request->user['first_name'];
+        $user->last_name = $request->user['last_name'];
+        $user->username = $request->user['username'];
+        $user->email = $request->user['email'];
+        $user->password = Hash::make($request->user['password']);
+        $user->role_id = $request->user['role'];
+        $user->parent_id = $request->user['leader'];
         
         if($user->save()){
 
@@ -99,13 +106,13 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        $user->username = $request->input('username');
-        $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
-        $user->role_id = $request->input('role_id');
-        $user->parent_id = $request->input('parent_id');
+        $user->first_name = $request->user['first_name'];
+        $user->last_name = $request->user['last_name'];
+        $user->username = $request->user['username'];
+        $user->email = $request->user['email'];
+        $user->password = Hash::make($request->user['password']);
+        $user->role_id = $request->user['role'];
+        $user->parent_id = $request->user['leader'];
         
         if($user->save()){
 

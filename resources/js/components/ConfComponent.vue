@@ -23,7 +23,7 @@
             <label for="sprint_points">Sprint points</label>
             <input type="number" required class="form-control" id="sprint_points" name="sprint_points" placeholder="Enter sprint points" v-model="info.sprint_points">
         </div>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn green">Save</button>
         </form>
     </div>
 </template>
@@ -41,9 +41,11 @@ export default {
         }
     },
     created(){
+        
         this.fetchData();
     },
     methods:{
+        
         fetchData(){
             axios.get('http://jira-app.com/api/info')
                 .then(response => 

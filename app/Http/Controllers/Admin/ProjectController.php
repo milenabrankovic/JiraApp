@@ -142,10 +142,11 @@ class ProjectController extends Controller
         if($project->save())
         {
             
-            if($request->selectedUsers != null && count($request->selectedUsers)>0) //users je name attr; provera da li je projekat dodeljen zaposlenom
+            if($request->selectedUsers != null) //users je name attr; provera da li je projekat dodeljen zaposlenom
             {
                 $users_new = $request->selectedUsers;
                 $users_old = \DB::table('project_user')->select('user_id')->where('project_id', $project->project_id)->get()->toArray();
+                
 
                 $array_new = [];
                 $array_old = [];
@@ -160,7 +161,7 @@ class ProjectController extends Controller
                
                 $result_delete = array_diff($array_old,$array_new);
                 $result_add = array_diff($array_new,$array_old);
-
+                
                 $data_delete = [];
                 $data_add = [];
                 
@@ -183,6 +184,10 @@ class ProjectController extends Controller
                 \DB::table('project_user')->insert($data_add);
                 
                 //return new ProjectResource($project);
+            }
+            else
+            {
+                \DB::table('project_user')->where('project_id', $project->project_id)->delete();
             }
         }
     }

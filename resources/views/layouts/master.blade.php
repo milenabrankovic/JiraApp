@@ -7,23 +7,25 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     @section('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
        <!-- BEGIN GLOBAL MANDATORY STYLES -->
        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
-       <link href="{{asset('/')}}/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-       <link href="{{asset('/')}}/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-       <link href="{{asset('/')}}/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-       <link href="{{asset('/')}}/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+       <link href="{{asset('/')}}assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+       <link href="{{asset('/')}}assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+       <link href="{{asset('/')}}assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+       <link href="{{asset('/')}}assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
        <!-- END GLOBAL MANDATORY STYLES -->
        <!-- BEGIN THEME GLOBAL STYLES -->
-       <link href="{{asset('/')}}/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-       <link href="{{asset('/')}}/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+       <link href="{{asset('/')}}assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+       <link href="{{asset('/')}}assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
        <!-- END THEME GLOBAL STYLES -->
        <!-- BEGIN THEME LAYOUT STYLES -->
-       <link href="{{asset('/')}}/assets/layouts/layout4/css/layout.min.css" rel="stylesheet" type="text/css" />
-       <link href="{{asset('/')}}/assets/layouts/layout4/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
-       <link href="{{asset('/')}}/assets/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css" />
+       <link href="{{asset('/')}}assets/layouts/layout4/css/layout.min.css" rel="stylesheet" type="text/css" />
+       <link href="{{asset('/')}}assets/layouts/layout4/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
+       <link href="{{asset('/')}}assets/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css" />
        <!-- END THEME LAYOUT STYLES -->
+       <link href=".{{asset('/')}}assets/global/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+
     @show
 </head>
 <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo">
@@ -61,6 +63,8 @@
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+        <script src="{{asset('/')}}assets/global/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js" type="text/javascript"></script>
+        <script src="{{asset('/')}}assets/pages/scripts/components-bootstrap-multiselect.min.js" type="text/javascript"></script>
 
       
     @show

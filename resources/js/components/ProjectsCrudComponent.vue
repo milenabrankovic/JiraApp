@@ -76,7 +76,7 @@
                                 <tr v-if="!projects.length" class="no-data">
                                     <td colspan="5" class="text-center">Projects not found</td>
                                 </tr>
-                                <tr v-if="projects.length" v-for="project in projects" v-bind:key="project.project_id">
+                                <tr v-else v-for="project in projects" v-bind:key="project.project_id">
                                     <td> {{project.name}} </td>
                                     <td> {{project.description}} </td>
                                     <td> {{project.start_date.split(' ')[0]}} </td>
@@ -152,21 +152,20 @@ export default {
         },
         fetchUsers(){
             axios.get('http://jira-app.com/api/user')
-                    .then(response => this.users = response.data['data']);
+                    .then(response => this.users = response.data);
         },
         createProject(event){
             this.selectedUsers = $("#multiple").val();
             axios.post('http://jira-app.com/api/project', {project: this.project, selectedUsers: this.selectedUsers})
-            .then(response => {console.log(response); this.fetchProjects();});
+            .then(response => {this.fetchProjects();});
         },
         editProject(){
-            console.log(this.project.project_id);
             axios.put('http://jira-app.com/api/project/'+this.project.project_id, {project:this.project, selectedUsers: this.selectedUsers})
-            .then(response => {console.log(response); this.fetchProjects();});
+            .then(response => {this.fetchProjects();});
         },
         deleteProject(){
             axios.delete('http://jira-app.com/api/project/'+this.project.project_id,)
-            .then(response => {console.log(response); this.fetchProjects();});
+            .then(response => {this.fetchProjects();});
         },
         hideModal(){
             $('#project_modal').modal('hide');
@@ -201,7 +200,11 @@ export default {
                 inner += value.first_name+' '+value.last_name+', ';
             });
             this.selectedUsers = niz;
+            if(niz.length == 0){
+                inner = 'Nothing selected';
+            }else{
             inner = inner.substring(0, inner.length - 2);
+            }
             $('.filter-option-inner-inner').text(inner);
         }
     }
