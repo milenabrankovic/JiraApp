@@ -11,13 +11,13 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user')->insert([
+        DB::table('users')->insert([
             [
                 'first_name' => 'Milena',
                 'last_name' => 'Brankovic',
                 'username' => 'mbrankovic',
                 'email' => 'mbrankovic@ep-entel.com',
-                'password' => 'milena123',
+                'password' => bcrypt('milena123'),
                 'role_id' => 2,
                 'parent_id' => null
             ],
@@ -26,7 +26,7 @@ class UserTableSeeder extends Seeder
                 'last_name' => 'Petrovic',
                 'username' => 'ppetrovic',
                 'email' => 'ppetrovic@ep-entel.com',
-                'password' => 'petar123',
+                'password' => bcrypt('petar123'),
                 'role_id' => 2,
                 'parent_id' => 1
             ],
@@ -35,7 +35,7 @@ class UserTableSeeder extends Seeder
                 'last_name' => 'Djuric',
                 'username' => 'jdjuric',
                 'email' => 'jdjuric@ep-entel.com',
-                'password' => 'jdjuric123',
+                'password' => bcrypt('jdjuric123'),
                 'role_id' => 2,
                 'parent_id' => 2
             ],
@@ -44,7 +44,7 @@ class UserTableSeeder extends Seeder
                 'last_name' => 'Jovic',
                 'username' => 'mjovic',
                 'email' => 'mjovic@ep-entel.com',
-                'password' => 'mjovic123',
+                'password' => bcrypt('mjovic123'),
                 'role_id' => 2,
                 'parent_id' => 2
             ]

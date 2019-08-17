@@ -128,6 +128,7 @@ export default {
     },
     data(){
         return{
+            test: 1,
             projects: [],
             project: {
                 project_name: '',
@@ -145,7 +146,15 @@ export default {
         this.fetchProjects();
         this.fetchUsers();
     },
+    watch:{
+        $route (to, from){
+            this.rerender();
+        }
+    },
     methods:{
+        rerender(){
+            //location.reload();
+        },
         fetchProjects(){
             axios.get('http://jira-app.com/api/project')
                     .then(response => { this.projects = response.data});
