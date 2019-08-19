@@ -205,7 +205,6 @@ export default {
             $( '.modal-backdrop.in' ).hide(); // removes the overlay
         },
         editModal(user){
-            
             this.edit = true;
             $('#user_id_to_edit').val(user.user_id);
             this.user.user_id = user.user_id;
