@@ -27,7 +27,7 @@ class UserController extends Controller
     public function index()
     {
         //$users = User::all();
-        $users = \DB::table('user')->join('role', 'role.role_id', 'user.role_id')->get();
+        $users = \DB::table('users')->join('role', 'role.role_id', 'users.role_id')->get();
         
         return $users;
     }
