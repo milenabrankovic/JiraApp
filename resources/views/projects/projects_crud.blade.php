@@ -1,7 +1,5 @@
 @extends('layouts.master')
 
-
-
 @section('title')
     Project CRUD
 @endsection

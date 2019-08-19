@@ -144,6 +144,7 @@ export default {
     },
     data(){
         return{
+            test: 1,
             users: [],
             user: {
                 first_name: '',
@@ -163,8 +164,15 @@ export default {
         this.fetchUsers();
         this.fetchRoles();
     },
+    watch:{
+        $route (to, from){
+            this.rerender();
+        }
+    },
     methods:{
-
+        rerender(){
+           //location.reload();
+        },
         fetchUsers(){
             axios.get('http://jira-app.com/api/user')
                     .then(response => {this.users = response.data});

@@ -4,9 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+//Model
+class User extends Model implements Authenticatable
 {
-    protected $table = 'user';
+    use AuthenticableTrait;
+    
+    protected $table = 'users';
 
     public $primaryKey = 'user_id';
 

@@ -1771,6 +1771,58 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HeaderComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/HeaderComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/NavComponent.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/NavComponent.vue?vue&type=script&lang=js& ***!
@@ -2030,6 +2082,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      test: 1,
       projects: [],
       project: {
         project_name: '',
@@ -2047,7 +2100,14 @@ __webpack_require__.r(__webpack_exports__);
     this.fetchProjects();
     this.fetchUsers();
   },
+  watch: {
+    $route: function $route(to, from) {
+      this.rerender();
+    }
+  },
   methods: {
+    rerender: function rerender() {//location.reload();
+    },
     fetchProjects: function fetchProjects() {
       var _this = this;
 
@@ -2293,6 +2353,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      test: 1,
       users: [],
       user: {
         first_name: '',
@@ -2312,7 +2373,14 @@ __webpack_require__.r(__webpack_exports__);
     this.fetchUsers();
     this.fetchRoles();
   },
+  watch: {
+    $route: function $route(to, from) {
+      this.rerender();
+    }
+  },
   methods: {
+    rerender: function rerender() {//location.reload();
+    },
     fetchUsers: function fetchUsers() {
       var _this = this;
 
@@ -40583,910 +40651,53 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "page-header navbar navbar-fixed-top" }, [
+    _c("div", { staticClass: "page-header-inner " }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "page-top" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "http://jira-app.com/logout",
+              onclick:
+                "event.preventDefault(); document.getElementById('logout-form').submit();"
+            }
+          },
+          [_vm._v("\n                                Logout\n                ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            staticStyle: { display: "none" },
+            attrs: { id: "logout-form", action: "/logout", method: "POST" }
+          },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.csrf }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "top-menu" })
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "page-header navbar navbar-fixed-top" }, [
-      _c("div", { staticClass: "page-header-inner " }, [
-        _c("div", { staticClass: "page-logo" }, [
-          _c("a", { attrs: { href: "index.html" } }, [
-            _c("img", {
-              staticClass: "logo-default",
-              attrs: { src: "", alt: "logo" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "menu-toggler sidebar-toggler" })
-        ]),
-        _vm._v(" "),
-        _c("a", {
-          staticClass: "menu-toggler responsive-toggler",
-          attrs: {
-            href: "javascript:;",
-            "data-toggle": "collapse",
-            "data-target": ".navbar-collapse"
-          }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "page-actions" }, [
-          _c("div", { staticClass: "btn-group" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn red-haze btn-sm dropdown-toggle",
-                attrs: {
-                  type: "button",
-                  "data-toggle": "dropdown",
-                  "data-hover": "dropdown",
-                  "data-close-others": "true"
-                }
-              },
-              [
-                _c("span", { staticClass: "hidden-sm hidden-xs" }, [
-                  _vm._v("Actions ")
-                ]),
-                _vm._v(" "),
-                _c("i", { staticClass: "fa fa-angle-down" })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "ul",
-              { staticClass: "dropdown-menu", attrs: { role: "menu" } },
-              [
-                _c("li", [
-                  _c("a", { attrs: { href: "javascript:;" } }, [
-                    _c("i", { staticClass: "icon-docs" }),
-                    _vm._v(" New Post ")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "javascript:;" } }, [
-                    _c("i", { staticClass: "icon-tag" }),
-                    _vm._v(" New Comment ")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "javascript:;" } }, [
-                    _c("i", { staticClass: "icon-share" }),
-                    _vm._v(" Share ")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "divider" }),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "javascript:;" } }, [
-                    _c("i", { staticClass: "icon-flag" }),
-                    _vm._v(" Comments\n                                "),
-                    _c("span", { staticClass: "badge badge-success" }, [
-                      _vm._v("4")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "javascript:;" } }, [
-                    _c("i", { staticClass: "icon-users" }),
-                    _vm._v(" Feedbacks\n                                "),
-                    _c("span", { staticClass: "badge badge-danger" }, [
-                      _vm._v("2")
-                    ])
-                  ])
-                ])
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "page-top" }, [
-          _c(
-            "form",
-            {
-              staticClass: "search-form",
-              attrs: { action: "page_general_search_2.html", method: "GET" }
-            },
-            [
-              _c("div", { staticClass: "input-group" }, [
-                _c("input", {
-                  staticClass: "form-control input-sm",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Search...",
-                    name: "query"
-                  }
-                }),
-                _vm._v(" "),
-                _c("span", { staticClass: "input-group-btn" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn submit",
-                      attrs: { href: "javascript:;" }
-                    },
-                    [_c("i", { staticClass: "icon-magnifier" })]
-                  )
-                ])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "top-menu" }, [
-            _c("ul", { staticClass: "nav navbar-nav pull-right" }, [
-              _c("li", { staticClass: "separator hide" }),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  staticClass:
-                    "dropdown dropdown-extended dropdown-notification dropdown-dark",
-                  attrs: { id: "header_notification_bar" }
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "dropdown-toggle",
-                      attrs: {
-                        href: "javascript:;",
-                        "data-toggle": "dropdown",
-                        "data-hover": "dropdown",
-                        "data-close-others": "true"
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "icon-bell" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "badge badge-success" }, [
-                        _vm._v(" 7 ")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("ul", { staticClass: "dropdown-menu" }, [
-                    _c("li", { staticClass: "external" }, [
-                      _c("h3", [
-                        _c("span", { staticClass: "bold" }, [
-                          _vm._v("12 pending")
-                        ]),
-                        _vm._v(" notifications")
-                      ]),
-                      _vm._v(" "),
-                      _c("a", { attrs: { href: "page_user_profile_1.html" } }, [
-                        _vm._v("view all")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c(
-                        "ul",
-                        {
-                          staticClass: "dropdown-menu-list scroller",
-                          staticStyle: { height: "250px" },
-                          attrs: { "data-handle-color": "#637283" }
-                        },
-                        [
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "time" }, [
-                                _vm._v("just now")
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "details" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "label label-sm label-icon label-success"
-                                  },
-                                  [_c("i", { staticClass: "fa fa-plus" })]
-                                ),
-                                _vm._v(" New user registered. ")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "time" }, [
-                                _vm._v("3 mins")
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "details" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "label label-sm label-icon label-danger"
-                                  },
-                                  [_c("i", { staticClass: "fa fa-bolt" })]
-                                ),
-                                _vm._v(" Server #12 overloaded. ")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "time" }, [
-                                _vm._v("10 mins")
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "details" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "label label-sm label-icon label-warning"
-                                  },
-                                  [_c("i", { staticClass: "fa fa-bell-o" })]
-                                ),
-                                _vm._v(" Server #2 not responding. ")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "time" }, [
-                                _vm._v("14 hrs")
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "details" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "label label-sm label-icon label-info"
-                                  },
-                                  [_c("i", { staticClass: "fa fa-bullhorn" })]
-                                ),
-                                _vm._v(" Application error. ")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "time" }, [
-                                _vm._v("2 days")
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "details" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "label label-sm label-icon label-danger"
-                                  },
-                                  [_c("i", { staticClass: "fa fa-bolt" })]
-                                ),
-                                _vm._v(" Database overloaded 68%. ")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "time" }, [
-                                _vm._v("3 days")
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "details" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "label label-sm label-icon label-danger"
-                                  },
-                                  [_c("i", { staticClass: "fa fa-bolt" })]
-                                ),
-                                _vm._v(" A user IP blocked. ")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "time" }, [
-                                _vm._v("4 days")
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "details" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "label label-sm label-icon label-warning"
-                                  },
-                                  [_c("i", { staticClass: "fa fa-bell-o" })]
-                                ),
-                                _vm._v(
-                                  " Storage Server #4 not responding dfdfdfd. "
-                                )
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "time" }, [
-                                _vm._v("5 days")
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "details" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "label label-sm label-icon label-info"
-                                  },
-                                  [_c("i", { staticClass: "fa fa-bullhorn" })]
-                                ),
-                                _vm._v(" System Error. ")
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "time" }, [
-                                _vm._v("9 days")
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "details" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "label label-sm label-icon label-danger"
-                                  },
-                                  [_c("i", { staticClass: "fa fa-bolt" })]
-                                ),
-                                _vm._v(" Storage server failed. ")
-                              ])
-                            ])
-                          ])
-                        ]
-                      )
-                    ])
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c("li", { staticClass: "separator hide" }),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  staticClass:
-                    "dropdown dropdown-extended dropdown-inbox dropdown-dark",
-                  attrs: { id: "header_inbox_bar" }
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "dropdown-toggle",
-                      attrs: {
-                        href: "javascript:;",
-                        "data-toggle": "dropdown",
-                        "data-hover": "dropdown",
-                        "data-close-others": "true"
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "icon-envelope-open" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "badge badge-danger" }, [
-                        _vm._v(" 4 ")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("ul", { staticClass: "dropdown-menu" }, [
-                    _c("li", { staticClass: "external" }, [
-                      _c("h3", [
-                        _vm._v(
-                          "You have\n                                        "
-                        ),
-                        _c("span", { staticClass: "bold" }, [_vm._v("7 New")]),
-                        _vm._v(" Messages")
-                      ]),
-                      _vm._v(" "),
-                      _c("a", { attrs: { href: "app_inbox.html" } }, [
-                        _vm._v("view all")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c(
-                        "ul",
-                        {
-                          staticClass: "dropdown-menu-list scroller",
-                          staticStyle: { height: "275px" },
-                          attrs: { "data-handle-color": "#637283" }
-                        },
-                        [
-                          _c("li", [
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("span", { staticClass: "photo" }, [
-                                _c("img", {
-                                  staticClass: "img-circle",
-                                  attrs: { src: "", alt: "" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "subject" }, [
-                                _c("span", { staticClass: "from" }, [
-                                  _vm._v(" Lisa Wong ")
-                                ]),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "time" }, [
-                                  _vm._v("Just Now ")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "message" }, [
-                                _vm._v(
-                                  " Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh... "
-                                )
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("span", { staticClass: "photo" }, [
-                                _c("img", {
-                                  staticClass: "img-circle",
-                                  attrs: { src: "", alt: "" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "subject" }, [
-                                _c("span", { staticClass: "from" }, [
-                                  _vm._v(" Richard Doe ")
-                                ]),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "time" }, [
-                                  _vm._v("16 mins ")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "message" }, [
-                                _vm._v(
-                                  " Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... "
-                                )
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("span", { staticClass: "photo" }, [
-                                _c("img", {
-                                  staticClass: "img-circle",
-                                  attrs: { src: "", alt: "" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "subject" }, [
-                                _c("span", { staticClass: "from" }, [
-                                  _vm._v(" Bob Nilson ")
-                                ]),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "time" }, [
-                                  _vm._v("2 hrs ")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "message" }, [
-                                _vm._v(
-                                  " Vivamus sed nibh auctor nibh congue nibh. auctor nibh auctor nibh... "
-                                )
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("span", { staticClass: "photo" }, [
-                                _c("img", {
-                                  staticClass: "img-circle",
-                                  attrs: { src: "", alt: "" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "subject" }, [
-                                _c("span", { staticClass: "from" }, [
-                                  _vm._v(" Richard Doe ")
-                                ]),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "time" }, [
-                                  _vm._v("46 mins ")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "message" }, [
-                                _vm._v(
-                                  " Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... "
-                                )
-                              ])
-                            ])
-                          ])
-                        ]
-                      )
-                    ])
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c("li", { staticClass: "separator hide" }),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  staticClass:
-                    "dropdown dropdown-extended dropdown-tasks dropdown-dark",
-                  attrs: { id: "header_task_bar" }
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "dropdown-toggle",
-                      attrs: {
-                        href: "javascript:;",
-                        "data-toggle": "dropdown",
-                        "data-hover": "dropdown",
-                        "data-close-others": "true"
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "icon-calendar" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "badge badge-primary" }, [
-                        _vm._v(" 3 ")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("ul", { staticClass: "dropdown-menu extended tasks" }, [
-                    _c("li", { staticClass: "external" }, [
-                      _c("h3", [
-                        _vm._v(
-                          "You have\n                                        "
-                        ),
-                        _c("span", { staticClass: "bold" }, [
-                          _vm._v("12 pending")
-                        ]),
-                        _vm._v(" tasks")
-                      ]),
-                      _vm._v(" "),
-                      _c("a", { attrs: { href: "?p=page_todo_2" } }, [
-                        _vm._v("view all")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c(
-                        "ul",
-                        {
-                          staticClass: "dropdown-menu-list scroller",
-                          staticStyle: { height: "275px" },
-                          attrs: { "data-handle-color": "#637283" }
-                        },
-                        [
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "task" }, [
-                                _c("span", { staticClass: "desc" }, [
-                                  _vm._v("New release v1.2 ")
-                                ]),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "percent" }, [
-                                  _vm._v("30%")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "progress" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "progress-bar progress-bar-success",
-                                    staticStyle: { width: "40%" },
-                                    attrs: {
-                                      "aria-valuenow": "40",
-                                      "aria-valuemin": "0",
-                                      "aria-valuemax": "100"
-                                    }
-                                  },
-                                  [
-                                    _c("span", { staticClass: "sr-only" }, [
-                                      _vm._v("40% Complete")
-                                    ])
-                                  ]
-                                )
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "task" }, [
-                                _c("span", { staticClass: "desc" }, [
-                                  _vm._v("Application deployment")
-                                ]),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "percent" }, [
-                                  _vm._v("65%")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "progress" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "progress-bar progress-bar-danger",
-                                    staticStyle: { width: "65%" },
-                                    attrs: {
-                                      "aria-valuenow": "65",
-                                      "aria-valuemin": "0",
-                                      "aria-valuemax": "100"
-                                    }
-                                  },
-                                  [
-                                    _c("span", { staticClass: "sr-only" }, [
-                                      _vm._v("65% Complete")
-                                    ])
-                                  ]
-                                )
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "task" }, [
-                                _c("span", { staticClass: "desc" }, [
-                                  _vm._v("Mobile app release")
-                                ]),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "percent" }, [
-                                  _vm._v("98%")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "progress" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "progress-bar progress-bar-success",
-                                    staticStyle: { width: "98%" },
-                                    attrs: {
-                                      "aria-valuenow": "98",
-                                      "aria-valuemin": "0",
-                                      "aria-valuemax": "100"
-                                    }
-                                  },
-                                  [
-                                    _c("span", { staticClass: "sr-only" }, [
-                                      _vm._v("98% Complete")
-                                    ])
-                                  ]
-                                )
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "task" }, [
-                                _c("span", { staticClass: "desc" }, [
-                                  _vm._v("Database migration")
-                                ]),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "percent" }, [
-                                  _vm._v("10%")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "progress" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "progress-bar progress-bar-warning",
-                                    staticStyle: { width: "10%" },
-                                    attrs: {
-                                      "aria-valuenow": "10",
-                                      "aria-valuemin": "0",
-                                      "aria-valuemax": "100"
-                                    }
-                                  },
-                                  [
-                                    _c("span", { staticClass: "sr-only" }, [
-                                      _vm._v("10% Complete")
-                                    ])
-                                  ]
-                                )
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "task" }, [
-                                _c("span", { staticClass: "desc" }, [
-                                  _vm._v("Web server upgrade")
-                                ]),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "percent" }, [
-                                  _vm._v("58%")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "progress" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "progress-bar progress-bar-info",
-                                    staticStyle: { width: "58%" },
-                                    attrs: {
-                                      "aria-valuenow": "58",
-                                      "aria-valuemin": "0",
-                                      "aria-valuemax": "100"
-                                    }
-                                  },
-                                  [
-                                    _c("span", { staticClass: "sr-only" }, [
-                                      _vm._v("58% Complete")
-                                    ])
-                                  ]
-                                )
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "task" }, [
-                                _c("span", { staticClass: "desc" }, [
-                                  _vm._v("Mobile development")
-                                ]),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "percent" }, [
-                                  _vm._v("85%")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "progress" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "progress-bar progress-bar-success",
-                                    staticStyle: { width: "85%" },
-                                    attrs: {
-                                      "aria-valuenow": "85",
-                                      "aria-valuemin": "0",
-                                      "aria-valuemax": "100"
-                                    }
-                                  },
-                                  [
-                                    _c("span", { staticClass: "sr-only" }, [
-                                      _vm._v("85% Complete")
-                                    ])
-                                  ]
-                                )
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("a", { attrs: { href: "javascript:;" } }, [
-                              _c("span", { staticClass: "task" }, [
-                                _c("span", { staticClass: "desc" }, [
-                                  _vm._v("New UI release")
-                                ]),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "percent" }, [
-                                  _vm._v("38%")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "progress progress-striped" },
-                                [
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "progress-bar progress-bar-important",
-                                      staticStyle: { width: "38%" },
-                                      attrs: {
-                                        "aria-valuenow": "18",
-                                        "aria-valuemin": "0",
-                                        "aria-valuemax": "100"
-                                      }
-                                    },
-                                    [
-                                      _c("span", { staticClass: "sr-only" }, [
-                                        _vm._v("38% Complete")
-                                      ])
-                                    ]
-                                  )
-                                ]
-                              )
-                            ])
-                          ])
-                        ]
-                      )
-                    ])
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                { staticClass: "dropdown dropdown-user dropdown-dark" },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "dropdown-toggle",
-                      attrs: {
-                        href: "javascript:;",
-                        "data-toggle": "dropdown",
-                        "data-hover": "dropdown",
-                        "data-close-others": "true"
-                      }
-                    },
-                    [
-                      _c(
-                        "span",
-                        { staticClass: "username username-hide-on-mobile" },
-                        [_vm._v(" Nick ")]
-                      ),
-                      _vm._v(" "),
-                      _c("img", {
-                        staticClass: "img-circle",
-                        attrs: { alt: "", src: "" }
-                      })
-                    ]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  staticClass:
-                    "dropdown dropdown-extended quick-sidebar-toggler"
-                },
-                [
-                  _c("span", { staticClass: "sr-only" }, [
-                    _vm._v("Toggle Quick Sidebar")
-                  ]),
-                  _vm._v(" "),
-                  _c("i", { staticClass: "icon-logout" })
-                ]
-              )
-            ])
-          ])
-        ])
+    return _c("div", { staticClass: "page-logo" }, [
+      _c("a", { attrs: { href: "index.html" } }, [
+        _c("img", {
+          staticClass: "logo-default",
+          attrs: { src: "", alt: "logo" }
+        })
       ])
     ])
   }
@@ -42799,7 +42010,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            " /\n                                        "
+                            " /\r\n                                        "
                           ),
                           _c(
                             "a",
@@ -58183,15 +57394,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _HeaderComponent_vue_vue_type_template_id_153bfd55___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HeaderComponent.vue?vue&type=template&id=153bfd55& */ "./resources/js/components/HeaderComponent.vue?vue&type=template&id=153bfd55&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _HeaderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HeaderComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/HeaderComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _HeaderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _HeaderComponent_vue_vue_type_template_id_153bfd55___WEBPACK_IMPORTED_MODULE_0__["render"],
   _HeaderComponent_vue_vue_type_template_id_153bfd55___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -58205,6 +57418,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/HeaderComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/HeaderComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/HeaderComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HeaderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./HeaderComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HeaderComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HeaderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -58538,8 +57765,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/entel/laravel/JiraApp/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/entel/laravel/JiraApp/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -12,10 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
 Route::get('/projects', 'FrontendController@projects_crud')->name('projects_crud');
 Route::get('/users', 'FrontendController@users_crud')->name('users_crud');
 Route::get('/projects/assignment', 'FrontendController@projects_assignment')->name('projects_assignment');
 Route::get('/configuration', 'FrontendController@configuration')->name('configuration');
+
+Auth::routes(['register'=>false]);
+Route::get('login2', 'Auth\LoginController@login2');
