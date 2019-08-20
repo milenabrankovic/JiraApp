@@ -19,22 +19,22 @@
                 <h3 class="form-title font-green">Sign In</h3>
                 
                 <div class="form-group">
+                    @if(session('message'))
+                        <span class="invalid-feedback" role="alert" style="color:#db7972;">
+                            <strong>{{ session('message') }}</strong>
+                        </span>
+                    @endif
                     <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
                     <label class="control-label visible-ie8 visible-ie9">Username</label>
                     <input class="form-control form-control-solid placeholder-no-fix @error('username') is-invalid @enderror" type="text"  placeholder="Username" name="username"  required/> </div>
-                    @error('username')
-                        <span class="invalid-feedback" role="alert" style="color:#db7972;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                     <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">Password</label>
                     <input class="form-control form-control-solid placeholder-no-fix @error('password') is-invalid @enderror" type="password" placeholder="Password" name="password" required/> </div>
-                    @error('password')
+                    {{-- @error('password')
                         <span class="invalid-feedback" role="alert" style="color:#db7972;">
                             <strong>{{ $message }}</strong>
                         </span>
-                    @enderror
+                    @enderror --}}
                     <div class="form-actions">
                     <button type="submit" class="btn green uppercase ">Login</button>
                     <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>

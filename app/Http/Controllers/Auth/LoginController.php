@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 class LoginController extends Controller
 {
@@ -44,10 +46,29 @@ class LoginController extends Controller
         return 'username';
     }
 
-    public function login2()
+    public function showLoginForm()
     {
-        return view('auth.login2');
+        return view('auth.login');
     }
+
+    public function login(Request $request){
+
+        $credentials = $request->only(['username', 'password']);
+  
+        if (!$token = JWTAuth::attempt($credentials)) {
+           //return 'Invalid login details';
+           return redirect()->back()->with('message', 'Invalid login details');
+        }
+  
+        // return response()->json([
+        //     'token' => $token,
+        //     'expires' => auth('api')->factory()->getTTL() * 60, // time to expiration
+            
+        // ]);
+
+        return redirect('/')->with(['success' => 'Logged in', 'token' => $token, 'expires' => auth('api')->factory()->getTTL() * 60]);
+
+     }
 
     public function logout(Request $request)
     {

@@ -6,10 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
-//Model
-class User extends Model implements Authenticatable
+use Tymon\JWTAuth\Contracts\JWTSubject;
+
+class User extends Model implements Authenticatable, JWTSubject
 {
     use AuthenticableTrait;
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+    
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
     
     protected $table = 'users';
 

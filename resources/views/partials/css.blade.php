@@ -15,6 +15,9 @@
        <!-- CSS FOR LOGIN PAGE -->
        <link href="{{asset('/')}}assets/pages/css/login.min.css" rel="stylesheet" type="text/css" />
 
+       <!-- CSS FOR ERROR PAGE -->
+       <link href="{{asset('/')}}assets/pages/css/error.min.css" rel="stylesheet" type="text/css" />
+
        <!-- BEGIN THEME LAYOUT STYLES -->
        <link href="{{asset('/')}}assets/layouts/layout4/css/layout.min.css" rel="stylesheet" type="text/css" />
        <link href="{{asset('/')}}assets/layouts/layout4/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />

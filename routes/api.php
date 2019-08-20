@@ -13,16 +13,27 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::group(['middleware' => 'auth.role'], function() {
+
+    Route::resource('project', 'Admin\ProjectController');
+    Route::resource('user', 'Admin\UserController');
+    Route::get('roles', 'Admin\UserController@roles')->name('user.roles');
+    Route::get('company', 'Admin\ConfController@company');
+    Route::get('info', 'Admin\ConfController@info');
+    Route::post('info_update', 'Admin\ConfController@save');
+    Route::post('assign_employee', 'Admin\ProjectController@assign_employee');
+
 });
 
-Route::resource('project', 'Admin\ProjectController');
-Route::resource('user', 'Admin\UserController');
-Route::get('roles', 'Admin\UserController@roles')->name('user.roles');
-Route::get('company', 'Admin\ConfController@company');
-Route::get('info', 'Admin\ConfController@info');
-Route::post('info_update', 'Admin\ConfController@save');
-Route::post('assign_employee', 'Admin\ProjectController@assign_employee');
+    
+
+
+
+
+
 
 

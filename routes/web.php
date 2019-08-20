@@ -15,10 +15,13 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-Route::get('/projects', 'FrontendController@projects_crud')->name('projects_crud');
-Route::get('/users', 'FrontendController@users_crud')->name('users_crud');
-Route::get('/projects/assignment', 'FrontendController@projects_assignment')->name('projects_assignment');
-Route::get('/configuration', 'FrontendController@configuration')->name('configuration');
+Route::group(['prefix' => 'admin', 'middleware' => 'auth.role'], function() {
+    Route::get('/projects', 'FrontendController@projects_crud')->name('projects_crud');
+    Route::get('/users', 'FrontendController@users_crud')->name('users_crud');
+    Route::get('/projects/assignment', 'FrontendController@projects_assignment')->name('projects_assignment');
+    Route::get('/configuration', 'FrontendController@configuration')->name('configuration');
+});
+
 
 Auth::routes(['register'=>false]);
-Route::get('login2', 'Auth\LoginController@login2');
+Route::get('/forbidden', 'FrontendController@forbidden');

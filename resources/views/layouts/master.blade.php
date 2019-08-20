@@ -9,19 +9,24 @@
     @include('partials.css')
 </head>
 <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo">
-        <div id="app">
-            <div class="page-container">
-                <header-component></header-component>
-                <nav-component></nav-component>
-                <div class="page-content-wrapper">
-                    <div class="page-content">
-                        <keep-alive>
-                                <router-view></router-view>
-                        </keep-alive>
+        
+            <div id="app">
+                    
+                <div class="page-container">
+                    <header-component></header-component>
+                    <nav-component></nav-component>
+                    <div class="page-content-wrapper">
+                        <div class="page-content">
+                            @section('content')
+                                <keep-alive>
+                                        <router-view></router-view>
+                                </keep-alive>
+                            @endsection
+                        </div>
                     </div>
                 </div>
-             </div>
-        </div>
+            </div>
+        
     @include('partials.scripts')
 </body>
 </html>

@@ -7,9 +7,9 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 let routes = [
-    { path: '/projects', component: require('./components/ProjectsCrudComponent.vue').default },
-    { path: '/configuration', component: require('./components/ConfComponent.vue').default },
-    { path: '/users', component: require('./components/UserComponent.vue').default }
+    { path: '/admin/projects', component: require('./components/ProjectsCrudComponent.vue').default },
+    { path: '/admin/configuration', component: require('./components/ConfComponent.vue').default },
+    { path: '/admin/users', component: require('./components/UserComponent.vue').default }
 
   ]
 

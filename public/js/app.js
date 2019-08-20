@@ -40744,7 +40744,7 @@ var render = function() {
                 "router-link",
                 {
                   staticClass: "nav-link nav-toggle",
-                  attrs: { to: "/projects" }
+                  attrs: { to: "/admin/projects" }
                 },
                 [
                   _c("i", { staticClass: "icon-list" }),
@@ -40764,7 +40764,10 @@ var render = function() {
             [
               _c(
                 "router-link",
-                { staticClass: "nav-link nav-toggle", attrs: { to: "/users" } },
+                {
+                  staticClass: "nav-link nav-toggle",
+                  attrs: { to: "/admin/users" }
+                },
                 [
                   _c("i", { staticClass: "icon-user" }),
                   _vm._v(" "),
@@ -40785,7 +40788,7 @@ var render = function() {
                 "router-link",
                 {
                   staticClass: "nav-link nav-toggle",
-                  attrs: { to: "/configuration" }
+                  attrs: { to: "/admin/configuration" }
                 },
                 [
                   _c("i", { staticClass: "icon-settings" }),
@@ -42010,7 +42013,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            " /\n                                        "
+                            " /\r\n                                        "
                           ),
                           _c(
                             "a",
@@ -57230,13 +57233,13 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var routes = [{
-  path: '/projects',
+  path: '/admin/projects',
   component: __webpack_require__(/*! ./components/ProjectsCrudComponent.vue */ "./resources/js/components/ProjectsCrudComponent.vue")["default"]
 }, {
-  path: '/configuration',
+  path: '/admin/configuration',
   component: __webpack_require__(/*! ./components/ConfComponent.vue */ "./resources/js/components/ConfComponent.vue")["default"]
 }, {
-  path: '/users',
+  path: '/admin/users',
   component: __webpack_require__(/*! ./components/UserComponent.vue */ "./resources/js/components/UserComponent.vue")["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
@@ -57765,8 +57768,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/entel/laravel/JiraApp/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/entel/laravel/JiraApp/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

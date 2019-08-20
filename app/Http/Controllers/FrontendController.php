@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
+    public function index()
+    {
+        return view('dashboard'); //temporary
+    }
+
     public function projects_list()
     {
         return view('projects.projects_list');
@@ -29,5 +34,10 @@ class FrontendController extends Controller
     public function configuration()
     {
         return view('configuration');
+    }
+
+    public function forbidden()
+    {
+        return view('forbidden');
     }
 }
