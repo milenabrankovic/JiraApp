@@ -2094,7 +2094,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('http://jira-app.com/api/project').then(function (response) {
-        _this.projects = response.data;
+        _this.projects = response.data['data'];
       });
     },
     fetchUsers: function fetchUsers() {

@@ -157,7 +157,7 @@ export default {
         },
         fetchProjects(){
             axios.get('http://jira-app.com/api/project')
-                    .then(response => { this.projects = response.data});
+                    .then(response => { this.projects = response.data['data'];});
         },
         fetchUsers(){
             axios.get('http://jira-app.com/api/user')
