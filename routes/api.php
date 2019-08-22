@@ -23,4 +23,4 @@ Route::get('company', 'Admin\ConfController@company');
 Route::get('info', 'Admin\ConfController@info');
 Route::post('info_update', 'Admin\ConfController@save');
 Route::post('assign_employee', 'Admin\ProjectController@assign_employee');
-
+Route::get('roles', 'Admin\UserController@roles')->name('user.roles');

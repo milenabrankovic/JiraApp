@@ -51,13 +51,19 @@
                             </router-link>
                         </li>
                         <li class="nav-item start">
+                             <router-link to="/users" class="nav-link nav-toggle">
+                                <i class="icon-settings"></i>
+                                <span class="title">Users</span>
+                                <span class="selected"></span>
+                            </router-link>
+                        </li>
+                        <li class="nav-item start">
                              <router-link to="/configuration" class="nav-link nav-toggle">
                                 <i class="icon-settings"></i>
                                 <span class="title">Configuration</span>
                                 <span class="selected"></span>
                             </router-link>
                         </li>
-                        
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>

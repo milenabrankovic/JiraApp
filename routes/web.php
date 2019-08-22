@@ -18,3 +18,4 @@ Route::get('/', function () {
 Route::get('/projects', 'FrontendController@projects_crud')->name('projects_crud');
 Route::get('/projects/assignment', 'FrontendController@projects_assignment')->name('projects_assignment');
 Route::get('/configuration', 'FrontendController@configuration')->name('configuration');
+Route::get('/users', 'FrontendController@users_crud')->name('users_crud');

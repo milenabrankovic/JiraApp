@@ -25,4 +25,9 @@ class FrontendController extends Controller
     {
         return view('configuration');
     }
+
+    public function users_crud()
+    {
+        return view('users_crud');
+    }
 }
