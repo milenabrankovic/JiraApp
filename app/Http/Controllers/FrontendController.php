@@ -30,4 +30,10 @@ class FrontendController extends Controller
     {
         return view('users_crud');
     }
+
+    public function login()
+    {
+        return view('login');
+    }
+
 }

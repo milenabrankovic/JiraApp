@@ -52,7 +52,7 @@
                         </li>
                         <li class="nav-item start">
                              <router-link to="/users" class="nav-link nav-toggle">
-                                <i class="icon-settings"></i>
+                                <i class="icon-user"></i>
                                 <span class="title">Users</span>
                                 <span class="selected"></span>
                             </router-link>
