@@ -40,6 +40,11 @@
             fetchUser: true,
         });       
       },
+      logout(){
+        this.$auth.logout({
+          redirect: '/login'
+        });
+      }
     }
   } 
 </script>
