@@ -3012,6 +3012,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3028,18 +3066,17 @@ __webpack_require__.r(__webpack_exports__);
           username: app.username,
           password: app.password
         },
-        success: function success() {},
+        success: function success() {
+          var redirectTo = this.$auth.user().role_id === 1 ? '/projects' : '/users';
+          this.$router.push({
+            name: redirectTo
+          });
+        },
         error: function error(_error) {
           console.log(_error);
         },
         rememberMe: true,
-        redirect: '/',
         fetchUser: true
-      });
-    },
-    logout: function logout() {
-      this.$auth.logout({
-        redirect: '/login'
       });
     }
   }
@@ -3648,6 +3685,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('http://jira-app.com/api/user').then(function (response) {
         _this.users = response.data;
+        console.log(response.data);
       });
     },
     fetchRoles: function fetchRoles() {
@@ -41925,30 +41963,32 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "page-header navbar navbar-fixed-top" }, [
-    _c("div", { staticClass: "page-header-inner " }, [
-      _c("div", { staticClass: "page-top" }, [
-        _c("ul", [
-          _vm.$auth.check()
-            ? _c("li", { staticClass: "pull-right" }, [
-                _c(
-                  "a",
-                  {
-                    attrs: { href: "" },
-                    on: {
-                      click: function($event) {
-                        return _vm.logout()
-                      }
-                    }
-                  },
-                  [_vm._v("Logout")]
-                )
-              ])
-            : _vm._e()
+  return _vm.$auth.check()
+    ? _c("div", { staticClass: "page-header navbar navbar-fixed-top" }, [
+        _c("div", { staticClass: "page-header-inner" }, [
+          _c("div", { staticClass: "page-top" }, [
+            _c("ul", [
+              _vm.$auth.check()
+                ? _c("li", { staticClass: "pull-right" }, [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.logout()
+                          }
+                        }
+                      },
+                      [_vm._v("Logout")]
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ])
         ])
       ])
-    ])
-  ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -41972,91 +42012,133 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.error
-      ? _c("div", { staticClass: "alert alert-danger" }, [
-          _c("p", [
-            _vm._v(
-              "There was an error, unable to sign in with those credentials."
-            )
+  return _c("div", { staticClass: "login" }, [
+    _c("div", { staticClass: "content" }, [
+      _vm.error
+        ? _c("div", { staticClass: "alert alert-danger" }, [
+            _c("p", [
+              _vm._v(
+                "There was an error, unable to sign in with those credentials."
+              )
+            ])
           ])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        attrs: { autocomplete: "off", method: "post" },
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.login($event)
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "login-form",
+          attrs: { method: "post" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.login($event)
+            }
           }
-        }
-      },
-      [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "username" } }, [_vm._v("E-mail")]),
+        },
+        [
+          _c("h3", { staticClass: "form-title font-green" }, [
+            _vm._v("Log In")
+          ]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.username,
-                expression: "username"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", id: "username", required: "" },
-            domProps: { value: _vm.username },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "label",
+              { staticClass: "control-label visible-ie8 visible-ie9" },
+              [_vm._v("Username")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.username,
+                  expression: "username"
                 }
-                _vm.username = $event.target.value
+              ],
+              staticClass: "form-control form-control-solid placeholder-no-fix",
+              attrs: {
+                type: "text",
+                id: "username",
+                placeholder: "Username",
+                name: "username",
+                required: ""
+              },
+              domProps: { value: _vm.username },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.username = $event.target.value
+                }
               }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "password" } }, [_vm._v("Password")]),
+            })
+          ]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.password,
-                expression: "password"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "password", id: "password", required: "" },
-            domProps: { value: _vm.password },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "label",
+              { staticClass: "control-label visible-ie8 visible-ie9" },
+              [_vm._v("Password")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.password,
+                  expression: "password"
                 }
-                _vm.password = $event.target.value
+              ],
+              staticClass: "form-control form-control-solid placeholder-no-fix",
+              attrs: {
+                type: "password",
+                id: "password",
+                placeholder: "Password",
+                name: "password",
+                required: ""
+              },
+              domProps: { value: _vm.password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.password = $event.target.value
+                }
               }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-default", attrs: { type: "submit" } },
-          [_vm._v("Sign in")]
+            })
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "copyright" }, [
+        _vm._v(
+          " " + _vm._s(new Date().getFullYear()) + " © All rights reserved. "
         )
-      ]
-    )
+      ])
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-actions" }, [
+      _c(
+        "button",
+        { staticClass: "btn green uppercase ", attrs: { type: "submit" } },
+        [_vm._v("Login")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -42080,83 +42162,90 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "page-sidebar-wrapper" }, [
     _c("div", { staticClass: "page-sidebar" }, [
-      _c(
-        "ul",
-        {
-          staticClass: "page-sidebar-menu",
-          attrs: {
-            "data-keep-expanded": "false",
-            "data-auto-scroll": "true",
-            "data-slide-speed": "200"
-          }
-        },
-        [
-          _c(
-            "li",
-            { staticClass: "nav-item start" },
+      _vm.$auth.check()
+        ? _c(
+            "ul",
+            {
+              staticClass: "page-sidebar-menu",
+              attrs: {
+                "data-keep-expanded": "false",
+                "data-auto-scroll": "true",
+                "data-slide-speed": "200"
+              }
+            },
             [
               _c(
-                "router-link",
-                {
-                  staticClass: "nav-link nav-toggle",
-                  attrs: { to: "/projects" }
-                },
+                "li",
+                { staticClass: "nav-item start" },
                 [
-                  _c("i", { staticClass: "icon-list" }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "title" }, [_vm._v("Projects")]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "selected" })
-                ]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "nav-item start" },
-            [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link nav-toggle",
+                      attrs: { to: "/projects" }
+                    },
+                    [
+                      _c("i", { staticClass: "icon-list" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title" }, [
+                        _vm._v("Projects")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "selected" })
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
               _c(
-                "router-link",
-                { staticClass: "nav-link nav-toggle", attrs: { to: "/users" } },
+                "li",
+                { staticClass: "nav-item start" },
                 [
-                  _c("i", { staticClass: "icon-user" }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "title" }, [_vm._v("Users")]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "selected" })
-                ]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "nav-item start" },
-            [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link nav-toggle",
+                      attrs: { to: "/users" }
+                    },
+                    [
+                      _c("i", { staticClass: "icon-user" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title" }, [_vm._v("Users")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "selected" })
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
               _c(
-                "router-link",
-                {
-                  staticClass: "nav-link nav-toggle",
-                  attrs: { to: "/configuration" }
-                },
+                "li",
+                { staticClass: "nav-item start" },
                 [
-                  _c("i", { staticClass: "icon-settings" }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "title" }, [
-                    _vm._v("Configuration")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "selected" })
-                ]
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link nav-toggle",
+                      attrs: { to: "/configuration" }
+                    },
+                    [
+                      _c("i", { staticClass: "icon-settings" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title" }, [
+                        _vm._v("Configuration")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "selected" })
+                    ]
+                  )
+                ],
+                1
               )
-            ],
-            1
+            ]
           )
-        ]
-      )
+        : _vm._e()
     ])
   ])
 }
@@ -43365,7 +43454,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            " /\r\n                                        "
+                            " /\n                                        "
                           ),
                           _c(
                             "a",
@@ -59218,8 +59307,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/entel/laravel/JiraApp/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/entel/laravel/JiraApp/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

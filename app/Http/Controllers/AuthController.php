@@ -21,7 +21,8 @@ class AuthController extends Controller
                 ], 400);
         }
         return response([
-                'status' => 'success'
+                'status' => 'success',
+                'data' => User::find(Auth::user()->id)
             ])
             ->header('Authorization', $token);
     }

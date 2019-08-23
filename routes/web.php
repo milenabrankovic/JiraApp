@@ -22,7 +22,7 @@ Route::get('/users', 'FrontendController@users_crud')->name('users_crud');
 Route::get('/login', 'FrontendController@login')->name('login');
 
 
-Route::post('auth/login', 'AuthController@login');
+Route::post('auth/login', 'AuthController@login')->name('login');
 Route::group(['middleware' => 'jwt.auth'], function(){
   Route::get('auth/user', 'AuthController@user');
   Route::post('auth/logout', 'AuthController@logout');

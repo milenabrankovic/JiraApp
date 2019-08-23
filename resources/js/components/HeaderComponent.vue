@@ -1,8 +1,8 @@
 <template>
     <!-- BEGIN HEADER -->
-        <div class="page-header navbar navbar-fixed-top">
+        <div class="page-header navbar navbar-fixed-top" v-if="$auth.check()">
             <!-- BEGIN HEADER INNER -->
-            <div class="page-header-inner ">
+            <div class="page-header-inner">
                 <div class="page-top">
                     <ul>
                         <li v-if="$auth.check()" class="pull-right">

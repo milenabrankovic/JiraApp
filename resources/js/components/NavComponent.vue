@@ -42,7 +42,7 @@
             <div class="page-sidebar-wrapper">
                 <!-- BEGIN SIDEBAR -->
                 <div class="page-sidebar">
-                    <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                    <ul v-if="$auth.check()" class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                         <li class="nav-item start">
                             <router-link to="/projects" class="nav-link nav-toggle">
                                 <i class="icon-list"></i>

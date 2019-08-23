@@ -175,7 +175,7 @@ export default {
         },
         fetchUsers(){
             axios.get('http://jira-app.com/api/user')
-                    .then(response => {this.users = response.data});
+                    .then(response => {this.users = response.data; console.log(response.data)});
         },
         fetchRoles(){
             axios.get('http://jira-app.com/api/roles')
