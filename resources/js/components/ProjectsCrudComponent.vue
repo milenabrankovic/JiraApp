@@ -44,8 +44,8 @@
                                         <input type="date" required  class="form-control" id="labelStartDate" name="start_date" size="16"  v-model="project.start_date">
                                     </div>
                                     <div class="form-group">
-                                        <label for="multiple" class="control-label">Choose Employees</label><br/>
-                                        <select class="selectpicker form-control" data-live-search="true" id="multiple" multiple  v-model="selectedUsers">
+                                        <label for="multiple_user" class="control-label">Choose Employees</label><br/>
+                                        <select class="form-control" data-live-search="true" id="multiple_user" multiple  v-model="selectedUsers">
                                             <option v-for="user in users" v-bind:key="user.user_id" :data-tokens="user.user_id" :value="user.user_id">{{user.first_name}} {{user.last_name}}</option>
                                         </select>
                                     </div>     

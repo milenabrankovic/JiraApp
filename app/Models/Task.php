@@ -25,4 +25,9 @@ class Task extends Model
     {
         return $this->belongsTo('App\Models\Log', 'log_id');
     }
+
+    public function project()
+    {
+        return $this->belongsTo('App\Models\Project', 'project_id');
+    }
 }

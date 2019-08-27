@@ -11,10 +11,11 @@ Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 
 let routes = [
-    { path: '/projects', component: require('./components/ProjectsCrudComponent.vue').default, meta: { auth: true } },
-    { path: '/configuration', component: require('./components/ConfComponent.vue').default, meta: { auth: true } },
-    { path: '/users', component: require('./components/UserComponent.vue').default, meta: { auth: true } },
-    { path: '/login', component: require('./components/LoginComponent.vue').default, meta: { auth: false } }
+  { path: '/projects', component: require('./components/ProjectsCrudComponent.vue').default, meta: { auth: true } },
+  { path: '/user_projects', component: require('./components/ProjectsComponent.vue').default, meta: { auth: true } },
+  { path: '/configuration', component: require('./components/ConfComponent.vue').default, meta: { auth: true } },
+  { path: '/users', component: require('./components/UserComponent.vue').default, meta: { auth: true } },
+  { path: '/login', component: require('./components/LoginComponent.vue').default, meta: { auth: false } }
 
 
   ]

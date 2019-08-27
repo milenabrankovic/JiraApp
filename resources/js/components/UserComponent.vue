@@ -47,13 +47,13 @@
                                     </div>
                                     <div class="form-group" id="rolediv">
                                         <label for="role" class="control-label">Choose Role</label><br/>
-                                        <select class="selectpicker form-control" id="role" v-model="user.role" title="Choose Role">
+                                        <select class="form-control" id="role" v-model="user.role" title="Choose Role">
                                             <option v-for="role in roles" v-bind:key="role.role_id" :data-tokens="role.role_id" :value="role.role_id">{{role.name}}</option>
                                         </select>
                                     </div>      
                                     <div class="form-group" id="leaderdiv">
                                         <label for="leader" class="control-label">Choose Leader</label><br/>
-                                        <select class="selectpicker form-control" id="leader" v-model="user.leader" title="Choose Leader">
+                                        <select class="form-control" id="leader" v-model="user.leader" title="Choose Leader">
                                             <option v-for="user in users" v-bind:key="user.user_id" :data-tokens="user.user_id" :value="user.user_id">{{user.first_name}} {{user.last_name}}</option>
                                         </select>
                                     </div>  

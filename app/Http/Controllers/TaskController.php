@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Models\Project;
 
 class TaskController extends Controller
 {
@@ -25,9 +26,13 @@ class TaskController extends Controller
     }
 
     //list of tasks by project
-    public function tasksByProject()
+    public function tasks_by_project(Request $request)
     {
-        
+        $project_id = $request->get('project_id');
+        $user_id = $request->get('user_id');
+
+        $tasks = Task::where(['project_id' => $project_id, 'user_id' => $user_id])->get();
+        return $tasks;
     }
 
 

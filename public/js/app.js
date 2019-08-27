@@ -3020,36 +3020,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3066,11 +3036,7 @@ __webpack_require__.r(__webpack_exports__);
           username: app.username,
           password: app.password
         },
-        success: function success() {
-          var redirectTo = this.$auth.user().role_id === 1 ? '/projects' : '/users';
-          this.$router.push({
-            name: redirectTo
-          });
+        success: function success() {//window.location.href = 'http://jira-app.com/';
         },
         error: function error(_error) {
           console.log(_error);
@@ -3143,34 +3109,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      company_name: ''
+      company_name: '',
+      authUser: null
     };
   },
   created: function created() {
@@ -3219,21 +3162,98 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      projects: []
+      userProjects: [],
+      tasksByProject: []
     };
   },
   created: function created() {
     this.fetchData();
+    console.log(this.$auth.user().user_id);
   },
   methods: {
     fetchData: function fetchData() {
       var _this = this;
 
-      axios.get('http://jira-app.com/api/project').then(function (response) {
-        return _this.projects = response.data['data'];
+      axios.get('http://jira-app.com/api/projects_by_user', {
+        params: {
+          id: this.$auth.user().user_id
+        }
+      }).then(function (response) {
+        return _this.userProjects = response.data;
+      });
+    },
+    openTasksModal: function openTasksModal(project) {
+      $('#tasks_modal').find('.modal-header #project_name_tasks').text(project.name);
+      axios.get('http://jira-app.com/api/tasks_by_project', {
+        params: {
+          user_id: this.$auth.user().user_id,
+          project_id: project.project_id
+        }
+      }).then(function (response) {
+        return console.log(response);
       });
     }
   }
@@ -42162,7 +42182,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "page-sidebar-wrapper" }, [
     _c("div", { staticClass: "page-sidebar" }, [
-      _vm.$auth.check()
+      _vm.$auth.check() && _vm.$auth.user().role_id == 1
         ? _c(
             "ul",
             {
@@ -42245,6 +42265,67 @@ var render = function() {
               )
             ]
           )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.$auth.check() && _vm.$auth.user().role_id == 2
+        ? _c(
+            "ul",
+            {
+              staticClass: "page-sidebar-menu",
+              attrs: {
+                "data-keep-expanded": "false",
+                "data-auto-scroll": "true",
+                "data-slide-speed": "200"
+              }
+            },
+            [
+              _c(
+                "li",
+                { staticClass: "nav-item start" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link nav-toggle",
+                      attrs: { to: "/user_projects" }
+                    },
+                    [
+                      _c("i", { staticClass: "icon-list" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title" }, [
+                        _vm._v("Projects")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "selected" })
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "nav-item start" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link nav-toggle",
+                      attrs: { to: "/users" }
+                    },
+                    [
+                      _c("i", { staticClass: "icon-user" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title" }, [_vm._v("Tasks")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "selected" })
+                    ]
+                  )
+                ],
+                1
+              )
+            ]
+          )
         : _vm._e()
     ])
   ])
@@ -42271,64 +42352,199 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "accordion", attrs: { id: "accordionExample" } },
-    _vm._l(_vm.projects, function(project) {
-      return _c("div", { key: project.project_id, staticClass: "card" }, [
-        _c(
-          "div",
-          {
-            staticClass: "card-header",
-            attrs: { id: "heading" + project.project_id }
-          },
-          [
-            _c("h5", { staticClass: "mb-0" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-link",
-                  attrs: {
-                    type: "button",
-                    "data-toggle": "collapse",
-                    "data-target": "#collapse" + project.project_id,
-                    "aria-expanded": "true",
-                    "aria-controls": "collapse" + project.project_id
-                  }
-                },
-                [_vm._v("\n          " + _vm._s(project.name) + "\n        ")]
-              )
-            ])
-          ]
-        ),
+  return _c("div", { staticClass: "portlet light " }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
+    _c("div", { staticClass: "portlet-body" }, [
+      _c("div", { staticClass: "table-scrollable" }, [
+        _c("table", { staticClass: "table table-hover" }, [
+          _vm._m(3),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            [
+              !_vm.userProjects.length
+                ? _c("tr", { staticClass: "no-data" }, [
+                    _c(
+                      "td",
+                      { staticClass: "text-center", attrs: { colspan: "5" } },
+                      [_vm._v("Projects not found")]
+                    )
+                  ])
+                : _vm._l(_vm.userProjects, function(project) {
+                    return _c(
+                      "tr",
+                      {
+                        key: project.project_id,
+                        attrs: {
+                          "data-toggle": "collapse",
+                          "data-target": "#collapse" + project.project_id
+                        }
+                      },
+                      [
+                        _c("td", [_vm._v(" " + _vm._s(project.name) + " ")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(" " + _vm._s(project.description) + " ")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            " " + _vm._s(project.start_date.split(" ")[0]) + " "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" ks ")]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-center" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#tasks_modal" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.openTasksModal(project)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "icon-list font-green" })]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("br")
+                      ]
+                    )
+                  })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(4)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "page-head" }, [
+      _c("div", { staticClass: "page-title" }, [_c("h1", [_vm._v("Projects")])])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "portlet-title" }, [
+      _c(
+        "div",
+        {
+          staticClass: "custom-alerts alert alert-success",
+          attrs: { id: "prefix_1438324840626" }
+        },
+        [_vm._v("Here you can see projects you are on.")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "portlet-title" }, [
+      _c("div", { staticClass: "caption" }, [
+        _c("i", { staticClass: "icon-list font-green" }),
         _vm._v(" "),
         _c(
+          "span",
+          { staticClass: "caption-subject font-green bold uppercase" },
+          [_vm._v("Project List")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v(" Project Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v(" Project Description ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v(" Start Date ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v(" Project Manager ")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v(" Tasks ")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: { tabindex: "-1", role: "dialog", id: "tasks_modal" }
+      },
+      [
+        _c(
           "div",
-          {
-            staticClass: "collapse",
-            attrs: {
-              id: "collapse" + project.project_id,
-              "aria-labelledby": "heading" + project.project_id,
-              "data-parent": "#accordionExample"
-            }
-          },
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n          " + _vm._s(project.description) + "\n          "
-              ),
-              _c("span", { staticClass: "badge badge-primary float-right" }, [
-                _vm._v(_vm._s(project.start_date))
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("h5", { staticClass: "modal-title" }, [
+                  _vm._v('Tasks by "'),
+                  _c("span", { attrs: { id: "project_name_tasks" } }),
+                  _vm._v('" project ')
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn dark btn-outline",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Close")]
+                )
               ])
             ])
           ]
         )
-      ])
-    }),
-    0
-  )
-}
-var staticRenderFns = []
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -42555,7 +42771,7 @@ var render = function() {
                             "label",
                             {
                               staticClass: "control-label",
-                              attrs: { for: "multiple" }
+                              attrs: { for: "multiple_user" }
                             },
                             [_vm._v("Choose Employees")]
                           ),
@@ -42572,10 +42788,10 @@ var render = function() {
                                   expression: "selectedUsers"
                                 }
                               ],
-                              staticClass: "selectpicker form-control",
+                              staticClass: "form-control",
                               attrs: {
                                 "data-live-search": "true",
-                                id: "multiple",
+                                id: "multiple_user",
                                 multiple: ""
                               },
                               on: {
@@ -43235,7 +43451,7 @@ var render = function() {
                                   expression: "user.role"
                                 }
                               ],
-                              staticClass: "selectpicker form-control",
+                              staticClass: "form-control",
                               attrs: { id: "role", title: "Choose Role" },
                               on: {
                                 change: function($event) {
@@ -43302,7 +43518,7 @@ var render = function() {
                                   expression: "user.leader"
                                 }
                               ],
-                              staticClass: "selectpicker form-control",
+                              staticClass: "form-control",
                               attrs: { id: "leader", title: "Choose Leader" },
                               on: {
                                 change: function($event) {
@@ -58687,6 +58903,12 @@ var routes = [{
     auth: true
   }
 }, {
+  path: '/user_projects',
+  component: __webpack_require__(/*! ./components/ProjectsComponent.vue */ "./resources/js/components/ProjectsComponent.vue")["default"],
+  meta: {
+    auth: true
+  }
+}, {
   path: '/configuration',
   component: __webpack_require__(/*! ./components/ConfComponent.vue */ "./resources/js/components/ConfComponent.vue")["default"],
   meta: {
@@ -59086,14 +59308,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************!*\
   !*** ./resources/js/components/ProjectsComponent.vue ***!
   \*******************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProjectsComponent_vue_vue_type_template_id_20cb5d70___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProjectsComponent.vue?vue&type=template&id=20cb5d70& */ "./resources/js/components/ProjectsComponent.vue?vue&type=template&id=20cb5d70&");
 /* harmony import */ var _ProjectsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProjectsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ProjectsComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ProjectsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ProjectsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -59123,7 +59346,7 @@ component.options.__file = "resources/js/components/ProjectsComponent.vue"
 /*!********************************************************************************!*\
   !*** ./resources/js/components/ProjectsComponent.vue?vue&type=script&lang=js& ***!
   \********************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

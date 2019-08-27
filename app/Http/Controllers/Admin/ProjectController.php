@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\User;
 use App\Models\Company;
 use App\Http\Resources\Project as ProjectResource;
 
@@ -34,6 +35,13 @@ class ProjectController extends Controller
         return ProjectResource::collection($projects);
     }
 
+    public function projects_by_user(Request $request)
+    {   
+        $id = $request->get('id');
+        $projects = User::find($id)->project;
+
+        return $projects;
+    }
     /**
      * Show the form for creating a new resource.
      *

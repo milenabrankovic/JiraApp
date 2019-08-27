@@ -22,14 +22,14 @@ class AuthController extends Controller
         }
         return response([
                 'status' => 'success',
-                'data' => User::find(Auth::user()->id)
+                'data' => User::find(Auth::user()->user_id)
             ])
             ->header('Authorization', $token);
     }
 
     public function user(Request $request)
     {
-        $user = User::find(Auth::user()->id);
+        $user = User::find(Auth::user()->user_id);
         return response([
                 'status' => 'success',
                 'data' => $user
