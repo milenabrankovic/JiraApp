@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
-@section('title')
+{{-- @section('title')
     Login
-@endsection
+@endsection --}}
 
 @section('content')
     <login-component></login-component>

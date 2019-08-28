@@ -26,6 +26,11 @@ class FrontendController extends Controller
         return view('projects.projects_by_user');
     }
 
+    public function tasks()
+    {
+        return view('tasks');
+    }
+
     public function configuration()
     {
         return view('configuration');

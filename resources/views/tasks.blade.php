@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 {{-- @section('title')
-    Configuration
+    Tasks
 @endsection --}}
 
 @section('content')
-    <conf-component></conf-component>
+    <task-component></task-component>
 @endsection

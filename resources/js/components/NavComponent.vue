@@ -34,7 +34,7 @@
                             </router-link>
                         </li>
                         <li class="nav-item start">
-                             <router-link to="/users" class="nav-link nav-toggle">
+                             <router-link to="/tasks" class="nav-link nav-toggle">
                                 <i class="icon-user"></i>
                                 <span class="title">Tasks</span>
                                 <span class="selected"></span>
@@ -52,7 +52,6 @@
 export default {
     data(){
         return {
-            company_name: '',
             authUser: null
         }
     },

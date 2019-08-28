@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\User;
 use App\Models\Company;
 use App\Http\Resources\Project as ProjectResource;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -206,6 +207,9 @@ class ProjectController extends Controller
 
         if($project->delete())
         {
+            DB::table('project_user')->where('project_id', $id)->delete();
+            DB::table('task')->where('project_id', $id)->delete();
+            
             return new ProjectResource($project);
         }
     }

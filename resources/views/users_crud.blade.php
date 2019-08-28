@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 
-@section('title')
+{{-- @section('title')
     Users
-@endsection
+@endsection --}}
 
 @section('content')
     <user-component></user-component>

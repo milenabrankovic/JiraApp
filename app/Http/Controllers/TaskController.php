@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Project;
+use Illuminate\Support\Facades\DB;
+
 
 class TaskController extends Controller
 {
@@ -31,7 +33,52 @@ class TaskController extends Controller
         $project_id = $request->get('project_id');
         $user_id = $request->get('user_id');
 
-        $tasks = Task::where(['project_id' => $project_id, 'user_id' => $user_id])->get();
+        if($project_id == 0)
+        {
+            $tasks = DB::table('task')
+                    ->join('users', 'task.parent_id', 'users.user_id')
+                    ->join('status', 'task.status_id', 'status.status_id')
+                    ->where('task.user_id', $user_id)
+                    //->limit(10)
+                    ->get();
+        }
+        else
+        {
+            $tasks = DB::table('task')
+                    ->join('users', 'task.parent_id', 'users.user_id')
+                    ->join('status', 'task.status_id', 'status.status_id')
+                    ->where(['project_id' => $project_id, 'task.user_id' => $user_id])
+                    //->limit(10)
+                    ->get();
+        }
+
+        return $tasks;
+    }
+
+    public function tasks_by_parent(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $project_id = $request->get('project_id');
+
+        if($request->get('project_id') == 0)
+        {
+            $tasks = DB::table('task')
+                    ->join('users', 'task.user_id', 'users.user_id')
+                    ->join('status', 'task.status_id', 'status.status_id')
+                    ->where('task.parent_id', $user_id)
+                    //->limit(10)
+                    ->get();
+        }
+        else
+        {
+            $tasks = DB::table('task')
+                    ->join('users', 'task.user_id', 'users.user_id')
+                    ->join('status', 'task.status_id', 'status.status_id')
+                    ->where(['task.parent_id' => $user_id, 'task.project_id' => $project_id])
+                    //->limit(10)
+                    ->get();
+        }
+
         return $tasks;
     }
 

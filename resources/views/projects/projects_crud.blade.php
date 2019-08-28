@@ -6,9 +6,9 @@
 <link href="{{asset('/')}}assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
 @endsection
 
-@section('title')
+{{-- @section('title')
     Project CRUD
-@endsection
+@endsection --}}
 
 @section('content')
     <project-crud></project-crud>

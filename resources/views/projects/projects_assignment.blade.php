@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
-@section('title')
+{{-- @section('title')
     Project Assignment
-@endsection
+@endsection --}}
 
 @section('content')
     Assignment
