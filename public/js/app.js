@@ -3665,14 +3665,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       userProjects: [],
       tasksByProject: [],
       tasksByParent: [],
+      statuses: [],
       selectedProject: '',
-      selectedProjectParent: ''
+      selectedProjectParent: '',
+      selectedStatus: '',
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
   props: {
@@ -3717,6 +3730,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         return _this.tasksByParent = response.data;
       });
+      axios.get('http://jira-app.com/api/statuses').then(function (response) {
+        return _this.statuses = response.data;
+      });
     },
     changeTasks: function changeTasks() {
       var _this2 = this;
@@ -3741,6 +3757,27 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         return _this3.tasksByParent = response.data;
       });
+    },
+    editModal: function editModal(task) {
+      $('#task_name').text(task.title);
+      $('#task_id_to_edit').val(task.task_id);
+      this.selectedStatus = task.status_id;
+    },
+    editStatus: function editStatus() {
+      var _this4 = this;
+
+      axios.put('http://jira-app.com/api/edit_status', {
+        params: {
+          task_id: $('#task_id_to_edit').val(),
+          status_id: this.selectedStatus
+        }
+      }).then(function (response) {
+        _this4.fetchData();
+      });
+    },
+    hideModal: function hideModal() {
+      $('#task_modal_user_edit').modal('hide');
+      $('.modal-backdrop.in').hide(); // removes the overlay
     }
   }
 });
@@ -43515,60 +43552,124 @@ var render = function() {
                     _c("div", { staticClass: "modal-content" }, [
                       _vm._m(4),
                       _vm._v(" "),
-                      _c(
-                        "form",
-                        {
-                          attrs: { role: "form", method: "post" },
-                          on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                              return _vm.editStatus()
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c(
+                          "form",
+                          {
+                            attrs: { role: "form", method: "post" },
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return _vm.editStatus()
+                              }
                             }
-                          }
-                        },
-                        [
-                          _c("input", {
-                            attrs: { type: "hidden", name: "_token" },
-                            domProps: { value: _vm.csrf }
-                          }),
-                          _vm._v(" "),
-                          _c("input", {
-                            attrs: {
-                              type: "hidden",
-                              name: "_method",
-                              value: "put"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("input", {
-                            attrs: { type: "hidden", id: "task_id_to_edit" }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "modal-footer" }, [
+                          },
+                          [
+                            _c("input", {
+                              attrs: { type: "hidden", name: "_token" },
+                              domProps: { value: _vm.csrf }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "_method",
+                                value: "put"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: { type: "hidden", id: "task_id_to_edit" }
+                            }),
+                            _vm._v(" "),
                             _c(
-                              "button",
-                              {
-                                staticClass: "btn dark btn-outline",
-                                attrs: {
-                                  type: "button",
-                                  "data-dismiss": "modal"
-                                }
-                              },
-                              [_vm._v("Close")]
+                              "label",
+                              { attrs: { for: "select_task_status_edit" } },
+                              [_vm._v("Status")]
                             ),
                             _vm._v(" "),
                             _c(
-                              "button",
+                              "select",
                               {
-                                staticClass: "btn green",
-                                attrs: { type: "submit" },
-                                on: { click: _vm.hideModal }
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.selectedStatus,
+                                    expression: "selectedStatus"
+                                  }
+                                ],
+                                staticClass:
+                                  "bs-select form-control input-small",
+                                attrs: { id: "select_task_status_edit" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.selectedStatus = $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  }
+                                }
                               },
-                              [_vm._v("Save")]
-                            )
-                          ])
-                        ]
-                      )
+                              _vm._l(_vm.statuses, function(status) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: status.status_id,
+                                    domProps: { value: status.status_id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                  " +
+                                        _vm._s(status.name) +
+                                        "\n                              "
+                                    )
+                                  ]
+                                )
+                              }),
+                              0
+                            ),
+                            _vm._v(" "),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "modal-footer" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn dark btn-outline",
+                                  attrs: {
+                                    type: "button",
+                                    "data-dismiss": "modal"
+                                  }
+                                },
+                                [_vm._v("Close")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn green",
+                                  attrs: { type: "submit" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.hideModal()
+                                    }
+                                  }
+                                },
+                                [_vm._v("Save")]
+                              )
+                            ])
+                          ]
+                        )
+                      ])
                     ])
                   ]
                 )
@@ -43786,7 +43887,7 @@ var staticRenderFns = [
       ),
       _vm._v(" "),
       _c("h5", { staticClass: "modal-title" }, [
-        _vm._v('Modify project "'),
+        _vm._v('Modify task "'),
         _c("span", { attrs: { id: "task_name" } }),
         _vm._v("'s\" status?")
       ])

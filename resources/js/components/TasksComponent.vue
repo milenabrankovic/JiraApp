@@ -65,20 +65,30 @@
                             <span aria-hidden="true">&times;</span>
                             </button>
                             
-                            <h5 class="modal-title">Modify project "<span id="task_name"></span>'s" status?</h5>
+                            <h5 class="modal-title">Modify task "<span id="task_name"></span>'s" status?</h5>
                         </div>
+
+                        <div class="modal-body">
                         <form role="form" method="post" @submit.prevent="editStatus()">
                             <input type="hidden" name="_token" :value="csrf">
                             <input type="hidden" name="_method" value="put" />
                             <input type="hidden" id="task_id_to_edit" />
+                            <label for="select_task_status_edit">Status</label>
+                            <select class="bs-select form-control input-small" id="select_task_status_edit" v-model="selectedStatus">
+                                <option v-for="status in statuses" v-bind:key="status.status_id" :value="status.status_id">
+                                    {{status.name}}
+                                </option>
+                            </select>
+                           <br/>
                             <div class="modal-footer">
                                 <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn green" @click="hideModal">Save</button>
+                                <button type="submit" class="btn green" @click="hideModal()">Save</button>
                             </div>
+                          </form>
                         
-                        </form>
                         </div>
-                    </div>
+                     </div>
+                  </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="tab_1_2">
@@ -134,8 +144,11 @@ export default {
             userProjects: [],
             tasksByProject: [],
             tasksByParent: [],
+            statuses: [],
             selectedProject: '',
-            selectedProjectParent: ''
+            selectedProjectParent: '',
+            selectedStatus: '',
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content') 
         }
     },
     props: {
@@ -162,6 +175,9 @@ export default {
 
             axios.get('http://jira-app.com/api/tasks_by_parent', {params:{user_id:this.$auth.user().user_id, project_id: 0}})
                  .then(response => this.tasksByParent = response.data);
+
+            axios.get('http://jira-app.com/api/statuses')
+                 .then(response => this.statuses = response.data);
         },
         changeTasks(){
             axios.get('http://jira-app.com/api/tasks_by_project', {params:{user_id:this.$auth.user().user_id, project_id: this.selectedProject}})
@@ -170,6 +186,19 @@ export default {
         changeTasksParent(){
             axios.get('http://jira-app.com/api/tasks_by_parent', {params:{user_id:this.$auth.user().user_id, project_id: this.selectedProjectParent}})
                  .then(response => this.tasksByParent = response.data);
+        },
+        editModal(task){
+            $('#task_name').text(task.title);
+            $('#task_id_to_edit').val(task.task_id);
+            this.selectedStatus = task.status_id;
+        },
+        editStatus(){
+            axios.put('http://jira-app.com/api/edit_status', {params: {task_id: $('#task_id_to_edit').val(), status_id: this.selectedStatus}})
+            .then(response => {this.fetchData();});
+        },
+        hideModal(){
+            $('#task_modal_user_edit').modal('hide');
+            $( '.modal-backdrop.in' ).hide(); // removes the overlay
         }
         
     }

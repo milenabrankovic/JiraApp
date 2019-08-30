@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Project;
+use App\Models\Status;
 use Illuminate\Support\Facades\DB;
 
 
@@ -80,6 +81,29 @@ class TaskController extends Controller
         }
 
         return $tasks;
+    }
+
+    public function statuses()
+    {
+        $statuses = Status::all();
+
+        return $statuses;
+    }
+
+    public function edit_status(Request $request)
+    {
+       // return $request->get('params')['status_id'];
+
+        $task_id = $request->get('params')['task_id'];
+        $status_id = $request->get('params')['status_id'];
+
+        $task = Task::find($task_id);
+        $task->status_id = $status_id;
+        
+        if($task->save())
+        {
+            return $task;    
+        }
     }
 
 
