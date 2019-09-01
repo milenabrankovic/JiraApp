@@ -45,8 +45,14 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="multiple_user" class="control-label">Choose Employees</label><br/>
-                                        <select class="form-control" data-live-search="true" id="multiple_user" multiple  v-model="selectedUsers">
+                                        <select class="selectpicker" data-live-search="true" id="multiple_user" multiple  v-model="selectedUsers">
                                             <option v-for="user in users" v-bind:key="user.user_id" :data-tokens="user.user_id" :value="user.user_id">{{user.first_name}} {{user.last_name}}</option>
+                                        </select>
+                                        <select class="selectpicker">
+                                            <option>test1</option>
+                                            <option>test2</option>
+                                            <option>test3</option>
+                                            <option>test4</option>
                                         </select>
                                     </div>     
                                 </div>
@@ -216,6 +222,7 @@ export default {
             }
             $('.filter-option-inner-inner').text(inner);
         }
+        
     }
 }
 </script>

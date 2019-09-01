@@ -47,15 +47,18 @@ class LoginController extends Controller
                     'msg' => 'Invalid Credentials.'
                 ], 400);
         }
+        //$user = User::find(Auth::user()->user_id);
+        $user = $token->authenticate();
         return response([
-                'status' => 'success'
+                'status' => 'success',
+                'user' => $user
             ])
             ->header('Authorization', $token);
     }
 
     public function user(Request $request)
     {
-        $user = User::find(Auth::user()->id);
+        $user = User::find(Auth::user()->user_id);
         return response([
                 'status' => 'success',
                 'data' => $user

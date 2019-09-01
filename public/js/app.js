@@ -3055,7 +3055,8 @@ __webpack_require__.r(__webpack_exports__);
           username: app.username,
           password: app.password
         },
-        success: function success() {//window.location.href = 'http://jira-app.com/';
+        success: function success(data) {//window.location.href = 'http://jira-app.com/';
+          //console.log("DATA:"+JSON.stringify(data));
         },
         error: function error(_error) {
           console.log(_error);
@@ -3283,6 +3284,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var q__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! q */ "./node_modules/q/q.js");
 /* harmony import */ var q__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(q__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3675,13 +3682,140 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      task: {
+        id: '',
+        title: '',
+        description: '',
+        project_id: '',
+        status_id: '',
+        user_id: '',
+        parent_id: '',
+        points: '',
+        sprint_id: ''
+      },
+      active_sprint_id: '',
       userProjects: [],
       tasksByProject: [],
       tasksByParent: [],
       statuses: [],
+      teamUsers: [],
       selectedProject: '',
       selectedProjectParent: '',
       selectedStatus: '',
@@ -3733,6 +3867,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('http://jira-app.com/api/statuses').then(function (response) {
         return _this.statuses = response.data;
       });
+      axios.get('http://jira-app.com/api/active_sprint').then(function (response) {
+        return _this.active_sprint_id = response.data.sprint_id;
+      });
     },
     changeTasks: function changeTasks() {
       var _this2 = this;
@@ -3758,13 +3895,73 @@ __webpack_require__.r(__webpack_exports__);
         return _this3.tasksByParent = response.data;
       });
     },
+    createTaskModal: function createTaskModal() {
+      this.task.id = '';
+      this.task.title = '';
+      this.task.description = '';
+      this.task.project_id = '';
+      this.task.status_id = 1;
+      this.task.user_id = '';
+      this.task.parent_id = this.$auth.user().user_id;
+      this.task.points = '';
+      this.task.sprint_id = this.active_sprint_id;
+      this.getTeamUsers();
+    },
     editModal: function editModal(task) {
       $('#task_name').text(task.title);
       $('#task_id_to_edit').val(task.task_id);
       this.selectedStatus = task.status_id;
     },
-    editStatus: function editStatus() {
+    editModalParent: function editModalParent(task) {
+      this.task.id = task.task_id;
+      this.task.title = task.title;
+      this.task.description = task.description;
+      this.task.project_id = task.project_id;
+      this.task.status_id = task.status_id;
+      this.task.user_id = task.user_id;
+      this.task.parent_id = this.$auth.user().user_id;
+      this.task.points = task.points;
+      this.task.sprint_id = task.sprint_id;
+      this.getTeamUsers(); //console.log(this.task);
+    },
+    createTask: function createTask() {
       var _this4 = this;
+
+      axios.post('http://jira-app.com/api/create_task', {
+        params: {
+          task: this.task
+        }
+      }).then(function (response) {
+        console.log(response);
+
+        _this4.fetchData();
+      });
+    },
+    editTaskParent: function editTaskParent(task) {
+      var _this5 = this;
+
+      axios.put('http://jira-app.com/api/edit_task', {
+        params: {
+          task: this.task
+        }
+      }).then(function (response) {
+        _this5.fetchData();
+      });
+    },
+    getTeamUsers: function getTeamUsers() {
+      var _this6 = this;
+
+      axios.get('http://jira-app.com/api/team_users', {
+        params: {
+          user_id: this.$auth.user().user_id
+        }
+      }).then(function (response) {
+        console.log(response);
+        _this6.teamUsers = response.data;
+      });
+    },
+    editStatus: function editStatus() {
+      var _this7 = this;
 
       axios.put('http://jira-app.com/api/edit_status', {
         params: {
@@ -3772,11 +3969,13 @@ __webpack_require__.r(__webpack_exports__);
           status_id: this.selectedStatus
         }
       }).then(function (response) {
-        _this4.fetchData();
+        _this7.fetchData();
       });
     },
     hideModal: function hideModal() {
       $('#task_modal_user_edit').modal('hide');
+      $('#create_task_modal').modal('hide');
+      $('#task_modal_parent_edit').modal('hide');
       $('.modal-backdrop.in').hide(); // removes the overlay
     }
   }
@@ -3795,6 +3994,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var q__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! q */ "./node_modules/q/q.js");
 /* harmony import */ var q__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(q__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
 //
 //
 //
@@ -8518,6 +8719,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "\n.router-link-active{\n    border-left: 3px solid #5C9ACF!important;\n    margin-left: -3px;\n    padding-left: 15px;\n    background: #f2f6f9;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TasksComponent.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TasksComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.cross-row{\n    text-decoration:line-through;\n},\n.disable-modification{\n    color: currentColor;\n    cursor: not-allowed;\n    opacity: 0.5;\n    text-decoration: none;\n}\n", ""]);
 
 // exports
 
@@ -41457,6 +41677,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TasksComponent.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TasksComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./TasksComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TasksComponent.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -43013,7 +43263,7 @@ var render = function() {
                                   expression: "selectedUsers"
                                 }
                               ],
-                              staticClass: "form-control",
+                              staticClass: "selectpicker",
                               attrs: {
                                 "data-live-search": "true",
                                 id: "multiple_user",
@@ -43054,7 +43304,9 @@ var render = function() {
                               )
                             }),
                             0
-                          )
+                          ),
+                          _vm._v(" "),
+                          _vm._m(4)
                         ])
                       ]),
                       _vm._v(" "),
@@ -43116,7 +43368,7 @@ var render = function() {
       _c("div", { staticClass: "portlet-body" }, [
         _c("div", { staticClass: "table-scrollable" }, [
           _c("table", { staticClass: "table table-hover" }, [
-            _vm._m(4),
+            _vm._m(5),
             _vm._v(" "),
             _c(
               "tbody",
@@ -43207,7 +43459,7 @@ var render = function() {
                 { staticClass: "modal-dialog", attrs: { role: "document" } },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(5),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c(
                       "form",
@@ -43329,6 +43581,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("select", { staticClass: "selectpicker" }, [
+      _c("option", [_vm._v("test1")]),
+      _vm._v(" "),
+      _c("option", [_vm._v("test2")]),
+      _vm._v(" "),
+      _c("option", [_vm._v("test3")]),
+      _vm._v(" "),
+      _c("option", [_vm._v("test4")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v(" Project Name")]),
@@ -43395,8 +43661,397 @@ var render = function() {
     _vm._v(" "),
     _vm._m(1),
     _vm._v(" "),
+    _c(
+      "a",
+      {
+        staticClass: "btn green",
+        staticStyle: { float: "right" },
+        attrs: { "data-toggle": "modal", href: "#create_task_modal" },
+        on: {
+          click: function($event) {
+            return _vm.createTaskModal()
+          }
+        }
+      },
+      [_vm._v(" + New task ")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: { tabindex: "-1", role: "dialog", id: "create_task_modal" }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "form",
+                  {
+                    attrs: { role: "form", method: "post" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.createTask()
+                      }
+                    }
+                  },
+                  [
+                    _c("input", {
+                      attrs: { type: "hidden", name: "_token" },
+                      domProps: { value: _vm.csrf }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "taskTtitle" } }, [
+                        _vm._v("Task Title")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.task.title,
+                            expression: "task.title"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          required: "",
+                          id: "taskTtitle",
+                          name: "taskTitle",
+                          placeholder: "Enter task title"
+                        },
+                        domProps: { value: _vm.task.title },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.task, "title", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "taskDesc" } }, [
+                        _vm._v("Task Description")
+                      ]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.task.description,
+                            expression: "task.description"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          required: "",
+                          id: "taskDesc",
+                          name: "taskDesc",
+                          placeholder: "Enter task description"
+                        },
+                        domProps: { value: _vm.task.description },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.task,
+                              "description",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "control-label",
+                          attrs: { for: "task_project" }
+                        },
+                        [_vm._v("Choose Project")]
+                      ),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.task.project_id,
+                              expression: "task.project_id"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { id: "task_project" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.task,
+                                "project_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { value: "", selected: "", disabled: "" }
+                            },
+                            [_vm._v("Select project...")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.userProjects, function(project) {
+                            return _c(
+                              "option",
+                              {
+                                key: project.project_id,
+                                attrs: { "data-tokens": project.project_id },
+                                domProps: { value: project.project_id }
+                              },
+                              [_vm._v(_vm._s(project.name))]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "taskPoints" } }, [
+                        _vm._v("Points")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.task.points,
+                            expression: "task.points"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "number",
+                          required: "",
+                          id: "taskPoints",
+                          name: "taskPoints",
+                          placeholder: "Enter task points"
+                        },
+                        domProps: { value: _vm.task.points },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.task, "points", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        { attrs: { for: "select_task_status_edit" } },
+                        [_vm._v("Status")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.task.status_id,
+                              expression: "task.status_id"
+                            }
+                          ],
+                          staticClass: "bs-select form-control input-small",
+                          attrs: {
+                            id: "select_task_status_edit",
+                            disabled: ""
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.task,
+                                "status_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        _vm._l(_vm.statuses, function(status) {
+                          return _c(
+                            "option",
+                            {
+                              key: status.status_id,
+                              domProps: { value: status.status_id }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                           " +
+                                  _vm._s(status.name) +
+                                  "\n                                      "
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "assignedTo" } }, [
+                        _vm._v("Assigned to")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.task.user_id,
+                              expression: "task.user_id"
+                            }
+                          ],
+                          staticClass: "bs-select form-control input-small",
+                          attrs: { id: "assignedTo" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.task,
+                                "user_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { value: "", selected: "", disabled: "" }
+                            },
+                            [_vm._v("Select user...")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.teamUsers, function(user) {
+                            return _c(
+                              "option",
+                              {
+                                key: user.user_id,
+                                domProps: { value: user.user_id }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                          " +
+                                    _vm._s(user.first_name) +
+                                    " " +
+                                    _vm._s(user.last_name) +
+                                    "\n                                      "
+                                )
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn dark btn-outline",
+                          attrs: { type: "button", "data-dismiss": "modal" }
+                        },
+                        [_vm._v("Close")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn green",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              return _vm.hideModal()
+                            }
+                          }
+                        },
+                        [_vm._v("Create")]
+                      )
+                    ])
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
     _c("div", { staticClass: "portlet-body" }, [
-      _vm._m(2),
+      _vm._m(3),
       _vm._v(" "),
       _c("div", { staticClass: "tab-content" }, [
         _c(
@@ -43469,7 +44124,7 @@ var render = function() {
             _c("br"),
             _vm._v(" "),
             _c("table", { staticClass: "table table-hover" }, [
-              _vm._m(3),
+              _vm._m(4),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -43486,48 +44141,55 @@ var render = function() {
                         )
                       ])
                     : _vm._l(_vm.tasksByProject, function(task) {
-                        return _c("tr", { key: task.task_id }, [
-                          _c("td", [_vm._v(_vm._s(task.title))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(task.description))]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _vm._v(
-                              _vm._s(task.first_name) +
-                                " " +
-                                _vm._s(task.last_name)
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "text-center" }, [
-                            _vm._v(_vm._s(task.points))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(task.name))]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c(
-                              "a",
-                              {
-                                attrs: {
-                                  "data-toggle": "modal",
-                                  href: "#task_modal_user_edit"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.editModal(task)
+                        return _c(
+                          "tr",
+                          {
+                            key: task.task_id,
+                            class: task.status_id == 3 ? "cross-row" : ""
+                          },
+                          [
+                            _c("td", [_vm._v(_vm._s(task.title))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(task.description))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                _vm._s(task.first_name) +
+                                  " " +
+                                  _vm._s(task.last_name)
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _vm._v(_vm._s(task.points))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(task.name))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    "data-toggle": "modal",
+                                    href: "#task_modal_user_edit"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.editModal(task)
+                                    }
                                   }
-                                }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "icon-pencil font-green",
-                                  attrs: { "data-toggle": "modal" }
-                                })
-                              ]
-                            )
-                          ])
-                        ])
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "icon-pencil font-green",
+                                    attrs: { "data-toggle": "modal" }
+                                  })
+                                ]
+                              )
+                            ])
+                          ]
+                        )
                       })
                 ],
                 2
@@ -43550,7 +44212,7 @@ var render = function() {
                   { staticClass: "modal-dialog", attrs: { role: "document" } },
                   [
                     _c("div", { staticClass: "modal-content" }, [
-                      _vm._m(4),
+                      _vm._m(5),
                       _vm._v(" "),
                       _c("div", { staticClass: "modal-body" }, [
                         _c(
@@ -43745,7 +44407,7 @@ var render = function() {
           _c("br"),
           _vm._v(" "),
           _c("table", { staticClass: "table table-hover" }, [
-            _vm._m(5),
+            _vm._m(6),
             _vm._v(" "),
             _c(
               "tbody",
@@ -43759,39 +44421,442 @@ var render = function() {
                       )
                     ])
                   : _vm._l(_vm.tasksByParent, function(task) {
-                      return _c("tr", { key: task.task_id }, [
-                        _c("td", [_vm._v(_vm._s(task.title))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(task.description))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(task.first_name) +
-                              " " +
-                              _vm._s(task.last_name)
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-center" }, [
-                          _vm._v(_vm._s(task.points))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(task.name))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            "\n                          edit\n                      "
-                          )
-                        ])
-                      ])
+                      return _c(
+                        "tr",
+                        {
+                          key: task.task_id,
+                          class: task.status_id == 3 ? "cross-row" : ""
+                        },
+                        [
+                          _c("td", [_vm._v(_vm._s(task.title))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(task.description))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(task.first_name) +
+                                " " +
+                                _vm._s(task.last_name)
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "text-center" }, [
+                            _vm._v(_vm._s(task.points))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(task.name))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  "data-toggle": "modal",
+                                  href: "#task_modal_parent_edit"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.editModalParent(task)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "icon-pencil font-green",
+                                  attrs: { "data-toggle": "modal" }
+                                })
+                              ]
+                            )
+                          ])
+                        ]
+                      )
                     })
               ],
               2
             )
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(6)
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                tabindex: "-1",
+                role: "dialog",
+                id: "task_modal_parent_edit"
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "modal-dialog", attrs: { role: "document" } },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c(
+                        "form",
+                        {
+                          attrs: { role: "form", method: "post" },
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.editTaskParent(_vm.task)
+                            }
+                          }
+                        },
+                        [
+                          _c("input", {
+                            attrs: { type: "hidden", name: "_token" },
+                            domProps: { value: _vm.csrf }
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              type: "hidden",
+                              name: "_method",
+                              value: "put"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "taskTtitle" } }, [
+                              _vm._v("Task Title")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.task.title,
+                                  expression: "task.title"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                required: "",
+                                id: "taskTtitle",
+                                name: "taskTitle",
+                                placeholder: "Enter task title"
+                              },
+                              domProps: { value: _vm.task.title },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.task,
+                                    "title",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "taskDesc" } }, [
+                              _vm._v("Task Description")
+                            ]),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.task.description,
+                                  expression: "task.description"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                required: "",
+                                id: "taskDesc",
+                                name: "taskDesc",
+                                placeholder: "Enter task description"
+                              },
+                              domProps: { value: _vm.task.description },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.task,
+                                    "description",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "control-label",
+                                attrs: { for: "task_project" }
+                              },
+                              [_vm._v("Choose Project")]
+                            ),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.task.project_id,
+                                    expression: "task.project_id"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { id: "task_project" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.task,
+                                      "project_id",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              _vm._l(_vm.userProjects, function(project) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: project.project_id,
+                                    attrs: {
+                                      "data-tokens": project.project_id
+                                    },
+                                    domProps: { value: project.project_id }
+                                  },
+                                  [_vm._v(_vm._s(project.name))]
+                                )
+                              }),
+                              0
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "taskPoints" } }, [
+                              _vm._v("Points")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.task.points,
+                                  expression: "task.points"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "number",
+                                required: "",
+                                id: "taskPoints",
+                                name: "taskPoints",
+                                placeholder: "Enter task points"
+                              },
+                              domProps: { value: _vm.task.points },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.task,
+                                    "points",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              { attrs: { for: "select_task_status_edit" } },
+                              [_vm._v("Status")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.task.status_id,
+                                    expression: "task.status_id"
+                                  }
+                                ],
+                                staticClass:
+                                  "bs-select form-control input-small",
+                                attrs: { id: "select_task_status_edit" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.task,
+                                      "status_id",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              _vm._l(_vm.statuses, function(status) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: status.status_id,
+                                    domProps: { value: status.status_id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                      " +
+                                        _vm._s(status.name) +
+                                        "\n                                  "
+                                    )
+                                  ]
+                                )
+                              }),
+                              0
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "assignedTo" } }, [
+                              _vm._v("Assigned to")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.task.user_id,
+                                    expression: "task.user_id"
+                                  }
+                                ],
+                                staticClass:
+                                  "bs-select form-control input-small",
+                                attrs: { id: "assignedTo" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.task,
+                                      "user_id",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              _vm._l(_vm.teamUsers, function(user) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: user.user_id,
+                                    domProps: { value: user.user_id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                      " +
+                                        _vm._s(user.first_name) +
+                                        " " +
+                                        _vm._s(user.last_name) +
+                                        "\n                                  "
+                                    )
+                                  ]
+                                )
+                              }),
+                              0
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "modal-footer" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn dark btn-outline",
+                                attrs: {
+                                  type: "button",
+                                  "data-dismiss": "modal"
+                                }
+                              },
+                              [_vm._v("Close")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn green",
+                                attrs: { type: "submit" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.hideModal()
+                                  }
+                                }
+                              },
+                              [_vm._v("Save")]
+                            )
+                          ])
+                        ]
+                      )
+                    ])
+                  ])
+                ]
+              )
+            ]
+          )
+        ])
       ])
     ])
   ])
@@ -43828,22 +44893,37 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Create new task")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("ul", { staticClass: "nav nav-tabs" }, [
       _c("li", { staticClass: "active" }, [
         _c("a", { attrs: { href: "#tab_1_1", "data-toggle": "tab" } }, [
-          _vm._v(" List ")
+          _vm._v(" Your tasks")
         ])
       ]),
       _vm._v(" "),
       _c("li", [
         _c("a", { attrs: { href: "#tab_1_2", "data-toggle": "tab" } }, [
-          _vm._v(" Assigned ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("li", [
-        _c("a", { attrs: { href: "#tab_1_3", "data-toggle": "tab" } }, [
-          _vm._v(" Create ")
+          _vm._v(" Your team tasks ")
         ])
       ])
     ])
@@ -43917,11 +44997,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "tab-pane fade", attrs: { id: "tab_1_3" } },
-      [_c("p", [_vm._v("Create ")])]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Modify task")])
+    ])
   }
 ]
 render._withStripped = true
@@ -44254,18 +45345,32 @@ var render = function() {
                                 }
                               }
                             },
-                            _vm._l(_vm.roles, function(role) {
-                              return _c(
+                            [
+                              _c(
                                 "option",
                                 {
-                                  key: role.role_id,
-                                  attrs: { "data-tokens": role.role_id },
-                                  domProps: { value: role.role_id }
+                                  attrs: {
+                                    value: "",
+                                    selected: "",
+                                    disabled: ""
+                                  }
                                 },
-                                [_vm._v(_vm._s(role.name))]
-                              )
-                            }),
-                            0
+                                [_vm._v("Select Role...")]
+                              ),
+                              _vm._v(" "),
+                              _vm._l(_vm.roles, function(role) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: role.role_id,
+                                    attrs: { "data-tokens": role.role_id },
+                                    domProps: { value: role.role_id }
+                                  },
+                                  [_vm._v(_vm._s(role.name))]
+                                )
+                              })
+                            ],
+                            2
                           )
                         ]
                       ),
@@ -44321,24 +45426,38 @@ var render = function() {
                                 }
                               }
                             },
-                            _vm._l(_vm.users, function(user) {
-                              return _c(
+                            [
+                              _c(
                                 "option",
                                 {
-                                  key: user.user_id,
-                                  attrs: { "data-tokens": user.user_id },
-                                  domProps: { value: user.user_id }
+                                  attrs: {
+                                    value: "",
+                                    selected: "",
+                                    disabled: ""
+                                  }
                                 },
-                                [
-                                  _vm._v(
-                                    _vm._s(user.first_name) +
-                                      " " +
-                                      _vm._s(user.last_name)
-                                  )
-                                ]
-                              )
-                            }),
-                            0
+                                [_vm._v("Select Leader...")]
+                              ),
+                              _vm._v(" "),
+                              _vm._l(_vm.users, function(user) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: user.user_id,
+                                    attrs: { "data-tokens": user.user_id },
+                                    domProps: { value: user.user_id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(user.first_name) +
+                                        " " +
+                                        _vm._s(user.last_name)
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
                           )
                         ]
                       )
@@ -44450,7 +45569,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            " /\n                                        "
+                            " /\r\n                                        "
                           ),
                           _c(
                             "a",
@@ -60293,7 +61412,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TasksComponent_vue_vue_type_template_id_8f69a68c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TasksComponent.vue?vue&type=template&id=8f69a68c& */ "./resources/js/components/TasksComponent.vue?vue&type=template&id=8f69a68c&");
 /* harmony import */ var _TasksComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TasksComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/TasksComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _TasksComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TasksComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/TasksComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -60301,7 +61422,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _TasksComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _TasksComponent_vue_vue_type_template_id_8f69a68c___WEBPACK_IMPORTED_MODULE_0__["render"],
   _TasksComponent_vue_vue_type_template_id_8f69a68c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -60330,6 +61451,22 @@ component.options.__file = "resources/js/components/TasksComponent.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TasksComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TasksComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TasksComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TasksComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TasksComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/TasksComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TasksComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./TasksComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TasksComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TasksComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TasksComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TasksComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TasksComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TasksComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -60438,8 +61575,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/entel/laravel/JiraApp/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/entel/laravel/JiraApp/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

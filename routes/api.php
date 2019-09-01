@@ -30,5 +30,9 @@ Route::get('tasks_by_project', 'TaskController@tasks_by_project');
 Route::get('tasks_by_parent', 'TaskController@tasks_by_parent');
 Route::get('statuses', 'TaskController@statuses'); 
 Route::put('edit_status', 'TaskController@edit_status');
+Route::get('team_users', 'TaskController@team_users');
+Route::put('edit_task', 'TaskController@edit_task');
+Route::post('create_task', 'TaskController@create_task');
+Route::get('active_sprint', 'TaskController@active_sprint');
 
 
