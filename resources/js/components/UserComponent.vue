@@ -86,6 +86,7 @@
                                     <th> Username </th>
                                     <th> Email </th>
                                     <th> Role </th>
+                                    <th> Team </th>
                                     <th> Modify </th>
                                 </tr>
                             </thead>
@@ -99,6 +100,9 @@
                                     <td> {{user.username}} </td>
                                     <td> {{user.email}} </td>
                                     <td> {{user.name}} </td>
+                                    <td> 
+                                        <a data-toggle="modal" @click="teamModal(user)" href="#team_modal"><i  style="margin-left:10px;" class="icon-users font-green" data-toggle="modal" ></i></a>
+                                    </td>
                                     <td> 
                                         <a data-toggle="modal" @click="editModal(user)" href="#user_modal"><i class="icon-pencil font-green" data-toggle="modal" ></i></a> /
                                         <a href="#delete_user_modal" @click="openDeleteModal(user)" data-toggle="modal" style="color:red;"><i class="icon-trash"></i></a>
@@ -129,6 +133,38 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" tabindex="-1" role="dialog"   id="team_modal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    
+                                    <h5 class="modal-title"><span id="user_team"></span>'s team</h5>
+                                </div>
+                                <form role="form" method="post" @submit.prevent="editTeam">
+                                <div class="modal-body">
+                                    <input type="hidden" name="_token" :value="csrf">
+                                    <input type="hidden" name="_method" value="put" />
+                                    <input type="hidden" id="user_id_to_update_team" />
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Team</label>
+                                        <select multiple class="form-control" v-model="team">    
+                                            <option v-for="user in users" v-bind:key="user.user_id" :data-tokens="user.user_id" :value="user.user_id" v-if="user.user_id != $auth.user().user_id">
+                                                {{user.first_name}} {{user.last_name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn green" @click="hideModal">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="clearfix margin-bottom-20"> </div>
@@ -146,7 +182,7 @@ export default {
     },
     data(){
         return{
-            test: 1,
+            test: '1',
             users: [],
             user: {
                 first_name: '',
@@ -158,11 +194,15 @@ export default {
                 leader: ''
             },
             roles: [],
+            team: [],
             edit: false,
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content') 
         }
     },
     created(){
+        $(document).ready(function() {
+            $('.selectpicker').selectpicker();
+        });
         this.fetchUsers();
         this.fetchRoles();
     },
@@ -176,8 +216,11 @@ export default {
            //location.reload();
         },
         fetchUsers(){
+            let theVue = this;
             axios.get('http://jira-app.com/api/user')
-                    .then(response => {this.users = response.data; console.log(response.data)});
+                    .then(response => {this.users = response.data; theVue.$nextTick(function(){ $('#team-list').selectpicker('refresh');
+            });});
+           
         },
         fetchRoles(){
             axios.get('http://jira-app.com/api/roles')
@@ -196,6 +239,13 @@ export default {
             axios.delete('http://jira-app.com/api/user/'+this.user.user_id,)
             .then(response => {this.fetchUsers();});
         },
+        editTeam(){
+            
+            var user_id = $('#user_id_to_update_team').val();
+            axios.put('http://jira-app.com/api/edit_team/'+user_id, {team: this.team})
+            .then(response => {this.fetchUsers(); console.log(response);});
+            
+        },
         createModal(){
             this.edit = false;
             this.user.first_name = '';
@@ -212,7 +262,20 @@ export default {
         hideModal(){
             $('#user_modal').modal('hide');
             $('#delete_user_modal').modal('hide');
-            $( '.modal-backdrop.in' ).hide(); // removes the overlay
+            $('.modal-backdrop.in' ).hide(); // removes the overlay
+        },
+        teamModal(user){
+            let team_users;
+            $('#user_team').text(user.first_name+' '+user.last_name);
+            $('#user_id_to_update_team').val(user.user_id);
+            axios.get('http://jira-app.com/api/team', {params:{user_id: user.user_id}})
+            .then(response => {
+                let niz = [];
+                $.each(response.data, function( key, value ) {
+                    niz.push(value.user_id);
+                });
+                this.team = niz;
+            });
         },
         editModal(user){
             this.edit = true;

@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
   Route::get('/projects', 'FrontendController@projects_crud')->name('projects_crud');
   Route::get('/configuration', 'FrontendController@configuration')->name('configuration');
   Route::get('/users', 'FrontendController@users_crud')->name('users_crud');

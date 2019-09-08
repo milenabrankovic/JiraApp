@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Project;
 use App\Models\Role;
 use App\Http\Resources\User as UserResource;
 use Illuminate\Support\Facades\Hash;
@@ -30,6 +31,36 @@ class UserController extends Controller
         $roles = Role::all();
         
         return $roles;
+    }
+
+    public function team(Request $request)
+    {
+        $user_id = $request->get('user_id');
+
+        $team = User::select('user_id')->where('parent_id', $user_id)->get();
+
+        return $team;
+    }
+
+    public function edit_team(Request $request, $id)
+    {
+        $team = $request->get('team');
+
+        foreach($team as $t)
+        {
+            $user = User::find($t);
+            $user->parent_id = $id;
+            $user->save();
+        }
+        return $request->get('team');
+    }
+
+    public function users_by_project(Request $request)
+    {
+        $id = $request->get('project_id');
+        $users = Project::find($id)->users;
+        
+        return $users;
     }
     /**
      * Show the form for creating a new resource.

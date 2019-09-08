@@ -3404,12 +3404,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   head: {
@@ -3507,6 +3501,8 @@ __webpack_require__.r(__webpack_exports__);
       this.project.project_id = project.project_id;
     },
     editModal: function editModal(project) {
+      var _this6 = this;
+
       this.edit = true;
       $('#project_id_to_edit').val(project.project_id);
       this.project.project_id = project.project_id;
@@ -3515,19 +3511,22 @@ __webpack_require__.r(__webpack_exports__);
       this.project.start_date = project.start_date.split(' ')[0];
       var niz = [];
       var inner = '';
-      $.each(project.users, function (key, value) {
-        niz.push(value.user_id);
-        inner += value.first_name + ' ' + value.last_name + ', ';
+      axios.get('http://jira-app.com/api/users_by_project', {
+        params: {
+          project_id: project.project_id
+        }
+      }).then(function (response) {
+        //console.log(response.data)
+        $.each(response.data, function (key, value) {
+          niz.push(value.user_id); //inner += value.first_name+' '+value.last_name+', ';
+        });
+        _this6.selectedUsers = niz; // if(niz.length == 0){
+        //     inner = 'Nothing selected';
+        // }else{
+        // inner = inner.substring(0, inner.length - 2);
+        // }
+        // $('.filter-option-inner-inner').text(inner);
       });
-      this.selectedUsers = niz;
-
-      if (niz.length == 0) {
-        inner = 'Nothing selected';
-      } else {
-        inner = inner.substring(0, inner.length - 2);
-      }
-
-      $('.filter-option-inner-inner').text(inner);
     }
   }
 });
@@ -4132,6 +4131,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   head: {
@@ -4141,7 +4176,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      test: 1,
+      test: '1',
       users: [],
       user: {
         first_name: '',
@@ -4153,11 +4188,15 @@ __webpack_require__.r(__webpack_exports__);
         leader: ''
       },
       roles: [],
+      team: [],
       edit: false,
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
   created: function created() {
+    $(document).ready(function () {
+      $('.selectpicker').selectpicker();
+    });
     this.fetchUsers();
     this.fetchRoles();
   },
@@ -4172,9 +4211,12 @@ __webpack_require__.r(__webpack_exports__);
     fetchUsers: function fetchUsers() {
       var _this = this;
 
+      var theVue = this;
       axios.get('http://jira-app.com/api/user').then(function (response) {
         _this.users = response.data;
-        console.log(response.data);
+        theVue.$nextTick(function () {
+          $('#team-list').selectpicker('refresh');
+        });
       });
     },
     fetchRoles: function fetchRoles() {
@@ -4210,6 +4252,18 @@ __webpack_require__.r(__webpack_exports__);
         _this5.fetchUsers();
       });
     },
+    editTeam: function editTeam() {
+      var _this6 = this;
+
+      var user_id = $('#user_id_to_update_team').val();
+      axios.put('http://jira-app.com/api/edit_team/' + user_id, {
+        team: this.team
+      }).then(function (response) {
+        _this6.fetchUsers();
+
+        console.log(response);
+      });
+    },
     createModal: function createModal() {
       this.edit = false;
       this.user.first_name = '';
@@ -4227,6 +4281,24 @@ __webpack_require__.r(__webpack_exports__);
       $('#user_modal').modal('hide');
       $('#delete_user_modal').modal('hide');
       $('.modal-backdrop.in').hide(); // removes the overlay
+    },
+    teamModal: function teamModal(user) {
+      var _this7 = this;
+
+      var team_users;
+      $('#user_team').text(user.first_name + ' ' + user.last_name);
+      $('#user_id_to_update_team').val(user.user_id);
+      axios.get('http://jira-app.com/api/team', {
+        params: {
+          user_id: user.user_id
+        }
+      }).then(function (response) {
+        var niz = [];
+        $.each(response.data, function (key, value) {
+          niz.push(value.user_id);
+        });
+        _this7.team = niz;
+      });
     },
     editModal: function editModal(user) {
       this.edit = true;
@@ -43263,12 +43335,8 @@ var render = function() {
                                   expression: "selectedUsers"
                                 }
                               ],
-                              staticClass: "selectpicker",
-                              attrs: {
-                                "data-live-search": "true",
-                                id: "multiple_user",
-                                multiple: ""
-                              },
+                              staticClass: "form-control",
+                              attrs: { id: "multiple_user", multiple: "" },
                               on: {
                                 change: function($event) {
                                   var $$selectedVal = Array.prototype.filter
@@ -43304,9 +43372,7 @@ var render = function() {
                               )
                             }),
                             0
-                          ),
-                          _vm._v(" "),
-                          _vm._m(4)
+                          )
                         ])
                       ]),
                       _vm._v(" "),
@@ -43368,7 +43434,7 @@ var render = function() {
       _c("div", { staticClass: "portlet-body" }, [
         _c("div", { staticClass: "table-scrollable" }, [
           _c("table", { staticClass: "table table-hover" }, [
-            _vm._m(5),
+            _vm._m(4),
             _vm._v(" "),
             _c(
               "tbody",
@@ -43459,7 +43525,7 @@ var render = function() {
                 { staticClass: "modal-dialog", attrs: { role: "document" } },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(6),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c(
                       "form",
@@ -43576,20 +43642,6 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("select", { staticClass: "selectpicker" }, [
-      _c("option", [_vm._v("test1")]),
-      _vm._v(" "),
-      _c("option", [_vm._v("test2")]),
-      _vm._v(" "),
-      _c("option", [_vm._v("test3")]),
-      _vm._v(" "),
-      _c("option", [_vm._v("test4")])
-    ])
   },
   function() {
     var _vm = this
@@ -45553,6 +45605,30 @@ var render = function() {
                             {
                               attrs: {
                                 "data-toggle": "modal",
+                                href: "#team_modal"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.teamModal(user)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "icon-users font-green",
+                                staticStyle: { "margin-left": "10px" },
+                                attrs: { "data-toggle": "modal" }
+                              })
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                "data-toggle": "modal",
                                 href: "#user_modal"
                               },
                               on: {
@@ -45664,6 +45740,144 @@ var render = function() {
                 ]
               )
             ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: { tabindex: "-1", role: "dialog", id: "team_modal" }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "modal-dialog", attrs: { role: "document" } },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        attrs: { role: "form", method: "post" },
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.editTeam($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c("input", {
+                            attrs: { type: "hidden", name: "_token" },
+                            domProps: { value: _vm.csrf }
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              type: "hidden",
+                              name: "_method",
+                              value: "put"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              type: "hidden",
+                              id: "user_id_to_update_team"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              { staticClass: "control-label col-md-3" },
+                              [_vm._v("Team")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.team,
+                                    expression: "team"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { multiple: "" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.team = $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  }
+                                }
+                              },
+                              _vm._l(_vm.users, function(user) {
+                                return user.user_id != _vm.$auth.user().user_id
+                                  ? _c(
+                                      "option",
+                                      {
+                                        key: user.user_id,
+                                        attrs: { "data-tokens": user.user_id },
+                                        domProps: { value: user.user_id }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\r\n                                                " +
+                                            _vm._s(user.first_name) +
+                                            " " +
+                                            _vm._s(user.last_name) +
+                                            "\r\n                                            "
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              }),
+                              0
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-footer" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn dark btn-outline",
+                              attrs: { type: "button", "data-dismiss": "modal" }
+                            },
+                            [_vm._v("Close")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn green",
+                              attrs: { type: "submit" },
+                              on: { click: _vm.hideModal }
+                            },
+                            [_vm._v("Save")]
+                          )
+                        ])
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
           )
         ])
       ]),
@@ -45745,6 +45959,8 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v(" Role ")]),
         _vm._v(" "),
+        _c("th", [_vm._v(" Team ")]),
+        _vm._v(" "),
         _c("th", [_vm._v(" Modify ")])
       ])
     ])
@@ -45771,6 +45987,30 @@ var staticRenderFns = [
         _vm._v('Delete user "'),
         _c("span", { attrs: { id: "username" } }),
         _vm._v('"?')
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("h5", { staticClass: "modal-title" }, [
+        _c("span", { attrs: { id: "user_team" } }),
+        _vm._v("'s team")
       ])
     ])
   }
