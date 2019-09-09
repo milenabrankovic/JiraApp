@@ -9,7 +9,8 @@
                 <div class="page-top">
                     <ul>
                         <li v-if="$auth.check()" class="pull-right">
-                            <a href="" @click="logout()">Logout</a>
+                            {{$auth.user().first_name}} {{$auth.user().last_name}}
+                            <a href="" @click="logout()"><i class="icon-logout"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -43,3 +44,21 @@ export default {
     }
 }
 </script>
+<style>
+    .page-top i{
+        color: #c0cddc;
+        font-size: 26px;
+        margin-left:70%;
+        
+    }
+    .page-top li{
+        list-style-type:none;
+        color: #c0cddc;
+        font-size: 20px;
+    }
+    .page-top ul{
+        margin-top:5%;
+        margin-left:7%;
+    }
+    
+</style>

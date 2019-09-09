@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\Sprint_Info;
+use Illuminate\Support\Facades\Validator;
 
 class ConfController extends Controller
 {
@@ -29,7 +30,7 @@ class ConfController extends Controller
             'company' => $company,
             'sprint' => $sprint
         ];
-
+        
         return $this->data;
     }
 
@@ -43,15 +44,29 @@ class ConfController extends Controller
         
         $sprint_info = Sprint_Info::all()->where('active', 1)->first();
         
-        // $sprint_info->length = $request->input('sprint_length');
-        // $sprint_info->points = $request->input('sprint_points');
+        $validator = Validator::make($request->all(), [ 
+            'info.sprint_length' => 'required',
+            'info.sprint_points' => 'required',
+            'info.company_name' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 'error',
+                'msg'    => 'Invalid input'
+            ], 200);
+        }
 
         $sprint_info->length = $request->info['sprint_length'];
         $sprint_info->points = $request->info['sprint_points'];
         
         if($sprint_info->save() && $company->save())
         {
-            return redirect()->back();
+            return response()->json([
+                'status' => 'success',
+                'msg'    => 'Successfully updated'
+            ], 200);
         }
     }
 }

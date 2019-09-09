@@ -37,13 +37,6 @@ class UserController extends Controller
 
     public function team(Request $request)
     {
-<<<<<<< HEAD
-        $parent_id = $request->get('user_id');
-        $team = User::where('parent_id', $parent_id)->get();
-        
-        return $team;
-    }
-=======
         $user_id = $request->get('user_id');
 
         $team = User::select('user_id')->where('parent_id', $user_id)->get();
@@ -71,7 +64,6 @@ class UserController extends Controller
         
         return $users;
     }
->>>>>>> 3d8a4f1f74b4c1a683fe331886b840c354d21288
     /**
      * Show the form for creating a new resource.
      *
@@ -137,9 +129,9 @@ class UserController extends Controller
                 'user.first_name' => 'required',
                 'user.last_name' => 'required',
                 'user.username' => 'required',
-                // 'user.email' => 'required',
+                'user.email' => 'required',
                 // 'user.password' => 'required',
-                // 'user.role' => 'required',
+                'user.role' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -156,7 +148,11 @@ class UserController extends Controller
             $user->last_name = $request->user['last_name'];
             $user->username = $request->user['username'];
             $user->email = $request->user['email'];
-            $user->password = Hash::make($request->user['password']);
+            
+            if($request->user['password'] != ''){
+                
+                $user->password = Hash::make($request->user['password']);
+            }
             $user->role_id = $request->user['role'];
             $user->parent_id = $request->user['leader'];
         

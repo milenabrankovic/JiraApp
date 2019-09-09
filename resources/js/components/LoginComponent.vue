@@ -1,6 +1,6 @@
 <template>
-    <div class="login">
-      <div class="content">
+  <div class="login myClass">
+        <div class="content">
               <!-- BEGIN LOGIN FORM -->
               <div class="alert alert-danger" v-if="error">
                 <p>There was an error, unable to sign in with those credentials.</p>
@@ -53,3 +53,8 @@
     }
   } 
 </script>
+<style>
+  .content{
+    margin-left: 18% !important;
+  }
+</style>
