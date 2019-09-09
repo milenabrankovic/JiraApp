@@ -45,14 +45,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="multiple_user" class="control-label">Choose Employees</label><br/>
-                                        <select class="selectpicker" data-live-search="true" id="multiple_user" multiple  v-model="selectedUsers">
+                                        <select class="form-control" id="multiple_user" multiple  v-model="selectedUsers">
                                             <option v-for="user in users" v-bind:key="user.user_id" :data-tokens="user.user_id" :value="user.user_id">{{user.first_name}} {{user.last_name}}</option>
-                                        </select>
-                                        <select class="selectpicker">
-                                            <option>test1</option>
-                                            <option>test2</option>
-                                            <option>test3</option>
-                                            <option>test4</option>
                                         </select>
                                     </div>     
                                 </div>
@@ -210,17 +204,24 @@ export default {
             this.project.start_date = project.start_date.split(' ')[0];
             var niz = [];
             var inner = '';
-            $.each(project.users, function( key, value ) {
-                niz.push(value.user_id);
-                inner += value.first_name+' '+value.last_name+', ';
+            axios.get('http://jira-app.com/api/users_by_project', {params: {project_id: project.project_id}})
+            .then(response => {
+                //console.log(response.data)
+
+                 $.each(response.data, function( key, value ) {
+                    niz.push(value.user_id);
+                    //inner += value.first_name+' '+value.last_name+', ';
+                 });
+                this.selectedUsers = niz;
+                // if(niz.length == 0){
+                //     inner = 'Nothing selected';
+                // }else{
+                // inner = inner.substring(0, inner.length - 2);
+                // }
+                // $('.filter-option-inner-inner').text(inner);
             });
-            this.selectedUsers = niz;
-            if(niz.length == 0){
-                inner = 'Nothing selected';
-            }else{
-            inner = inner.substring(0, inner.length - 2);
-            }
-            $('.filter-option-inner-inner').text(inner);
+
+            
         }
         
     }

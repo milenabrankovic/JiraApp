@@ -19,6 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('project', 'Admin\ProjectController');
 Route::resource('user', 'Admin\UserController');
+Route::get('team', 'Admin\UserController@team');
+Route::put('edit_team/{id}', 'Admin\UserController@edit_team');
+Route::get('users_by_project', 'Admin\UserController@users_by_project');
 Route::get('company', 'Admin\ConfController@company');
 Route::get('info', 'Admin\ConfController@info');
 Route::post('info_update', 'Admin\ConfController@save');

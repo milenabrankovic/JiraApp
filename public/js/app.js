@@ -3404,12 +3404,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   head: {
@@ -3507,6 +3501,8 @@ __webpack_require__.r(__webpack_exports__);
       this.project.project_id = project.project_id;
     },
     editModal: function editModal(project) {
+      var _this6 = this;
+
       this.edit = true;
       $('#project_id_to_edit').val(project.project_id);
       this.project.project_id = project.project_id;
@@ -3515,19 +3511,22 @@ __webpack_require__.r(__webpack_exports__);
       this.project.start_date = project.start_date.split(' ')[0];
       var niz = [];
       var inner = '';
-      $.each(project.users, function (key, value) {
-        niz.push(value.user_id);
-        inner += value.first_name + ' ' + value.last_name + ', ';
+      axios.get('http://jira-app.com/api/users_by_project', {
+        params: {
+          project_id: project.project_id
+        }
+      }).then(function (response) {
+        //console.log(response.data)
+        $.each(response.data, function (key, value) {
+          niz.push(value.user_id); //inner += value.first_name+' '+value.last_name+', ';
+        });
+        _this6.selectedUsers = niz; // if(niz.length == 0){
+        //     inner = 'Nothing selected';
+        // }else{
+        // inner = inner.substring(0, inner.length - 2);
+        // }
+        // $('.filter-option-inner-inner').text(inner);
       });
-      this.selectedUsers = niz;
-
-      if (niz.length == 0) {
-        inner = 'Nothing selected';
-      } else {
-        inner = inner.substring(0, inner.length - 2);
-      }
-
-      $('.filter-option-inner-inner').text(inner);
     }
   }
 });
@@ -4195,7 +4194,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+<<<<<<< HEAD
     $(document).ready(function () {//$('.selectpicker').selectpicker();
+=======
+    $(document).ready(function () {
+      $('.selectpicker').selectpicker();
+>>>>>>> 3d8a4f1f74b4c1a683fe331886b840c354d21288
     });
     this.fetchUsers();
     this.fetchRoles();
@@ -4214,7 +4218,13 @@ __webpack_require__.r(__webpack_exports__);
       var theVue = this;
       axios.get('http://jira-app.com/api/user').then(function (response) {
         _this.users = response.data;
+<<<<<<< HEAD
         /*theVue.$nextTick(function(){ $('#team-list').selectpicker('refresh');*/
+=======
+        theVue.$nextTick(function () {
+          $('#team-list').selectpicker('refresh');
+        });
+>>>>>>> 3d8a4f1f74b4c1a683fe331886b840c354d21288
       });
     },
     fetchRoles: function fetchRoles() {
@@ -43405,12 +43415,8 @@ var render = function() {
                                   expression: "selectedUsers"
                                 }
                               ],
-                              staticClass: "selectpicker",
-                              attrs: {
-                                "data-live-search": "true",
-                                id: "multiple_user",
-                                multiple: ""
-                              },
+                              staticClass: "form-control",
+                              attrs: { id: "multiple_user", multiple: "" },
                               on: {
                                 change: function($event) {
                                   var $$selectedVal = Array.prototype.filter
@@ -43446,9 +43452,7 @@ var render = function() {
                               )
                             }),
                             0
-                          ),
-                          _vm._v(" "),
-                          _vm._m(4)
+                          )
                         ])
                       ]),
                       _vm._v(" "),
@@ -43510,7 +43514,7 @@ var render = function() {
       _c("div", { staticClass: "portlet-body" }, [
         _c("div", { staticClass: "table-scrollable" }, [
           _c("table", { staticClass: "table table-hover" }, [
-            _vm._m(5),
+            _vm._m(4),
             _vm._v(" "),
             _c(
               "tbody",
@@ -43601,7 +43605,7 @@ var render = function() {
                 { staticClass: "modal-dialog", attrs: { role: "document" } },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(6),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c(
                       "form",
@@ -43718,20 +43722,6 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("select", { staticClass: "selectpicker" }, [
-      _c("option", [_vm._v("test1")]),
-      _vm._v(" "),
-      _c("option", [_vm._v("test2")]),
-      _vm._v(" "),
-      _c("option", [_vm._v("test3")]),
-      _vm._v(" "),
-      _c("option", [_vm._v("test4")])
-    ])
   },
   function() {
     var _vm = this
@@ -45924,11 +45914,19 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
+<<<<<<< HEAD
                                           "\n                                                " +
                                             _vm._s(user.first_name) +
                                             " " +
                                             _vm._s(user.last_name) +
                                             "\n                                            "
+=======
+                                          "\r\n                                                " +
+                                            _vm._s(user.first_name) +
+                                            " " +
+                                            _vm._s(user.last_name) +
+                                            "\r\n                                            "
+>>>>>>> 3d8a4f1f74b4c1a683fe331886b840c354d21288
                                         )
                                       ]
                                     )

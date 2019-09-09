@@ -201,7 +201,11 @@ export default {
     },
     created(){
         $(document).ready(function() {
+<<<<<<< HEAD
             //$('.selectpicker').selectpicker();
+=======
+            $('.selectpicker').selectpicker();
+>>>>>>> 3d8a4f1f74b4c1a683fe331886b840c354d21288
         });
         this.fetchUsers();
         this.fetchRoles();
@@ -218,8 +222,13 @@ export default {
         fetchUsers(){
             let theVue = this;
             axios.get('http://jira-app.com/api/user')
+<<<<<<< HEAD
                     .then(response => {this.users = response.data; /*theVue.$nextTick(function(){ $('#team-list').selectpicker('refresh');*/
             });
+=======
+                    .then(response => {this.users = response.data; theVue.$nextTick(function(){ $('#team-list').selectpicker('refresh');
+            });});
+>>>>>>> 3d8a4f1f74b4c1a683fe331886b840c354d21288
            
         },
         fetchRoles(){
