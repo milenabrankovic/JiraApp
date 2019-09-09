@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Role;
 use App\Http\Resources\User as UserResource;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+
 class UserController extends Controller
 {
     private $user;
@@ -30,6 +32,14 @@ class UserController extends Controller
         $roles = Role::all();
         
         return $roles;
+    }
+
+    public function team(Request $request)
+    {
+        $parent_id = $request->get('user_id');
+        $team = User::where('parent_id', $parent_id)->get();
+        
+        return $team;
     }
     /**
      * Show the form for creating a new resource.
@@ -91,17 +101,43 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        $user->first_name = $request->user['first_name'];
-        $user->last_name = $request->user['last_name'];
-        $user->username = $request->user['username'];
-        $user->email = $request->user['email'];
-        $user->password = Hash::make($request->user['password']);
-        $user->role_id = $request->user['role'];
-        $user->parent_id = $request->user['leader'];
+
+            $validator = Validator::make($request->all(), [ 
+                'user.first_name' => 'required',
+                'user.last_name' => 'required',
+                'user.username' => 'required',
+                // 'user.email' => 'required',
+                // 'user.password' => 'required',
+                // 'user.role' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+    
+                //pass validator errors as errors object for ajax response
+                //return response()->json(['errors'=>$validator->errors()]);
+                return response()->json([
+                    'status' => 'error',
+                    'msg'    => 'Invalid input'
+                ], 200);
+            }
+
+            $user->first_name = $request->user['first_name'];
+            $user->last_name = $request->user['last_name'];
+            $user->username = $request->user['username'];
+            $user->email = $request->user['email'];
+            $user->password = Hash::make($request->user['password']);
+            $user->role_id = $request->user['role'];
+            $user->parent_id = $request->user['leader'];
         
-        if($user->save()){
-            return new UserResource($user);
-        }
+            if($user->save()){
+                //return new UserResource($user);
+                return response()->json([
+                    'status' => 'success',
+                    'msg'    => 'Successfully updated',
+                    'data' => $user
+                ], 200);
+            }
+        
     }
     /**
      * Remove the specified resource from storage.

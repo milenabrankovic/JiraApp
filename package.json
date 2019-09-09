@@ -25,7 +25,9 @@
     },
     "dependencies": {
         "@websanova/vue-auth": "^2.21.14-beta",
+        "bootstrap-select": "^1.13.10",
         "vue-axios": "^2.1.4",
+        "vue-flash-message": "^0.7.2",
         "vue-router": "^3.1.1"
     }
 }

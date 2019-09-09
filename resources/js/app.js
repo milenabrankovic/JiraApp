@@ -2,13 +2,19 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import VueRouter from 'vue-router'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
 
-Vue.use(VueAxios, axios)
 
-Vue.use(VueRouter)
+import VueRouter from 'vue-router';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+
+import VueFlashMessage from '../src';
+Vue.use(VueFlashMessage);
+require('vue-flash-message/dist/vue-flash-message.min.css');
+
+Vue.use(VueAxios, axios);
+
+Vue.use(VueRouter);
 
 
 let routes = [

@@ -375,7 +375,7 @@ export default {
 <style>
     .cross-row{
         text-decoration:line-through;
-    },
+    }
     .disable-modification{
         color: currentColor;
         cursor: not-allowed;

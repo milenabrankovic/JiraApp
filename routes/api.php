@@ -24,6 +24,7 @@ Route::get('info', 'Admin\ConfController@info');
 Route::post('info_update', 'Admin\ConfController@save');
 Route::post('assign_employee', 'Admin\ProjectController@assign_employee');
 Route::get('roles', 'Admin\UserController@roles')->name('user.roles');
+Route::get('team', 'Admin\UserController@team')->name('user.team');
 
 Route::get('projects_by_user', 'Admin\ProjectController@projects_by_user');
 Route::get('tasks_by_project', 'TaskController@tasks_by_project');

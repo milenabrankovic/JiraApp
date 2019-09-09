@@ -4132,6 +4132,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   head: {
@@ -4141,7 +4177,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      test: 1,
+      test: '1',
       users: [],
       user: {
         first_name: '',
@@ -4153,11 +4189,14 @@ __webpack_require__.r(__webpack_exports__);
         leader: ''
       },
       roles: [],
+      team: [],
       edit: false,
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
   created: function created() {
+    $(document).ready(function () {//$('.selectpicker').selectpicker();
+    });
     this.fetchUsers();
     this.fetchRoles();
   },
@@ -4172,9 +4211,10 @@ __webpack_require__.r(__webpack_exports__);
     fetchUsers: function fetchUsers() {
       var _this = this;
 
+      var theVue = this;
       axios.get('http://jira-app.com/api/user').then(function (response) {
         _this.users = response.data;
-        console.log(response.data);
+        /*theVue.$nextTick(function(){ $('#team-list').selectpicker('refresh');*/
       });
     },
     fetchRoles: function fetchRoles() {
@@ -4201,6 +4241,10 @@ __webpack_require__.r(__webpack_exports__);
         user: this.user
       }).then(function (response) {
         _this4.fetchUsers();
+
+        console.log(response);
+
+        _this4.flash(response.data.msg, response.data.status);
       });
     },
     deleteUser: function deleteUser() {
@@ -4208,6 +4252,18 @@ __webpack_require__.r(__webpack_exports__);
 
       axios["delete"]('http://jira-app.com/api/user/' + this.user.user_id).then(function (response) {
         _this5.fetchUsers();
+      });
+    },
+    editTeam: function editTeam() {
+      var _this6 = this;
+
+      var user_id = $('#user_id_to_update_team').val();
+      axios.put('http://jira-app.com/api/edit_team/' + user_id, {
+        team: this.team
+      }).then(function (response) {
+        _this6.fetchUsers();
+
+        console.log(response);
       });
     },
     createModal: function createModal() {
@@ -4227,6 +4283,24 @@ __webpack_require__.r(__webpack_exports__);
       $('#user_modal').modal('hide');
       $('#delete_user_modal').modal('hide');
       $('.modal-backdrop.in').hide(); // removes the overlay
+    },
+    teamModal: function teamModal(user) {
+      var _this7 = this;
+
+      var team_users;
+      $('#user_team').text(user.first_name + ' ' + user.last_name);
+      $('#user_id_to_update_team').val(user.user_id);
+      axios.get('http://jira-app.com/api/team', {
+        params: {
+          user_id: user.user_id
+        }
+      }).then(function (response) {
+        var niz = [];
+        $.each(response.data, function (key, value) {
+          niz.push(value.user_id);
+        });
+        _this7.team = niz;
+      });
     },
     editModal: function editModal(user) {
       this.edit = true;
@@ -8706,6 +8780,44 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-flash-message/dist/vue-flash-message.min.css":
+/*!*******************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-flash-message/dist/vue-flash-message.min.css ***!
+  \*******************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".flash__message{-webkit-box-sizing:border-box;box-sizing:border-box;padding:15px 30px 15px 15px;margin-bottom:10px;border:1px solid transparent;border-radius:4px;background-color:#ccc;position:relative}.flash__message.success{color:#3c763d;background-color:#dff0d8;border-color:#d6e9c6}.flash__message.warning{color:#8a6d3b;background-color:#fcf8e3;border-color:#faebcc}.flash__message.error{color:#a94442;background-color:#f2dede;border-color:#ebccd1}.flash__message.info{color:#37516a;background-color:#f2f5fe;border-color:#dfe3f0}.flash__close-button{-webkit-box-sizing:border-box;box-sizing:border-box;position:absolute;top:0;right:0;color:inherit;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-color:transparent;background:none;border:none;cursor:pointer;font-size:18px;line-height:10px;margin:0;padding:8px}.flash__close-button:active,.flash__close-button:focus{outline:none}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/src/FlashMessage.css":
+/*!************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/src/FlashMessage.css ***!
+  \************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".flash__message {\n  box-sizing: border-box;\n  padding: 15px 30px 15px 15px;\n  margin-bottom: 10px;\n  border: 1px solid transparent;\n  border-radius: 4px;\n  background-color: #cccccc;\n  position: relative;\n}\n\n.flash__message.success {\n  color: #3c763d;\n  background-color: #dff0d8;\n  border-color: #d6e9c6;\n}\n\n.flash__message.warning {\n  color: #8a6d3b;\n  background-color: #fcf8e3;\n  border-color: #faebcc;\n}\n\n.flash__message.error {\n  color: #a94442;\n  background-color: #f2dede;\n  border-color: #ebccd1;\n}\n\n.flash__message.info {\n  color: #37516A;\n  background-color: #F2F5FE;\n  border-color: rgb(223, 227, 240);\n}\n\n.flash__close-button {\n  box-sizing: border-box;\n  position: absolute;\n  top: 0px;\n  right: 0px;\n  color: inherit;\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  background-color: transparent;\n  background: none;\n  border: none;\n  cursor: pointer;\n  font-size: 18px;\n  line-height: 10px;\n  margin: 0;\n  padding: 8px;\n}\n\n.flash__close-button:active,.flash__close-button:focus {\n  outline: none;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/NavComponent.vue?vue&type=style&index=0&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/NavComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -8737,7 +8849,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.cross-row{\n    text-decoration:line-through;\n},\n.disable-modification{\n    color: currentColor;\n    cursor: not-allowed;\n    opacity: 0.5;\n    text-decoration: none;\n}\n", ""]);
+exports.push([module.i, "\n.cross-row{\n    text-decoration:line-through;\n}\n.disable-modification{\n    color: currentColor;\n    cursor: not-allowed;\n    opacity: 0.5;\n    text-decoration: none;\n}\n", ""]);
 
 // exports
 
@@ -42304,6 +42416,36 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof="fun
 
 /***/ }),
 
+/***/ "./node_modules/vue-flash-message/dist/vue-flash-message.min.css":
+/*!***********************************************************************!*\
+  !*** ./node_modules/vue-flash-message/dist/vue-flash-message.min.css ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../css-loader??ref--6-1!../../postcss-loader/src??ref--6-2!./vue-flash-message.min.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-flash-message/dist/vue-flash-message.min.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ConfComponent.vue?vue&type=template&id=2095ad5e&":
 /*!****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ConfComponent.vue?vue&type=template&id=2095ad5e& ***!
@@ -45128,7 +45270,6 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            required: "",
                             id: "labelFirstName",
                             name: "first_name",
                             placeholder: "Enter first name"
@@ -45485,8 +45626,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "btn green",
-                          attrs: { type: "submit", id: "modal_submit_button" },
-                          on: { click: _vm.hideModal }
+                          attrs: { type: "submit", id: "modal_submit_button" }
                         },
                         [_vm._v("Create")]
                       ),
@@ -45503,8 +45643,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "btn green",
-                          attrs: { type: "submit" },
-                          on: { click: _vm.hideModal }
+                          attrs: { type: "submit" }
                         },
                         [_vm._v("Update")]
                       )
@@ -45553,6 +45692,30 @@ var render = function() {
                             {
                               attrs: {
                                 "data-toggle": "modal",
+                                href: "#team_modal"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.teamModal(user)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "icon-users font-green",
+                                staticStyle: { "margin-left": "10px" },
+                                attrs: { "data-toggle": "modal" }
+                              })
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                "data-toggle": "modal",
                                 href: "#user_modal"
                               },
                               on: {
@@ -45569,7 +45732,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            " /\r\n                                        "
+                            " /\n                                        "
                           ),
                           _c(
                             "a",
@@ -45664,6 +45827,144 @@ var render = function() {
                 ]
               )
             ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: { tabindex: "-1", role: "dialog", id: "team_modal" }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "modal-dialog", attrs: { role: "document" } },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        attrs: { role: "form", method: "post" },
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.editTeam($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c("input", {
+                            attrs: { type: "hidden", name: "_token" },
+                            domProps: { value: _vm.csrf }
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              type: "hidden",
+                              name: "_method",
+                              value: "put"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              type: "hidden",
+                              id: "user_id_to_update_team"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              { staticClass: "control-label col-md-3" },
+                              [_vm._v("Team")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.team,
+                                    expression: "team"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { multiple: "" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.team = $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  }
+                                }
+                              },
+                              _vm._l(_vm.users, function(user) {
+                                return user.user_id != _vm.$auth.user().user_id
+                                  ? _c(
+                                      "option",
+                                      {
+                                        key: user.user_id,
+                                        attrs: { "data-tokens": user.user_id },
+                                        domProps: { value: user.user_id }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                                " +
+                                            _vm._s(user.first_name) +
+                                            " " +
+                                            _vm._s(user.last_name) +
+                                            "\n                                            "
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              }),
+                              0
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-footer" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn dark btn-outline",
+                              attrs: { type: "button", "data-dismiss": "modal" }
+                            },
+                            [_vm._v("Close")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn green",
+                              attrs: { type: "submit" },
+                              on: { click: _vm.hideModal }
+                            },
+                            [_vm._v("Save")]
+                          )
+                        ])
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
           )
         ])
       ]),
@@ -45745,6 +46046,8 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v(" Role ")]),
         _vm._v(" "),
+        _c("th", [_vm._v(" Team ")]),
+        _vm._v(" "),
         _c("th", [_vm._v(" Modify ")])
       ])
     ])
@@ -45771,6 +46074,30 @@ var staticRenderFns = [
         _vm._v('Delete user "'),
         _c("span", { attrs: { id: "username" } }),
         _vm._v('"?')
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("h5", { staticClass: "modal-title" }, [
+        _c("span", { attrs: { id: "user_team" } }),
+        _vm._v("'s team")
       ])
     ])
   }
@@ -60787,11 +61114,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.min.js");
 /* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _src__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../src */ "./resources/src/index.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
+
+
+Vue.use(_src__WEBPACK_IMPORTED_MODULE_3__["default"]);
+
+__webpack_require__(/*! vue-flash-message/dist/vue-flash-message.min.css */ "./node_modules/vue-flash-message/dist/vue-flash-message.min.css");
 
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a);
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
@@ -61568,6 +61901,384 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/src/FlashMessage.css":
+/*!****************************************!*\
+  !*** ./resources/src/FlashMessage.css ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../node_modules/css-loader??ref--6-1!../../node_modules/postcss-loader/src??ref--6-2!./FlashMessage.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/src/FlashMessage.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./resources/src/FlashMessageComponent.js":
+/*!************************************************!*\
+  !*** ./resources/src/FlashMessageComponent.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref$duration = _ref.duration,
+      duration = _ref$duration === void 0 ? 3000 : _ref$duration,
+      _ref$css = _ref.css,
+      css = _ref$css === void 0 ? null : _ref$css;
+
+  var bus = arguments.length > 1 ? arguments[1] : undefined;
+  return {
+    render: function render(createElement) {
+      var _this = this;
+
+      var children = [];
+      Object.keys(this.storage).map(function (messageId) {
+        var subchildren = [createElement('div', {
+          attrs: {
+            "class": 'flash__message-content'
+          },
+          domProps: {
+            innerHTML: _this.storage[messageId].content
+          }
+        })];
+
+        if (!_this.storage[messageId].options.important) {
+          subchildren.push(createElement('button', {
+            attrs: {
+              type: 'button',
+              "class": 'flash__close-button',
+              'data-dismiss': 'alert',
+              'aria-label': 'alertClose'
+            },
+            on: {
+              click: function click(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                _this.destroyFlash(messageId);
+              }
+            }
+          }, [createElement('span', {
+            attrs: {
+              'aria-hidden': 'true'
+            },
+            domProps: {
+              innerHTML: '&times;'
+            }
+          })]));
+        }
+
+        children.push(createElement('div', {
+          "class": "".concat(_this.cssClasses(messageId), " flash__message"),
+          key: messageId,
+          attrs: {
+            role: 'alert',
+            'aria-live': 'polite',
+            'aria-atomic': 'true'
+          },
+          on: {
+            mouseover: function mouseover() {
+              _this.onMouseOver(messageId);
+            },
+            mouseleave: function mouseleave() {
+              _this.onMouseOut(messageId);
+            }
+          }
+        }, subchildren));
+        return false;
+      });
+      return createElement('div', {}, [createElement('transition-group', {
+        attrs: {
+          name: this.transitionName,
+          tag: 'div'
+        },
+        "class": this.outerClass
+      }, children)]);
+    },
+    props: {
+      transitionName: {
+        type: String,
+        "default": 'flash-transition'
+      },
+      outerClass: {
+        type: String,
+        "default": 'flash__wrapper'
+      }
+    },
+    data: function data() {
+      return Object.assign({
+        message: null,
+        closed: false,
+        _timeout: null
+      }, {
+        duration: duration,
+        css: css
+      });
+    },
+    computed: {
+      storage: function storage() {
+        return bus.storage;
+      }
+    },
+    methods: {
+      cssClasses: function cssClasses(id) {
+        return this.getFlash(id).type;
+      },
+      getFlash: function getFlash(id) {
+        return this.storage[id];
+      },
+      destroyFlash: function destroyFlash(id) {
+        this.getFlash(id).destroy();
+      },
+      onMouseOver: function onMouseOver(id) {
+        var flash = this.getFlash(id);
+
+        if (typeof flash !== 'undefined') {
+          flash.onStartInteract();
+        }
+      },
+      onMouseOut: function onMouseOut(id) {
+        var flash = this.getFlash(id);
+
+        if (typeof flash !== 'undefined') {
+          flash.onCompleteInteract();
+        }
+      }
+    }
+  };
+});
+
+/***/ }),
+
+/***/ "./resources/src/index.js":
+/*!********************************!*\
+  !*** ./resources/src/index.js ***!
+  \********************************/
+/*! exports provided: default, FlashMessageComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! timers */ "./node_modules/timers-browserify/main.js");
+/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(timers__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _FlashMessageComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FlashMessageComponent */ "./resources/src/FlashMessageComponent.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FlashMessageComponent", function() { return _FlashMessageComponent__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+__webpack_require__(/*! ./FlashMessage.css */ "./resources/src/FlashMessage.css");
+
+function isFunction(functionToCheck) {
+  var getType = {};
+  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+}
+/*eslint-disable */
+
+
+function generateUUID() {
+  var d = new Date().getTime();
+  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = (d + Math.random() * 16) % 16 | 0;
+    d = Math.floor(d / 16);
+    return (c === 'x' ? r : r & 0x3 | 0x8).toString(16);
+  });
+  return uuid;
+}
+/* eslint-enable */
+
+
+var FlashMessage =
+/*#__PURE__*/
+function () {
+  function FlashMessage(Bus, messageContent, messageType, messageOptions, globalDefaults) {
+    _classCallCheck(this, FlashMessage);
+
+    var defaults = {
+      autoEmit: true,
+      important: false,
+      pauseOnInteract: false,
+      timeout: 0,
+      // callbacks
+      beforeDestroy: null,
+      onStartInteract: null,
+      onCompleteInteract: null
+    };
+    this.storage = Bus;
+    this.content = messageContent;
+    this.options = Object.assign(defaults, globalDefaults, messageOptions);
+    this.type = messageType;
+    this.id = generateUUID();
+    this.timer = null;
+
+    if (this.options.autoEmit) {
+      this.emit();
+    }
+  }
+
+  _createClass(FlashMessage, [{
+    key: "emit",
+    value: function emit() {
+      this.storage.push(this.id, this);
+      this.startSelfDestructTimer();
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      this.killSelfDestructTimer();
+      this.beforeDestroy();
+      this.storage.destroy(this.id);
+    }
+  }, {
+    key: "setSelfDestructTimeout",
+    value: function setSelfDestructTimeout(timeout) {
+      this.options.timeout = timeout;
+    }
+  }, {
+    key: "startSelfDestructTimer",
+    value: function startSelfDestructTimer() {
+      var _this = this;
+
+      if (this.options.timeout > 0) {
+        Object(timers__WEBPACK_IMPORTED_MODULE_0__["setTimeout"])(function () {
+          _this.destroy();
+        }, this.options.timeout);
+      }
+    }
+  }, {
+    key: "killSelfDestructTimer",
+    value: function killSelfDestructTimer() {
+      Object(timers__WEBPACK_IMPORTED_MODULE_0__["clearTimeout"])(this.timer);
+    }
+  }, {
+    key: "beforeDestroy",
+    value: function beforeDestroy() {
+      if (isFunction(this.options.beforeDestroy)) {
+        this.options.beforeDestroy();
+      }
+    }
+  }, {
+    key: "onStartInteract",
+    value: function onStartInteract() {
+      if (this.options.pauseOnInteract) {
+        this.killSelfDestructTimer();
+      }
+
+      if (isFunction(this.options.onStartInteract)) {
+        this.options.onStartInteract();
+      }
+    }
+  }, {
+    key: "onCompleteInteract",
+    value: function onCompleteInteract() {
+      if (this.options.pauseOnInteract) {
+        this.startSelfDestructTimer();
+      }
+
+      if (isFunction(this.options.onCompleteInteract)) {
+        this.options.onCompleteInteract();
+      }
+    }
+  }]);
+
+  return FlashMessage;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  install: function install(Vue) {
+    var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var defaults = {
+      method: 'flash',
+      storage: '$flashStorage',
+      createShortcuts: true,
+      name: 'flash-message'
+    };
+    var options = Object.assign(defaults, config);
+    var FlashBus = new Vue({
+      data: function data() {
+        return {
+          storage: {}
+        };
+      },
+      methods: {
+        flash: function flash(msg, type, opts) {
+          return new FlashMessage(FlashBus, msg, type, opts);
+        },
+        push: function push(id, message) {
+          Vue.set(this.storage, id, message);
+        },
+        destroy: function destroy(id) {
+          Vue["delete"](this.storage, id);
+        },
+        destroyAll: function destroyAll() {
+          Vue.set(this, 'storage', {});
+        }
+      }
+    });
+    var shortcuts = !options.createShortcuts ? {} : {
+      flashInfo: function flashInfo(msg, opts) {
+        return this[options.method](msg, 'info', opts);
+      },
+      flashError: function flashError(msg, opts) {
+        return this[options.method](msg, 'error', opts);
+      },
+      flashWarning: function flashWarning(msg, opts) {
+        return this[options.method](msg, 'warning', opts);
+      },
+      flashSuccess: function flashSuccess(msg, opts) {
+        return this[options.method](msg, 'success', opts);
+      }
+    };
+    Vue.mixin({
+      methods: _objectSpread(_defineProperty({}, options.method, function (msg, type, opts) {
+        if (arguments.length > 0) {
+          return new FlashMessage(FlashBus, msg, type, opts, options.messageOptions);
+        }
+
+        return FlashBus;
+      }), shortcuts)
+    });
+    Vue.prototype[options.storage] = FlashBus;
+    Vue.component(options.name, Object(_FlashMessageComponent__WEBPACK_IMPORTED_MODULE_1__["default"])(options, FlashBus));
+  }
+});
+
+
+/***/ }),
+
 /***/ 0:
 /*!*************************************************************!*\
   !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
@@ -61575,8 +62286,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/entel/laravel/JiraApp/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/entel/laravel/JiraApp/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
