@@ -62,8 +62,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                                    <button type="submit" id="modal_submit_button" class="btn green" v-show="!edit">Create</button>
-                                    <button type="submit" class="btn green" v-show="edit">Update</button>
+                                    <button type="submit" id="modal_submit_button" class="btn green" @click="hideModal" v-show="!edit">Create</button>
+                                    <button type="submit" class="btn green" v-show="edit" @click="hideModal">Update</button>
                                 </div>
                             </form>
                         </div>
@@ -201,11 +201,7 @@ export default {
     },
     created(){
         $(document).ready(function() {
-<<<<<<< HEAD
-            //$('.selectpicker').selectpicker();
-=======
-            $('.selectpicker').selectpicker();
->>>>>>> 3d8a4f1f74b4c1a683fe331886b840c354d21288
+           // $('.selectpicker').selectpicker();
         });
         this.fetchUsers();
         this.fetchRoles();
@@ -222,13 +218,8 @@ export default {
         fetchUsers(){
             let theVue = this;
             axios.get('http://jira-app.com/api/user')
-<<<<<<< HEAD
                     .then(response => {this.users = response.data; /*theVue.$nextTick(function(){ $('#team-list').selectpicker('refresh');*/
             });
-=======
-                    .then(response => {this.users = response.data; theVue.$nextTick(function(){ $('#team-list').selectpicker('refresh');
-            });});
->>>>>>> 3d8a4f1f74b4c1a683fe331886b840c354d21288
            
         },
         fetchRoles(){
@@ -294,7 +285,7 @@ export default {
             this.user.last_name = user.last_name;
             this.user.email = user.email;
             this.user.username = user.username;
-            this.user.password = user.password;
+            //this.user.password = user.password;
             this.user.role = user.role_id;
             this.user.leader = user.parent_id;
             var role =  $('#role option[value="'+this.user.role+'"]').text();
