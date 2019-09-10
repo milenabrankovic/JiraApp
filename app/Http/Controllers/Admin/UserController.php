@@ -37,13 +37,6 @@ class UserController extends Controller
 
     public function team(Request $request)
     {
-<<<<<<< HEAD
-        $parent_id = $request->get('user_id');
-        $team = User::where('parent_id', $parent_id)->get();
-        
-        return $team;
-    }
-=======
         $user_id = $request->get('user_id');
 
         $team = User::select('user_id')->where('parent_id', $user_id)->get();
@@ -71,7 +64,7 @@ class UserController extends Controller
         
         return $users;
     }
->>>>>>> 3d8a4f1f74b4c1a683fe331886b840c354d21288
+
     /**
      * Show the form for creating a new resource.
      *
