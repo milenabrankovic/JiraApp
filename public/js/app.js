@@ -4236,6 +4236,7 @@ __webpack_require__.r(__webpack_exports__);
     editUser: function editUser() {
       var _this4 = this;
 
+      console.log(this.user);
       axios.put('http://jira-app.com/api/user/' + this.user.user_id, {
         user: this.user
       }).then(function (response) {
@@ -8829,7 +8830,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.page-top i{\n    color: #c0cddc;\n    font-size: 26px;\n    margin-left:70%;\n}\n.page-top li{\n    list-style-type:none;\n    color: #c0cddc;\n    font-size: 20px;\n}\n.page-top ul{\n    margin-top:5%;\n    margin-left:7%;\n}\n\n", ""]);
+exports.push([module.i, "\n.page-top i{\n    color: #c0cddc;\n    font-size: 26px;\n    margin-left:70%;\n}\n.page-top li{\n    list-style-type:none;\n    color: #c0cddc;\n    font-size: 20px;\n}\n.page-top ul{\n    margin-top:5%;\n    margin-left:7%;\n}\n.page-top a{\n    text-decoration:none;\n    color:#c0cddc;\n    margin-left: 35px;\n}\n.page-top a:hover{\n    text-decoration:none;\n    color:#abe7ed;\n}\n\n", ""]);
 
 // exports
 
@@ -42771,6 +42772,7 @@ var render = function() {
                     _c(
                       "a",
                       {
+                        staticClass: "btn",
                         attrs: { href: "" },
                         on: {
                           click: function($event) {
@@ -42778,7 +42780,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_c("i", { staticClass: "icon-logout" })]
+                      [_vm._v("Logout")]
                     )
                   ])
                 : _vm._e()

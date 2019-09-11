@@ -232,6 +232,7 @@ export default {
             .then(response => {this.fetchUsers();});
         },
         editUser(){
+            console.log(this.user);
             axios.put('http://jira-app.com/api/user/'+this.user.user_id, {user:this.user})
             .then(response => {this.fetchUsers(); console.log(response);this.flash(response.data.msg, response.data.status);});
         },
@@ -240,7 +241,6 @@ export default {
             .then(response => {this.fetchUsers();});
         },
         editTeam(){
-            
             var user_id = $('#user_id_to_update_team').val();
             axios.put('http://jira-app.com/api/edit_team/'+user_id, {team: this.team})
             .then(response => {this.fetchUsers(); console.log(response);});

@@ -20,4 +20,9 @@ class Sprint extends Model
     {
         return $this->belongsTo('App\Models\Sprint_Info', 'sprint_info_id');
     }
+
+    public function project()
+    {
+        return $this->belongsTo('App\Models\Project', 'project_id');
+    }
 }
