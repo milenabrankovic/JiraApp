@@ -3,6 +3,14 @@
                 <!-- BEGIN SIDEBAR -->
                 <div class="page-sidebar">
                     <ul v-if="$auth.check() && $auth.user().role_id == 1" class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                        
+                        <li class="nav-item start">
+                            <router-link to="/dashboard" class="nav-link nav-toggle">
+                                <i class="icon-bar-chart"></i>
+                                <span class="title">Dashboard</span>
+                                <span class="selected"></span>
+                            </router-link>
+                        </li>
                         <li class="nav-item start">
                             <router-link to="/projects" class="nav-link nav-toggle">
                                 <i class="icon-list"></i>
@@ -26,6 +34,13 @@
                         </li>
                     </ul>
                     <ul v-if="$auth.check() && $auth.user().role_id == 2" class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                        <li class="nav-item start">
+                            <router-link to="/dashboard" class="nav-link nav-toggle">
+                                <i class="icon-bar-chart"></i>
+                                <span class="title">Dashboard</span>
+                                <span class="selected"></span>
+                            </router-link>
+                        </li>
                         <li class="nav-item start">
                             <router-link to="/user_projects" class="nav-link nav-toggle">
                                 <i class="icon-list"></i>

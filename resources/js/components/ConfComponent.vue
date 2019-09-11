@@ -6,7 +6,7 @@
             </div>
             </div>
         <div class="portlet-title">
-            <div id="prefix_1438324840626" class="custom-alerts alert alert-success">Here you can configure your company name and sprint properties.</div>
+            <div id="prefix_14383248406261" class="custom-alerts alert alert-success">Here you can configure your company name and sprint properties.</div>
         </div>
         <form  @submit.prevent="updateInfo" method="POST" role="form">
         <input type="hidden" name="_token" :value="csrf">

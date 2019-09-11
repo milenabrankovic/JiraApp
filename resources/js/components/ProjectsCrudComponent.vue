@@ -7,7 +7,7 @@
             </div>
             </div>
             <div class="portlet-title">
-                <div id="prefix_1438324840626" class="custom-alerts alert alert-success">Here you can do CRUD actions on projects.</div>
+                <div id="prefix_14383248406264" class="custom-alerts alert alert-success">Here you can do CRUD actions on projects.</div>
             </div>
             <a class="btn green" data-toggle="modal" style="float:right" href="#project_modal" @click="createModal"> + New project </a>
             <div class="portlet-title">
@@ -68,7 +68,7 @@
                                     <th> Project Name</th>
                                     <th> Project Description </th>
                                     <th> Start Date </th>
-                                    <th> Project Manager </th>
+                                    <th> Project Team </th>
                                     <th> Modify </th>
                                 </tr>
                             </thead>

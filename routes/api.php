@@ -17,7 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('project', 'Admin\ProjectController');
+Route::group(['middleware' => 'auth:api'], function() {
+
+    Route::resource('project', 'Admin\ProjectController');
+});
 Route::resource('user', 'Admin\UserController');
 Route::get('team', 'Admin\UserController@team');
 Route::put('edit_team/{id}', 'Admin\UserController@edit_team');

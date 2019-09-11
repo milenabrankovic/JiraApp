@@ -11,6 +11,7 @@ class Sprint extends Model
     public $primaryKey = 'sprint_id';
 
 
+
     public function tasks()
     {
         return $this->hasMany('App\Models\Task', 'sprint_id');
@@ -19,5 +20,10 @@ class Sprint extends Model
     public function sprint_info()
     {
         return $this->belongsTo('App\Models\Sprint_Info', 'sprint_info_id');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo('App\Models\Project', 'project_id');
     }
 }

@@ -2945,6 +2945,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HeaderComponent.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/HeaderComponent.vue?vue&type=script&lang=js& ***!
@@ -3054,15 +3086,7 @@ __webpack_require__.r(__webpack_exports__);
         params: {
           username: app.username,
           password: app.password
-        },
-        success: function success(data) {//window.location.href = 'http://jira-app.com/';
-          //console.log("DATA:"+JSON.stringify(data));
-        },
-        error: function error(_error) {
-          console.log(_error);
-        },
-        rememberMe: true,
-        fetchUser: true
+        }
       });
     }
   }
@@ -3079,6 +3103,21 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3993,6 +4032,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var q__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! q */ "./node_modules/q/q.js");
 /* harmony import */ var q__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(q__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
 //
 //
 //
@@ -8810,7 +8852,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".flash__message {\r\n  box-sizing: border-box;\r\n  padding: 15px 30px 15px 15px;\r\n  margin-bottom: 10px;\r\n  border: 1px solid transparent;\r\n  border-radius: 4px;\r\n  background-color: #cccccc;\r\n  position: relative;\r\n}\r\n\r\n.flash__message.success {\r\n  color: #3c763d;\r\n  background-color: #dff0d8;\r\n  border-color: #d6e9c6;\r\n}\r\n\r\n.flash__message.warning {\r\n  color: #8a6d3b;\r\n  background-color: #fcf8e3;\r\n  border-color: #faebcc;\r\n}\r\n\r\n.flash__message.error {\r\n  color: #a94442;\r\n  background-color: #f2dede;\r\n  border-color: #ebccd1;\r\n}\r\n\r\n.flash__message.info {\r\n  color: #37516A;\r\n  background-color: #F2F5FE;\r\n  border-color: rgb(223, 227, 240);\r\n}\r\n\r\n.flash__close-button {\r\n  box-sizing: border-box;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  color: inherit;\r\n  -webkit-appearance: none;\r\n     -moz-appearance: none;\r\n          appearance: none;\r\n  background-color: transparent;\r\n  background: none;\r\n  border: none;\r\n  cursor: pointer;\r\n  font-size: 18px;\r\n  line-height: 10px;\r\n  margin: 0;\r\n  padding: 8px;\r\n}\r\n\r\n.flash__close-button:active,.flash__close-button:focus {\r\n  outline: none;\r\n}\r\n", ""]);
+exports.push([module.i, ".flash__message {\n  box-sizing: border-box;\n  padding: 15px 30px 15px 15px;\n  margin-bottom: 10px;\n  border: 1px solid transparent;\n  border-radius: 4px;\n  background-color: #cccccc;\n  position: relative;\n}\n\n.flash__message.success {\n  color: #3c763d;\n  background-color: #dff0d8;\n  border-color: #d6e9c6;\n}\n\n.flash__message.warning {\n  color: #8a6d3b;\n  background-color: #fcf8e3;\n  border-color: #faebcc;\n}\n\n.flash__message.error {\n  color: #a94442;\n  background-color: #f2dede;\n  border-color: #ebccd1;\n}\n\n.flash__message.info {\n  color: #37516A;\n  background-color: #F2F5FE;\n  border-color: rgb(223, 227, 240);\n}\n\n.flash__close-button {\n  box-sizing: border-box;\n  position: absolute;\n  top: 0px;\n  right: 0px;\n  color: inherit;\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  background-color: transparent;\n  background: none;\n  border: none;\n  cursor: pointer;\n  font-size: 18px;\n  line-height: 10px;\n  margin: 0;\n  padding: 8px;\n}\n\n.flash__close-button:active,.flash__close-button:focus {\n  outline: none;\n}\n", ""]);
 
 // exports
 
@@ -42711,13 +42753,75 @@ var staticRenderFns = [
         "div",
         {
           staticClass: "custom-alerts alert alert-success",
-          attrs: { id: "prefix_1438324840626" }
+          attrs: { id: "prefix_14383248406261" }
         },
         [
           _vm._v(
             "Here you can configure your company name and sprint properties."
           )
         ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "portlet light" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _vm.$auth.check() && _vm.$auth.user().role_id == 1
+      ? _c("div", [_vm._v("\n        Admin\n    ")])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.$auth.check() && _vm.$auth.user().role_id == 2
+      ? _c("div", [_vm._v("\n        User\n    ")])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "page-head" }, [
+      _c("div", { staticClass: "page-title" }, [
+        _c("h1", [_vm._v("Dashboard")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "portlet-title" }, [
+      _c(
+        "div",
+        {
+          staticClass: "custom-alerts alert alert-success",
+          attrs: { id: "prefix_1438324840626" }
+        },
+        [_vm._v("Welcome to Jira App!")]
       )
     ])
   }
@@ -42980,6 +43084,30 @@ var render = function() {
                     "router-link",
                     {
                       staticClass: "nav-link nav-toggle",
+                      attrs: { to: "/dashboard" }
+                    },
+                    [
+                      _c("i", { staticClass: "icon-bar-chart" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title" }, [
+                        _vm._v("Dashboard")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "selected" })
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "nav-item start" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link nav-toggle",
                       attrs: { to: "/projects" }
                     },
                     [
@@ -43057,6 +43185,30 @@ var render = function() {
               }
             },
             [
+              _c(
+                "li",
+                { staticClass: "nav-item start" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link nav-toggle",
+                      attrs: { to: "/dashboard" }
+                    },
+                    [
+                      _c("i", { staticClass: "icon-bar-chart" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title" }, [
+                        _vm._v("Dashboard")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "selected" })
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
               _c(
                 "li",
                 { staticClass: "nav-item start" },
@@ -43228,7 +43380,7 @@ var staticRenderFns = [
         "div",
         {
           staticClass: "custom-alerts alert alert-success",
-          attrs: { id: "prefix_1438324840626" }
+          attrs: { id: "prefix_14383248406263" }
         },
         [_vm._v("Here you can see projects you are on.")]
       )
@@ -43785,7 +43937,7 @@ var staticRenderFns = [
         "div",
         {
           staticClass: "custom-alerts alert alert-success",
-          attrs: { id: "prefix_1438324840626" }
+          attrs: { id: "prefix_14383248406264" }
         },
         [_vm._v("Here you can do CRUD actions on projects.")]
       )
@@ -43832,7 +43984,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v(" Start Date ")]),
         _vm._v(" "),
-        _c("th", [_vm._v(" Project Manager ")]),
+        _c("th", [_vm._v(" Project Team ")]),
         _vm._v(" "),
         _c("th", [_vm._v(" Modify ")])
       ])
@@ -45108,7 +45260,7 @@ var staticRenderFns = [
         "div",
         {
           staticClass: "custom-alerts alert alert-success",
-          attrs: { id: "prefix_1438324840626" }
+          attrs: { id: "prefix_14383248406266" }
         },
         [
           _vm._v(
@@ -45603,92 +45755,103 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "form-group",
-                          attrs: { id: "leaderdiv" }
-                        },
-                        [
-                          _c(
-                            "label",
+                      _vm.user.role != 1
+                        ? _c(
+                            "div",
                             {
-                              staticClass: "control-label",
-                              attrs: { for: "leader" }
-                            },
-                            [_vm._v("Choose Leader")]
-                          ),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c(
-                            "select",
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.user.leader,
-                                  expression: "user.leader"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: { id: "leader", title: "Choose Leader" },
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.user,
-                                    "leader",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                }
-                              }
+                              staticClass: "form-group",
+                              attrs: { id: "leaderdiv" }
                             },
                             [
                               _c(
-                                "option",
+                                "label",
                                 {
+                                  staticClass: "control-label",
+                                  attrs: { for: "leader" }
+                                },
+                                [_vm._v("Choose Leader")]
+                              ),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.user.leader,
+                                      expression: "user.leader"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
                                   attrs: {
-                                    value: "",
-                                    selected: "",
-                                    disabled: ""
+                                    id: "leader",
+                                    title: "Choose Leader"
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.user,
+                                        "leader",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
                                   }
                                 },
-                                [_vm._v("Select Leader...")]
-                              ),
-                              _vm._v(" "),
-                              _vm._l(_vm.users, function(user) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: user.user_id,
-                                    attrs: { "data-tokens": user.user_id },
-                                    domProps: { value: user.user_id }
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(user.first_name) +
-                                        " " +
-                                        _vm._s(user.last_name)
-                                    )
-                                  ]
-                                )
-                              })
-                            ],
-                            2
+                                [
+                                  _c(
+                                    "option",
+                                    {
+                                      attrs: {
+                                        value: "",
+                                        selected: "",
+                                        disabled: ""
+                                      }
+                                    },
+                                    [_vm._v("Select Leader...")]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.users, function(user) {
+                                    return user.role_id != 1
+                                      ? _c(
+                                          "option",
+                                          {
+                                            key: user.user_id,
+                                            attrs: {
+                                              "data-tokens": user.user_id
+                                            },
+                                            domProps: { value: user.user_id }
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(user.first_name) +
+                                                " " +
+                                                _vm._s(user.last_name)
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  })
+                                ],
+                                2
+                              )
+                            ]
                           )
-                        ]
-                      )
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-footer" }, [
@@ -45775,29 +45938,31 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(" " + _vm._s(user.name) + " ")]),
                         _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "a",
-                            {
-                              attrs: {
-                                "data-toggle": "modal",
-                                href: "#team_modal"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.teamModal(user)
-                                }
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "icon-users font-green",
-                                staticStyle: { "margin-left": "10px" },
-                                attrs: { "data-toggle": "modal" }
-                              })
-                            ]
-                          )
-                        ]),
+                        user.name == "user"
+                          ? _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    "data-toggle": "modal",
+                                    href: "#team_modal"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.teamModal(user)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "icon-users font-green",
+                                    staticStyle: { "margin-left": "10px" },
+                                    attrs: { "data-toggle": "modal" }
+                                  })
+                                ]
+                              )
+                            ])
+                          : _c("td"),
                         _vm._v(" "),
                         _c("td", [
                           _c(
@@ -45821,7 +45986,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            " /\r\n                                        "
+                            " /\n                                        "
                           ),
                           _c(
                             "a",
@@ -46003,7 +46168,7 @@ var render = function() {
                                 }
                               },
                               _vm._l(_vm.users, function(user) {
-                                return user.user_id != _vm.$auth.user().user_id
+                                return user.role_id != 1
                                   ? _c(
                                       "option",
                                       {
@@ -46013,11 +46178,11 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\r\n                                                " +
+                                          "\n                                                " +
                                             _vm._s(user.first_name) +
                                             " " +
                                             _vm._s(user.last_name) +
-                                            "\r\n                                            "
+                                            "\n                                            "
                                         )
                                       ]
                                     )
@@ -46080,7 +46245,7 @@ var staticRenderFns = [
         "div",
         {
           staticClass: "custom-alerts alert alert-success",
-          attrs: { id: "prefix_1438324840626" }
+          attrs: { id: "prefix_14383248406267" }
         },
         [_vm._v("Here you can do CRUD actions on users.")]
       )
@@ -61218,6 +61383,22 @@ __webpack_require__(/*! vue-flash-message/dist/vue-flash-message.min.css */ "./n
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a);
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var routes = [{
+  path: '/',
+  redirect: '/dashboard',
+  meta: {
+    auth: true,
+    title: "Dashboard"
+  },
+  props: true
+}, {
+  path: '/dashboard',
+  component: __webpack_require__(/*! ./components/DashboardComponent.vue */ "./resources/js/components/DashboardComponent.vue")["default"],
+  meta: {
+    auth: true,
+    title: "Dashboard"
+  },
+  props: true
+}, {
   path: '/projects',
   component: __webpack_require__(/*! ./components/ProjectsCrudComponent.vue */ "./resources/js/components/ProjectsCrudComponent.vue")["default"],
   meta: {
@@ -61318,6 +61499,7 @@ Vue.use(__webpack_require__(/*! @websanova/vue-auth */ "./node_modules/@websanov
   http: __webpack_require__(/*! @websanova/vue-auth/drivers/http/axios.1.x.js */ "./node_modules/@websanova/vue-auth/drivers/http/axios.1.x.js"),
   router: __webpack_require__(/*! @websanova/vue-auth/drivers/router/vue-router.2.x.js */ "./node_modules/@websanova/vue-auth/drivers/router/vue-router.2.x.js")
 });
+Vue.component('dashboard-component', __webpack_require__(/*! ./components/DashboardComponent.vue */ "./resources/js/components/DashboardComponent.vue")["default"]);
 Vue.component('nav-component', __webpack_require__(/*! ./components/NavComponent.vue */ "./resources/js/components/NavComponent.vue")["default"]);
 Vue.component('header-component', __webpack_require__(/*! ./components/HeaderComponent.vue */ "./resources/js/components/HeaderComponent.vue")["default"]);
 Vue.component('project-component', __webpack_require__(/*! ./components/ProjectsComponent.vue */ "./resources/js/components/ProjectsComponent.vue")["default"]);
@@ -61455,6 +61637,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConfComponent_vue_vue_type_template_id_2095ad5e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConfComponent_vue_vue_type_template_id_2095ad5e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/DashboardComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/DashboardComponent.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DashboardComponent.vue?vue&type=template&id=01ab55f4& */ "./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&");
+/* harmony import */ var _DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DashboardComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/DashboardComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./DashboardComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DashboardComponent.vue?vue&type=template&id=01ab55f4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -62411,8 +62662,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/entel/laravel/JiraApp/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/entel/laravel/JiraApp/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

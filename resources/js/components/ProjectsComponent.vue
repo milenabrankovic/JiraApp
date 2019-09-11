@@ -6,7 +6,7 @@
               </div>
             </div>
             <div class="portlet-title">
-                <div id="prefix_1438324840626" class="custom-alerts alert alert-success">Here you can see projects you are on.</div>
+                <div id="prefix_14383248406263" class="custom-alerts alert alert-success">Here you can see projects you are on.</div>
             </div>
             <div class="portlet-title">
                 <div class="caption">

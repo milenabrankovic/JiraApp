@@ -17,6 +17,7 @@ class CreateSprintTable extends Migration
             $table->bigIncrements('sprint_id');
             $table->dateTime('start_date');
             $table->integer('sprint_info_id');
+            $table->integer('project_id');
             $table->integer('active')->default(1);
             $table->timestamps();
         });
