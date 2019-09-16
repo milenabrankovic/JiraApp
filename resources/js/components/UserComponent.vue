@@ -7,7 +7,7 @@
             </div>
             </div>
             <div class="portlet-title">
-                <div id="prefix_1438324840626" class="custom-alerts alert alert-success">Here you can do CRUD actions on users.</div>
+                <div id="prefix_14383248406267" class="custom-alerts alert alert-success">Here you can do CRUD actions on users.</div>
             </div>
             <a class="btn green" data-toggle="modal" style="float:right" href="#user_modal" @click="createModal"> + New user </a>
             <div class="modal fade" tabindex="-1" role="dialog"   id="user_modal">
@@ -38,12 +38,16 @@
                                         <input type="email" required class="form-control" id="labelEmail" name="email" placeholder="Enter email" v-model="user.email">
                                     </div>
                                     <div class="form-group">
+                                        <label for="labelUsername">Username</label>
+                                        <input type="text" required class="form-control" id="labelUsername" name="username" placeholder="Enter username" v-model="user.username">
+                                    </div>
+                                    <div class="form-group" v-if="!edit">
                                         <label for="labelPassword">Password</label>
                                         <input type="password" required class="form-control" id="labelPassword" name="password" placeholder="Enter password" v-model="user.password">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="labelUsername">Username</label>
-                                        <input type="text" required class="form-control" id="labelUsername" name="username" placeholder="Enter username" v-model="user.username">
+                                    <div class="form-group" v-else>
+                                        <label for="labelPassword">Password</label>
+                                        <input type="password" class="form-control" id="labelPassword" name="password" placeholder="Enter password" v-model="user.password">
                                     </div>
                                     <div class="form-group" id="rolediv">
                                         <label for="role" class="control-label">Choose Role</label><br/>
@@ -52,11 +56,11 @@
                                             <option v-for="role in roles" v-bind:key="role.role_id" :data-tokens="role.role_id" :value="role.role_id">{{role.name}}</option>
                                         </select>
                                     </div>      
-                                    <div class="form-group" id="leaderdiv">
+                                    <div class="form-group" id="leaderdiv" v-if="user.role !=1">
                                         <label for="leader" class="control-label">Choose Leader</label><br/>
                                         <select class="form-control" id="leader" v-model="user.leader" title="Choose Leader">
                                             <option value="" selected disabled>Select Leader...</option>
-                                            <option v-for="user in users" v-bind:key="user.user_id" :data-tokens="user.user_id" :value="user.user_id">{{user.first_name}} {{user.last_name}}</option>
+                                            <option v-for="user in users" v-bind:key="user.user_id" :data-tokens="user.user_id" :value="user.user_id" v-if="user.role_id != 1">{{user.first_name}} {{user.last_name}}</option>
                                         </select>
                                     </div>  
                                 </div>
@@ -100,8 +104,11 @@
                                     <td> {{user.username}} </td>
                                     <td> {{user.email}} </td>
                                     <td> {{user.name}} </td>
-                                    <td> 
+                                    <td v-if="user.name == 'user'"> 
                                         <a data-toggle="modal" @click="teamModal(user)" href="#team_modal"><i  style="margin-left:10px;" class="icon-users font-green" data-toggle="modal" ></i></a>
+                                    </td>
+                                    <td v-else>
+                                        
                                     </td>
                                     <td> 
                                         <a data-toggle="modal" @click="editModal(user)" href="#user_modal"><i class="icon-pencil font-green" data-toggle="modal" ></i></a> /
@@ -110,6 +117,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        
                         <div class="modal fade" tabindex="-1" role="dialog"   id="delete_user_modal">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -151,7 +159,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Team</label>
                                         <select multiple class="form-control" v-model="team">    
-                                            <option v-for="user in users" v-bind:key="user.user_id" :data-tokens="user.user_id" :value="user.user_id" v-if="user.user_id != $auth.user().user_id">
+                                            <option v-for="user in users" v-bind:key="user.user_id" :data-tokens="user.user_id" :value="user.user_id" v-if="user.role_id != 1">
                                                 {{user.first_name}} {{user.last_name}}
                                             </option>
                                         </select>
@@ -159,9 +167,10 @@
                                     </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn green" @click="hideModal">Save</button>
+                                            <button type="submit" class="btn green" @click="hideModalTeam">Save</button>
                                         </div>
                                     </form>
+
                                 </div>
                             </div>
                         </div>
@@ -227,12 +236,12 @@ export default {
                     .then(response => {this.roles = response.data});
         },
         createUser(){
-            console.log(this.user);
+            console.log('CREATE');
             axios.post('http://jira-app.com/api/user', {user: this.user})
             .then(response => {this.fetchUsers();});
         },
         editUser(){
-            console.log(this.user);
+            console.log('EDIT');
             axios.put('http://jira-app.com/api/user/'+this.user.user_id, {user:this.user})
             .then(response => {this.fetchUsers(); console.log(response);this.flash(response.data.msg, response.data.status);});
         },
@@ -262,7 +271,12 @@ export default {
         hideModal(){
             $('#user_modal').modal('hide');
             $('#delete_user_modal').modal('hide');
+            
             $('.modal-backdrop.in' ).hide(); // removes the overlay
+        },
+        hideModalTeam(){
+            $('#user_team').modal('hide');
+            $('.modal-backdrop.in' ).hide();
         },
         teamModal(user){
             let team_users;

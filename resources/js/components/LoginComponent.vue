@@ -40,13 +40,11 @@
             params: {
               username: app.username,
               password: app.password
-            }, 
-            success: function (data) {
-             //window.location.href = 'http://jira-app.com/';
-             //console.log("DATA:"+JSON.stringify(data));
             },
-            error: function (error) { console.log(error); },
+            success: function (data) {},
+            error: function (err) {this.error=true;},
             rememberMe: true,
+            redirect: '/dashboard',
             fetchUser: true,
         });   
       }

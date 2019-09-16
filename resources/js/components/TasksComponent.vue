@@ -6,7 +6,7 @@
         </div>
       </div>
       <div class="portlet-title">
-        <div id="prefix_1438324840626" class="custom-alerts alert alert-success">Here you can manipulate with tasks and see list of your tasks as same as list of tasks that you assigned to your team sorted by projects.</div>
+        <div id="prefix_14383248406266" class="custom-alerts alert alert-success">Here you can manipulate with tasks and see list of your tasks as same as list of tasks that you assigned to your team sorted by projects.</div>
     </div>
         <a class="btn green" data-toggle="modal" style="float:right" href="#create_task_modal" @click="createTaskModal()"> + New task </a>
         <div class="modal fade" tabindex="-1" role="dialog"   id="create_task_modal">
@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <label for="assignedTo">Assigned to</label>
                                     <select class="bs-select form-control input-small" id="assignedTo" v-model="task.user_id">
-                                    <option value="" selected disabled>Select user...</option>
+                                   
                                         <option v-for="user in teamUsers" v-bind:key="user.user_id" :value="user.user_id">
                                             {{user.first_name}} {{user.last_name}}
                                         </option>

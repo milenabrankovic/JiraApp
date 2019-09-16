@@ -2945,6 +2945,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HeaderComponent.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/HeaderComponent.vue?vue&type=script&lang=js& ***!
@@ -3055,13 +3087,12 @@ __webpack_require__.r(__webpack_exports__);
           username: app.username,
           password: app.password
         },
-        success: function success(data) {//window.location.href = 'http://jira-app.com/';
-          //console.log("DATA:"+JSON.stringify(data));
-        },
-        error: function error(_error) {
-          console.log(_error);
+        success: function success(data) {},
+        error: function error(err) {
+          this.error = true;
         },
         rememberMe: true,
+        redirect: '/dashboard',
         fetchUser: true
       });
     }
@@ -3079,6 +3110,21 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3160,8 +3206,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -3402,8 +3446,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   head: {
@@ -3456,11 +3498,13 @@ __webpack_require__.r(__webpack_exports__);
     createProject: function createProject(event) {
       var _this3 = this;
 
-      this.selectedUsers = $("#multiple").val();
+      //this.selectedUsers = $("#multiple").val();
       axios.post('http://jira-app.com/api/project', {
         project: this.project,
         selectedUsers: this.selectedUsers
       }).then(function (response) {
+        console.log(response);
+
         _this3.fetchProjects();
       });
     },
@@ -4167,6 +4211,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   head: {
@@ -4226,7 +4279,7 @@ __webpack_require__.r(__webpack_exports__);
     createUser: function createUser() {
       var _this3 = this;
 
-      console.log(this.user);
+      console.log('CREATE');
       axios.post('http://jira-app.com/api/user', {
         user: this.user
       }).then(function (response) {
@@ -4236,7 +4289,7 @@ __webpack_require__.r(__webpack_exports__);
     editUser: function editUser() {
       var _this4 = this;
 
-      console.log(this.user);
+      console.log('EDIT');
       axios.put('http://jira-app.com/api/user/' + this.user.user_id, {
         user: this.user
       }).then(function (response) {
@@ -4283,6 +4336,10 @@ __webpack_require__.r(__webpack_exports__);
       $('#user_modal').modal('hide');
       $('#delete_user_modal').modal('hide');
       $('.modal-backdrop.in').hide(); // removes the overlay
+    },
+    hideModalTeam: function hideModalTeam() {
+      $('#user_team').modal('hide');
+      $('.modal-backdrop.in').hide();
     },
     teamModal: function teamModal(user) {
       var _this7 = this;
@@ -42712,13 +42769,75 @@ var staticRenderFns = [
         "div",
         {
           staticClass: "custom-alerts alert alert-success",
-          attrs: { id: "prefix_1438324840626" }
+          attrs: { id: "prefix_14383248406261" }
         },
         [
           _vm._v(
             "Here you can configure your company name and sprint properties."
           )
         ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "portlet light" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _vm.$auth.check() && _vm.$auth.user().role_id == 1
+      ? _c("div", [_vm._v("\n        Admin\n    ")])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.$auth.check() && _vm.$auth.user().role_id == 2
+      ? _c("div", [_vm._v("\n        User\n    ")])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "page-head" }, [
+      _c("div", { staticClass: "page-title" }, [
+        _c("h1", [_vm._v("Dashboard")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "portlet-title" }, [
+      _c(
+        "div",
+        {
+          staticClass: "custom-alerts alert alert-success",
+          attrs: { id: "prefix_1438324840626" }
+        },
+        [_vm._v("Welcome to Jira App!")]
       )
     ])
   }
@@ -42982,6 +43101,30 @@ var render = function() {
                     "router-link",
                     {
                       staticClass: "nav-link nav-toggle",
+                      attrs: { to: "/dashboard" }
+                    },
+                    [
+                      _c("i", { staticClass: "icon-bar-chart" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title" }, [
+                        _vm._v("Dashboard")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "selected" })
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "nav-item start" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link nav-toggle",
                       attrs: { to: "/projects" }
                     },
                     [
@@ -43059,6 +43202,30 @@ var render = function() {
               }
             },
             [
+              _c(
+                "li",
+                { staticClass: "nav-item start" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link nav-toggle",
+                      attrs: { to: "/dashboard" }
+                    },
+                    [
+                      _c("i", { staticClass: "icon-bar-chart" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title" }, [
+                        _vm._v("Dashboard")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "selected" })
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
               _c(
                 "li",
                 { staticClass: "nav-item start" },
@@ -43178,8 +43345,6 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(" ks ")]),
-                        _vm._v(" "),
                         _c(
                           "td",
                           { staticClass: "text-center" },
@@ -43230,7 +43395,7 @@ var staticRenderFns = [
         "div",
         {
           staticClass: "custom-alerts alert alert-success",
-          attrs: { id: "prefix_1438324840626" }
+          attrs: { id: "prefix_14383248406263" }
         },
         [_vm._v("Here you can see projects you are on.")]
       )
@@ -43263,8 +43428,6 @@ var staticRenderFns = [
         _c("th", [_vm._v(" Project Description ")]),
         _vm._v(" "),
         _c("th", [_vm._v(" Start Date ")]),
-        _vm._v(" "),
-        _c("th", [_vm._v(" Project Manager ")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v(" Tasks ")])
       ])
@@ -43534,21 +43697,23 @@ var render = function() {
                               }
                             },
                             _vm._l(_vm.users, function(user) {
-                              return _c(
-                                "option",
-                                {
-                                  key: user.user_id,
-                                  attrs: { "data-tokens": user.user_id },
-                                  domProps: { value: user.user_id }
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(user.first_name) +
-                                      " " +
-                                      _vm._s(user.last_name)
+                              return user.role_id != 1
+                                ? _c(
+                                    "option",
+                                    {
+                                      key: user.user_id,
+                                      attrs: { "data-tokens": user.user_id },
+                                      domProps: { value: user.user_id }
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(user.first_name) +
+                                          " " +
+                                          _vm._s(user.last_name)
+                                      )
+                                    ]
                                   )
-                                ]
-                              )
+                                : _vm._e()
                             }),
                             0
                           )
@@ -43639,8 +43804,6 @@ var render = function() {
                             " " + _vm._s(project.start_date.split(" ")[0]) + " "
                           )
                         ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(" ks ")]),
                         _vm._v(" "),
                         _c("td", [
                           _c(
@@ -43787,7 +43950,7 @@ var staticRenderFns = [
         "div",
         {
           staticClass: "custom-alerts alert alert-success",
-          attrs: { id: "prefix_1438324840626" }
+          attrs: { id: "prefix_14383248406264" }
         },
         [_vm._v("Here you can do CRUD actions on projects.")]
       )
@@ -43833,8 +43996,6 @@ var staticRenderFns = [
         _c("th", [_vm._v(" Project Description ")]),
         _vm._v(" "),
         _c("th", [_vm._v(" Start Date ")]),
-        _vm._v(" "),
-        _c("th", [_vm._v(" Project Manager ")]),
         _vm._v(" "),
         _c("th", [_vm._v(" Modify ")])
       ])
@@ -44214,35 +44375,25 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _c(
+                        _vm._l(_vm.teamUsers, function(user) {
+                          return _c(
                             "option",
                             {
-                              attrs: { value: "", selected: "", disabled: "" }
+                              key: user.user_id,
+                              domProps: { value: user.user_id }
                             },
-                            [_vm._v("Select user...")]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.teamUsers, function(user) {
-                            return _c(
-                              "option",
-                              {
-                                key: user.user_id,
-                                domProps: { value: user.user_id }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                          " +
-                                    _vm._s(user.first_name) +
-                                    " " +
-                                    _vm._s(user.last_name) +
-                                    "\n                                      "
-                                )
-                              ]
-                            )
-                          })
-                        ],
-                        2
+                            [
+                              _vm._v(
+                                "\n                                          " +
+                                  _vm._s(user.first_name) +
+                                  " " +
+                                  _vm._s(user.last_name) +
+                                  "\n                                      "
+                              )
+                            ]
+                          )
+                        }),
+                        0
                       )
                     ]),
                     _vm._v(" "),
@@ -45110,7 +45261,7 @@ var staticRenderFns = [
         "div",
         {
           staticClass: "custom-alerts alert alert-success",
-          attrs: { id: "prefix_1438324840626" }
+          attrs: { id: "prefix_14383248406266" }
         },
         [
           _vm._v(
@@ -45452,44 +45603,6 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "labelPassword" } }, [
-                          _vm._v("Password")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.user.password,
-                              expression: "user.password"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "password",
-                            required: "",
-                            id: "labelPassword",
-                            name: "password",
-                            placeholder: "Enter password"
-                          },
-                          domProps: { value: _vm.user.password },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.user,
-                                "password",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
                         _c("label", { attrs: { for: "labelUsername" } }, [
                           _vm._v("Username")
                         ]),
@@ -45526,6 +45639,81 @@ var render = function() {
                           }
                         })
                       ]),
+                      _vm._v(" "),
+                      !_vm.edit
+                        ? _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "labelPassword" } }, [
+                              _vm._v("Password")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.password,
+                                  expression: "user.password"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "password",
+                                required: "",
+                                id: "labelPassword",
+                                name: "password",
+                                placeholder: "Enter password"
+                              },
+                              domProps: { value: _vm.user.password },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.user,
+                                    "password",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        : _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "labelPassword" } }, [
+                              _vm._v("Password")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.password,
+                                  expression: "user.password"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "password",
+                                id: "labelPassword",
+                                name: "password",
+                                placeholder: "Enter password"
+                              },
+                              domProps: { value: _vm.user.password },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.user,
+                                    "password",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -45605,92 +45793,103 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "form-group",
-                          attrs: { id: "leaderdiv" }
-                        },
-                        [
-                          _c(
-                            "label",
+                      _vm.user.role != 1
+                        ? _c(
+                            "div",
                             {
-                              staticClass: "control-label",
-                              attrs: { for: "leader" }
-                            },
-                            [_vm._v("Choose Leader")]
-                          ),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c(
-                            "select",
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.user.leader,
-                                  expression: "user.leader"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: { id: "leader", title: "Choose Leader" },
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.user,
-                                    "leader",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                }
-                              }
+                              staticClass: "form-group",
+                              attrs: { id: "leaderdiv" }
                             },
                             [
                               _c(
-                                "option",
+                                "label",
                                 {
+                                  staticClass: "control-label",
+                                  attrs: { for: "leader" }
+                                },
+                                [_vm._v("Choose Leader")]
+                              ),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.user.leader,
+                                      expression: "user.leader"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
                                   attrs: {
-                                    value: "",
-                                    selected: "",
-                                    disabled: ""
+                                    id: "leader",
+                                    title: "Choose Leader"
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.user,
+                                        "leader",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
                                   }
                                 },
-                                [_vm._v("Select Leader...")]
-                              ),
-                              _vm._v(" "),
-                              _vm._l(_vm.users, function(user) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: user.user_id,
-                                    attrs: { "data-tokens": user.user_id },
-                                    domProps: { value: user.user_id }
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(user.first_name) +
-                                        " " +
-                                        _vm._s(user.last_name)
-                                    )
-                                  ]
-                                )
-                              })
-                            ],
-                            2
+                                [
+                                  _c(
+                                    "option",
+                                    {
+                                      attrs: {
+                                        value: "",
+                                        selected: "",
+                                        disabled: ""
+                                      }
+                                    },
+                                    [_vm._v("Select Leader...")]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.users, function(user) {
+                                    return user.role_id != 1
+                                      ? _c(
+                                          "option",
+                                          {
+                                            key: user.user_id,
+                                            attrs: {
+                                              "data-tokens": user.user_id
+                                            },
+                                            domProps: { value: user.user_id }
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(user.first_name) +
+                                                " " +
+                                                _vm._s(user.last_name)
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  })
+                                ],
+                                2
+                              )
+                            ]
                           )
-                        ]
-                      )
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-footer" }, [
@@ -45777,29 +45976,31 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(" " + _vm._s(user.name) + " ")]),
                         _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "a",
-                            {
-                              attrs: {
-                                "data-toggle": "modal",
-                                href: "#team_modal"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.teamModal(user)
-                                }
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "icon-users font-green",
-                                staticStyle: { "margin-left": "10px" },
-                                attrs: { "data-toggle": "modal" }
-                              })
-                            ]
-                          )
-                        ]),
+                        user.name == "user"
+                          ? _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    "data-toggle": "modal",
+                                    href: "#team_modal"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.teamModal(user)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "icon-users font-green",
+                                    staticStyle: { "margin-left": "10px" },
+                                    attrs: { "data-toggle": "modal" }
+                                  })
+                                ]
+                              )
+                            ])
+                          : _c("td"),
                         _vm._v(" "),
                         _c("td", [
                           _c(
@@ -46005,7 +46206,7 @@ var render = function() {
                                 }
                               },
                               _vm._l(_vm.users, function(user) {
-                                return user.user_id != _vm.$auth.user().user_id
+                                return user.role_id != 1
                                   ? _c(
                                       "option",
                                       {
@@ -46045,7 +46246,7 @@ var render = function() {
                             {
                               staticClass: "btn green",
                               attrs: { type: "submit" },
-                              on: { click: _vm.hideModal }
+                              on: { click: _vm.hideModalTeam }
                             },
                             [_vm._v("Save")]
                           )
@@ -46082,7 +46283,7 @@ var staticRenderFns = [
         "div",
         {
           staticClass: "custom-alerts alert alert-success",
-          attrs: { id: "prefix_1438324840626" }
+          attrs: { id: "prefix_14383248406267" }
         },
         [_vm._v("Here you can do CRUD actions on users.")]
       )
@@ -61220,6 +61421,22 @@ __webpack_require__(/*! vue-flash-message/dist/vue-flash-message.min.css */ "./n
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a);
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var routes = [{
+  path: '/',
+  redirect: '/dashboard',
+  meta: {
+    auth: true,
+    title: "Dashboard"
+  },
+  props: true
+}, {
+  path: '/dashboard',
+  component: __webpack_require__(/*! ./components/DashboardComponent.vue */ "./resources/js/components/DashboardComponent.vue")["default"],
+  meta: {
+    auth: true,
+    title: "Dashboard"
+  },
+  props: true
+}, {
   path: '/projects',
   component: __webpack_require__(/*! ./components/ProjectsCrudComponent.vue */ "./resources/js/components/ProjectsCrudComponent.vue")["default"],
   meta: {
@@ -61320,6 +61537,7 @@ Vue.use(__webpack_require__(/*! @websanova/vue-auth */ "./node_modules/@websanov
   http: __webpack_require__(/*! @websanova/vue-auth/drivers/http/axios.1.x.js */ "./node_modules/@websanova/vue-auth/drivers/http/axios.1.x.js"),
   router: __webpack_require__(/*! @websanova/vue-auth/drivers/router/vue-router.2.x.js */ "./node_modules/@websanova/vue-auth/drivers/router/vue-router.2.x.js")
 });
+Vue.component('dashboard-component', __webpack_require__(/*! ./components/DashboardComponent.vue */ "./resources/js/components/DashboardComponent.vue")["default"]);
 Vue.component('nav-component', __webpack_require__(/*! ./components/NavComponent.vue */ "./resources/js/components/NavComponent.vue")["default"]);
 Vue.component('header-component', __webpack_require__(/*! ./components/HeaderComponent.vue */ "./resources/js/components/HeaderComponent.vue")["default"]);
 Vue.component('project-component', __webpack_require__(/*! ./components/ProjectsComponent.vue */ "./resources/js/components/ProjectsComponent.vue")["default"]);
@@ -61457,6 +61675,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConfComponent_vue_vue_type_template_id_2095ad5e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConfComponent_vue_vue_type_template_id_2095ad5e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/DashboardComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/DashboardComponent.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DashboardComponent.vue?vue&type=template&id=01ab55f4& */ "./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&");
+/* harmony import */ var _DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DashboardComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/DashboardComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./DashboardComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DashboardComponent.vue?vue&type=template&id=01ab55f4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

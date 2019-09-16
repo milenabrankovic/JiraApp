@@ -29,5 +29,4 @@ class Project extends Model
     {
         return $this->hasMany('App\Models\Sprint', 'project_id');
     }
-    
 }

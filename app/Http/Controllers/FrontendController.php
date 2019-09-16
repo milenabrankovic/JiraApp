@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
+
+    public function dashboard()
+    {
+        return view('dashboard');
+    }
+
     public function projects_list()
     {
         return view('projects.projects_list');

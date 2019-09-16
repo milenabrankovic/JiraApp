@@ -61,7 +61,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {   
-        
+        //return ($request->get('selectedUsers'));
         $project = $this->project;
 
         $project->name = $request->project['project_name'];
@@ -69,13 +69,14 @@ class ProjectController extends Controller
         $project->start_date = $request->project['start_date'];
         
         if($project->save())
-        {
+        {   
+            //return $project->project_id;
             //return new ProjectResource($project);
             
-            if($request->selectedUsers != null && count($request->selectedUsers)>0) //users je name attr; provera da li je projekat dodeljen zaposlenom
+            if($request->get('selectedUsers') != null) //users je name attr; provera da li je projekat dodeljen zaposlenom
             {
               // $this->assign_employee($request, $project->project_id);
-                $users = $request->selectedUsers;
+                $users = $request->get('selectedUsers');
                 $data = [];
                 
                 foreach($users as $user)

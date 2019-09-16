@@ -6,7 +6,7 @@
               </div>
             </div>
             <div class="portlet-title">
-                <div id="prefix_1438324840626" class="custom-alerts alert alert-success">Here you can see projects you are on.</div>
+                <div id="prefix_14383248406263" class="custom-alerts alert alert-success">Here you can see projects you are on.</div>
             </div>
             <div class="portlet-title">
                 <div class="caption">
@@ -22,7 +22,6 @@
                         <th> Project Name</th>
                         <th> Project Description </th>
                         <th> Start Date </th>
-                        <th> Project Manager </th>
                         <th class="text-center"> Tasks </th>
                       </tr>
                   </thead>
@@ -34,7 +33,6 @@
                       <td> {{project.name}} </td>
                       <td> {{project.description}} </td>
                       <td> {{project.start_date.split(' ')[0]}} </td>
-                      <td> ks </td>
                       <td class="text-center"><router-link :to="{ name: 'tasks', params: { projectId: project.project_id }}"><i class="icon-list font-green"></i></router-link></td>
                       <br>
                     </tr>

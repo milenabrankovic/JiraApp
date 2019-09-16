@@ -11,6 +11,7 @@ class Sprint extends Model
     public $primaryKey = 'sprint_id';
 
 
+
     public function tasks()
     {
         return $this->hasMany('App\Models\Task', 'sprint_id');

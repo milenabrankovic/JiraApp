@@ -6,6 +6,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use JWTAuth;
 use Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\Sprint_Info;
+use App\Models\Sprint;
+use Carbon\Carbon;
+
+
 class AuthController extends Controller
 {
     public function login(Request $request)
@@ -18,13 +24,14 @@ class AuthController extends Controller
                     'status' => 'error',
                     'error' => 'invalid.credentials',
                     'msg' => 'Invalid Credentials.'
-                ], 400);
+                ], 401);
         }
         return response([
                 'status' => 'success',
                 'data' => User::find(Auth::user()->user_id)
             ])
             ->header('Authorization', $token);
+        
     }
 
     public function user(Request $request)

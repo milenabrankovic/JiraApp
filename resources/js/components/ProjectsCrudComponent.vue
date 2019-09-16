@@ -7,7 +7,7 @@
             </div>
             </div>
             <div class="portlet-title">
-                <div id="prefix_1438324840626" class="custom-alerts alert alert-success">Here you can do CRUD actions on projects.</div>
+                <div id="prefix_14383248406264" class="custom-alerts alert alert-success">Here you can do CRUD actions on projects.</div>
             </div>
             <a class="btn green" data-toggle="modal" style="float:right" href="#project_modal" @click="createModal"> + New project </a>
             <div class="portlet-title">
@@ -46,7 +46,7 @@
                                     <div class="form-group">
                                         <label for="multiple_user" class="control-label">Choose Employees</label><br/>
                                         <select class="form-control" id="multiple_user" multiple  v-model="selectedUsers">
-                                            <option v-for="user in users" v-bind:key="user.user_id" :data-tokens="user.user_id" :value="user.user_id">{{user.first_name}} {{user.last_name}}</option>
+                                            <option v-for="user in users" v-bind:key="user.user_id" :data-tokens="user.user_id" :value="user.user_id" v-if="user.role_id != 1">{{user.first_name}} {{user.last_name}}</option>
                                         </select>
                                     </div>     
                                 </div>
@@ -68,7 +68,6 @@
                                     <th> Project Name</th>
                                     <th> Project Description </th>
                                     <th> Start Date </th>
-                                    <th> Project Manager </th>
                                     <th> Modify </th>
                                 </tr>
                             </thead>
@@ -80,7 +79,6 @@
                                     <td> {{project.name}} </td>
                                     <td> {{project.description}} </td>
                                     <td> {{project.start_date.split(' ')[0]}} </td>
-                                    <td> ks </td>
                                     <td> 
                                         <a data-toggle="modal" @click="editModal(project)" href="#project_modal"><i class="icon-pencil font-green" data-toggle="modal" ></i></a> /
                                         <a href="#delete_project_modal" @click="openDeleteModal(project)" data-toggle="modal" style="color:red;"><i class="icon-trash"></i></a>
@@ -164,9 +162,9 @@ export default {
                     .then(response => this.users = response.data);
         },
         createProject(event){
-            this.selectedUsers = $("#multiple").val();
+            //this.selectedUsers = $("#multiple").val();
             axios.post('http://jira-app.com/api/project', {project: this.project, selectedUsers: this.selectedUsers})
-            .then(response => {this.fetchProjects();});
+            .then(response => {console.log(response); this.fetchProjects();});
         },
         editProject(){
             axios.put('http://jira-app.com/api/project/'+this.project.project_id, {project:this.project, selectedUsers: this.selectedUsers})

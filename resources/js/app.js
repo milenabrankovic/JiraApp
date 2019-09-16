@@ -18,6 +18,8 @@ Vue.use(VueRouter);
 
 
 let routes = [
+  { path: '/', redirect:'/dashboard', meta: { auth: true, title: "Dashboard" }, props: true },
+  { path: '/dashboard',component: require('./components/DashboardComponent.vue').default, meta: { auth: true, title: "Dashboard" }, props: true },
   { path: '/projects',component: require('./components/ProjectsCrudComponent.vue').default, meta: { auth: true, title: "Projects" }, props: true },
   { path: '/user_projects', component: require('./components/ProjectsComponent.vue').default, meta: { auth: true, title: "Projects" } },
   { path: '/configuration', component: require('./components/ConfComponent.vue').default, meta: { auth: true, title: "Configuration" } },
@@ -89,7 +91,7 @@ Vue.use(require('@websanova/vue-auth'), {
   router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
 });
 
-
+Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
 Vue.component('nav-component', require('./components/NavComponent.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 Vue.component('project-component', require('./components/ProjectsComponent.vue').default);

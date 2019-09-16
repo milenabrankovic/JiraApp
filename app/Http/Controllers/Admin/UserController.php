@@ -49,13 +49,13 @@ class UserController extends Controller
     {
         $team = $request->get('team');
 
+        User::where('parent_id', $id)->update(['parent_id' => null]);
         foreach($team as $t)
         {
             $user = User::find($t);
             $user->parent_id = $id;
             $user->save();
         }
-        return $request->get('team');
     }
 
     public function users_by_project(Request $request)
