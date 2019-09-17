@@ -235,6 +235,7 @@ export default {
             .then(response => {this.fetchUsers();});
         },
         editUser(){
+            console.log("ok");
             axios.put('http://jira-app.com/api/user/'+this.user.user_id, {user:this.user})
             .then(response => {this.fetchUsers(); console.log(response);this.flash(response.data.msg, response.data.status);});
         },

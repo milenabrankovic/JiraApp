@@ -4278,6 +4278,7 @@ __webpack_require__.r(__webpack_exports__);
     editUser: function editUser() {
       var _this4 = this;
 
+      console.log("ok");
       axios.put('http://jira-app.com/api/user/' + this.user.user_id, {
         user: this.user
       }).then(function (response) {
