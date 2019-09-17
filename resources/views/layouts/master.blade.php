@@ -14,12 +14,9 @@
                     <header-component></header-component>
                     <nav-component></nav-component>
                     <div class="page-content-wrapper">
-                        <div class="page-content">
-                            <flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
-                            <keep-alive>
-                                    <router-view></router-view>
-                            </keep-alive>
-                        </div>
+                        <keep-alive>
+                                <router-view></router-view>
+                        </keep-alive>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,6 @@
 <template>
+<div class="page-content">
+    <flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
     <div>
         <div class="portlet light ">
             <div class="page-head">
@@ -114,6 +116,7 @@
                 <div class="clearfix margin-bottom-20"> </div>
             </div>
         </div>
+    </div>    
 </template>
 
 <script>

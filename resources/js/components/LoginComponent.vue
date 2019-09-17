@@ -1,26 +1,28 @@
 <template>
-  <div class="login myClass">
-        <div class="content">
+  <div class="login">
+        <div class="content" id="loginForm">
               <!-- BEGIN LOGIN FORM -->
-              <div class="alert alert-danger" v-if="error">
-                <p>There was an error, unable to sign in with those credentials.</p>
+              <div  >
+                <div class="alert alert-danger" v-if="error">
+                  <p>There was an error, unable to sign in with those credentials.</p>
+                </div>
+                <form class="login-form" @submit.prevent="login" method="post" >
+                    <h3 class="form-title font-green">Log In</h3>
+                    <h4 class="form-title font-green text-center">{{company_name}}</h4>
+                    
+                    <div class="form-group">
+                        <label class="control-label visible-ie8 visible-ie9">Username</label>
+                        <input class="form-control form-control-solid placeholder-no-fix" type="text" id="username" v-model="username" placeholder="Username" name="username"  required/> </div>
+                        <div class="form-group">
+                        <label class="control-label visible-ie8 visible-ie9">Password</label>
+                        <input class="form-control form-control-solid placeholder-no-fix" type="password" id="password" v-model="password" placeholder="Password" name="password" required/> </div>
+                        
+                      <div class="form-actions">
+                        <button type="submit" class="btn green uppercase ">Login</button>
+                    </div>
+                </form>
+                <div class="copyright"> {{ new Date().getFullYear() }} © Powered by Jira.</div>
               </div>
-              <form class="login-form" @submit.prevent="login" method="post">
-                      
-                  <h3 class="form-title font-green">Log In</h3>
-                  
-                  <div class="form-group">
-                      <label class="control-label visible-ie8 visible-ie9">Username</label>
-                      <input class="form-control form-control-solid placeholder-no-fix" type="text" id="username" v-model="username" placeholder="Username" name="username"  required/> </div>
-                      <div class="form-group">
-                      <label class="control-label visible-ie8 visible-ie9">Password</label>
-                      <input class="form-control form-control-solid placeholder-no-fix" type="password" id="password" v-model="password" placeholder="Password" name="password" required/> </div>
-                      
-                    <div class="form-actions">
-                      <button type="submit" class="btn green uppercase ">Login</button>
-                  </div>
-              </form>
-              <div class="copyright"> {{ new Date().getFullYear() }} © All rights reserved. </div>
           </div>
         </div>
 </template>
@@ -30,10 +32,21 @@
       return {
         username: null,
         password: null,
-        error: false
+        error: false,
+        company_name: '',
       }
     },
+    created(){
+        this.fetchData();
+    },
     methods: {
+      fetchData(){
+            axios.get('http://jira-app.com/api/info')
+                .then(response => 
+                {
+                  this.company_name = response.data.info.company.name;
+                });
+      },
       login(){
         var app = this
         this.$auth.login({
@@ -46,13 +59,17 @@
             rememberMe: true,
             redirect: '/dashboard',
             fetchUser: true,
-        });   
+        }); 
+          
       }
+      
     }
+   
   } 
+  
 </script>
 <style>
-  .content{
-    margin-left: 18% !important;
-  }
+ #loginForm{
+    margin: 0 auto;
+ }
 </style>

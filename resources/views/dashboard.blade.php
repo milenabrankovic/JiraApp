@@ -4,6 +4,4 @@
     Dashboard
 @endsection --}}
 
-@section('content')
-    <dashboard-component></dashboard-component>
-@endsection
+<dashboard-component></dashboard-component>

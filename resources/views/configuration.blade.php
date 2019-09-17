@@ -3,7 +3,4 @@
 {{-- @section('title')
     Configuration
 @endsection --}}
-
-@section('content')
-    <conf-component></conf-component>
-@endsection
+<conf-component></conf-component>

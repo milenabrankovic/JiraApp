@@ -1,4 +1,7 @@
 <template>
+
+<div class="page-content">
+    <flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
     <div class="portlet light">
         <div class="page-head">
             <div class="page-title">
@@ -26,6 +29,7 @@
         <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
+</div>
 </template>
 
 <script>

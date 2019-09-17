@@ -4,6 +4,4 @@
     Login
 @endsection --}}
 
-@section('content')
-    <login-component></login-component>
-@endsection
+<login-component></login-component>

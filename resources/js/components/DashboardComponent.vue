@@ -1,4 +1,5 @@
 <template>
+<div class="page-content">
     <div class="portlet light">
         <div class="page-head">
             <div class="page-title">
@@ -15,6 +16,7 @@
             User
         </div>
     </div>
+</div>    
 </template>
 
 <script>
