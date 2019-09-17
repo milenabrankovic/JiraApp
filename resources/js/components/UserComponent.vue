@@ -1,6 +1,10 @@
 <template>
 <div class="page-content">
+<<<<<<< HEAD
 <flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
+=======
+    <flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
+>>>>>>> 1fb10efec973b9133ce52a4e36acf8765634a816
         <div class="portlet light ">
             <div class="page-head">
             <div class="page-title">
@@ -243,7 +247,6 @@ export default {
             .then(response => {this.fetchUsers();});
         },
         editUser(){
-            console.log('EDIT');
             axios.put('http://jira-app.com/api/user/'+this.user.user_id, {user:this.user})
             .then(response => {this.fetchUsers(); console.log(response);this.flash(response.data.msg, response.data.status);});
         },

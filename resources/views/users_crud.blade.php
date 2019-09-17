@@ -5,6 +5,4 @@
     Users
 @endsection --}}
 
-@section('content')
-    <user-component></user-component>
-@endsection
+<user-component></user-component>

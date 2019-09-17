@@ -4,6 +4,4 @@
     Tasks
 @endsection --}}
 
-@section('content')
-    <task-component></task-component>
-@endsection
+<task-component></task-component>
