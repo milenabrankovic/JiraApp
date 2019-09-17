@@ -38,12 +38,16 @@
                                         <input type="email" required class="form-control" id="labelEmail" name="email" placeholder="Enter email" v-model="user.email">
                                     </div>
                                     <div class="form-group">
+                                        <label for="labelUsername">Username</label>
+                                        <input type="text" required class="form-control" id="labelUsername" name="username" placeholder="Enter username" v-model="user.username">
+                                    </div>
+                                    <div class="form-group" v-if="!edit">
                                         <label for="labelPassword">Password</label>
                                         <input type="password" required class="form-control" id="labelPassword" name="password" placeholder="Enter password" v-model="user.password">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="labelUsername">Username</label>
-                                        <input type="text" required class="form-control" id="labelUsername" name="username" placeholder="Enter username" v-model="user.username">
+                                    <div class="form-group" v-else>
+                                        <label for="labelPassword">Password</label>
+                                        <input type="password" class="form-control" id="labelPassword" name="password" placeholder="Enter password" v-model="user.password">
                                     </div>
                                     <div class="form-group" id="rolediv">
                                         <label for="role" class="control-label">Choose Role</label><br/>
@@ -113,6 +117,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        
                         <div class="modal fade" tabindex="-1" role="dialog"   id="delete_user_modal">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -162,9 +167,10 @@
                                     </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn green" @click="hideModal">Save</button>
+                                            <button type="submit" class="btn green" @click="hideModalTeam">Save</button>
                                         </div>
                                     </form>
+
                                 </div>
                             </div>
                         </div>
@@ -230,12 +236,11 @@ export default {
                     .then(response => {this.roles = response.data});
         },
         createUser(){
-            console.log(this.user);
+            console.log('CREATE');
             axios.post('http://jira-app.com/api/user', {user: this.user})
             .then(response => {this.fetchUsers();});
         },
         editUser(){
-            console.log("ok");
             axios.put('http://jira-app.com/api/user/'+this.user.user_id, {user:this.user})
             .then(response => {this.fetchUsers(); console.log(response);this.flash(response.data.msg, response.data.status);});
         },
@@ -244,7 +249,6 @@ export default {
             .then(response => {this.fetchUsers();});
         },
         editTeam(){
-            
             var user_id = $('#user_id_to_update_team').val();
             axios.put('http://jira-app.com/api/edit_team/'+user_id, {team: this.team})
             .then(response => {this.fetchUsers(); console.log(response);});
@@ -266,7 +270,12 @@ export default {
         hideModal(){
             $('#user_modal').modal('hide');
             $('#delete_user_modal').modal('hide');
+            
             $('.modal-backdrop.in' ).hide(); // removes the overlay
+        },
+        hideModalTeam(){
+            $('#user_team').modal('hide');
+            $('.modal-backdrop.in' ).hide();
         },
         teamModal(user){
             let team_users;

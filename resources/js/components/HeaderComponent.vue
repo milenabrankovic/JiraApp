@@ -10,7 +10,7 @@
                     <ul>
                         <li v-if="$auth.check()" class="pull-right">
                             {{$auth.user().first_name}} {{$auth.user().last_name}}
-                            <a href="" @click="logout()"><i class="icon-logout"></i></a>
+                            <a href="" class="btn" @click="logout()">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -59,6 +59,15 @@ export default {
     .page-top ul{
         margin-top:5%;
         margin-left:7%;
+    }
+    .page-top a{
+        text-decoration:none;
+        color:#c0cddc;
+        margin-left: 35px;
+    }
+    .page-top a:hover{
+        text-decoration:none;
+        color:#abe7ed;
     }
     
 </style>

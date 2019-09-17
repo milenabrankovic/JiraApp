@@ -22,7 +22,6 @@
                         <th> Project Name</th>
                         <th> Project Description </th>
                         <th> Start Date </th>
-                        <th> Project Manager </th>
                         <th class="text-center"> Tasks </th>
                       </tr>
                   </thead>
@@ -34,7 +33,6 @@
                       <td> {{project.name}} </td>
                       <td> {{project.description}} </td>
                       <td> {{project.start_date.split(' ')[0]}} </td>
-                      <td> ks </td>
                       <td class="text-center"><router-link :to="{ name: 'tasks', params: { projectId: project.project_id }}"><i class="icon-list font-green"></i></router-link></td>
                       <br>
                     </tr>

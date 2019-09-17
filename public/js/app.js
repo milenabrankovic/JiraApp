@@ -3086,7 +3086,14 @@ __webpack_require__.r(__webpack_exports__);
         params: {
           username: app.username,
           password: app.password
-        }
+        },
+        success: function success(data) {},
+        error: function error(err) {
+          this.error = true;
+        },
+        rememberMe: true,
+        redirect: '/dashboard',
+        fetchUser: true
       });
     }
   }
@@ -3199,8 +3206,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -3441,8 +3446,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   head: {
@@ -3495,11 +3498,13 @@ __webpack_require__.r(__webpack_exports__);
     createProject: function createProject(event) {
       var _this3 = this;
 
-      this.selectedUsers = $("#multiple").val();
+      //this.selectedUsers = $("#multiple").val();
       axios.post('http://jira-app.com/api/project', {
         project: this.project,
         selectedUsers: this.selectedUsers
       }).then(function (response) {
+        console.log(response);
+
         _this3.fetchProjects();
       });
     },
@@ -4209,6 +4214,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   head: {
@@ -4268,7 +4279,7 @@ __webpack_require__.r(__webpack_exports__);
     createUser: function createUser() {
       var _this3 = this;
 
-      console.log(this.user);
+      console.log('CREATE');
       axios.post('http://jira-app.com/api/user', {
         user: this.user
       }).then(function (response) {
@@ -4278,7 +4289,11 @@ __webpack_require__.r(__webpack_exports__);
     editUser: function editUser() {
       var _this4 = this;
 
+<<<<<<< HEAD
       console.log("ok");
+=======
+      console.log('EDIT');
+>>>>>>> 262c0e76dfcdb76416797644dce6d6597399f143
       axios.put('http://jira-app.com/api/user/' + this.user.user_id, {
         user: this.user
       }).then(function (response) {
@@ -4325,6 +4340,10 @@ __webpack_require__.r(__webpack_exports__);
       $('#user_modal').modal('hide');
       $('#delete_user_modal').modal('hide');
       $('.modal-backdrop.in').hide(); // removes the overlay
+    },
+    hideModalTeam: function hideModalTeam() {
+      $('#user_team').modal('hide');
+      $('.modal-backdrop.in').hide();
     },
     teamModal: function teamModal(user) {
       var _this7 = this;
@@ -8853,7 +8872,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".flash__message {\n  box-sizing: border-box;\n  padding: 15px 30px 15px 15px;\n  margin-bottom: 10px;\n  border: 1px solid transparent;\n  border-radius: 4px;\n  background-color: #cccccc;\n  position: relative;\n}\n\n.flash__message.success {\n  color: #3c763d;\n  background-color: #dff0d8;\n  border-color: #d6e9c6;\n}\n\n.flash__message.warning {\n  color: #8a6d3b;\n  background-color: #fcf8e3;\n  border-color: #faebcc;\n}\n\n.flash__message.error {\n  color: #a94442;\n  background-color: #f2dede;\n  border-color: #ebccd1;\n}\n\n.flash__message.info {\n  color: #37516A;\n  background-color: #F2F5FE;\n  border-color: rgb(223, 227, 240);\n}\n\n.flash__close-button {\n  box-sizing: border-box;\n  position: absolute;\n  top: 0px;\n  right: 0px;\n  color: inherit;\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  background-color: transparent;\n  background: none;\n  border: none;\n  cursor: pointer;\n  font-size: 18px;\n  line-height: 10px;\n  margin: 0;\n  padding: 8px;\n}\n\n.flash__close-button:active,.flash__close-button:focus {\n  outline: none;\n}\n", ""]);
+exports.push([module.i, ".flash__message {\r\n  box-sizing: border-box;\r\n  padding: 15px 30px 15px 15px;\r\n  margin-bottom: 10px;\r\n  border: 1px solid transparent;\r\n  border-radius: 4px;\r\n  background-color: #cccccc;\r\n  position: relative;\r\n}\r\n\r\n.flash__message.success {\r\n  color: #3c763d;\r\n  background-color: #dff0d8;\r\n  border-color: #d6e9c6;\r\n}\r\n\r\n.flash__message.warning {\r\n  color: #8a6d3b;\r\n  background-color: #fcf8e3;\r\n  border-color: #faebcc;\r\n}\r\n\r\n.flash__message.error {\r\n  color: #a94442;\r\n  background-color: #f2dede;\r\n  border-color: #ebccd1;\r\n}\r\n\r\n.flash__message.info {\r\n  color: #37516A;\r\n  background-color: #F2F5FE;\r\n  border-color: rgb(223, 227, 240);\r\n}\r\n\r\n.flash__close-button {\r\n  box-sizing: border-box;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  color: inherit;\r\n  -webkit-appearance: none;\r\n     -moz-appearance: none;\r\n          appearance: none;\r\n  background-color: transparent;\r\n  background: none;\r\n  border: none;\r\n  cursor: pointer;\r\n  font-size: 18px;\r\n  line-height: 10px;\r\n  margin: 0;\r\n  padding: 8px;\r\n}\r\n\r\n.flash__close-button:active,.flash__close-button:focus {\r\n  outline: none;\r\n}\r\n", ""]);
 
 // exports
 
@@ -8872,7 +8891,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.page-top i{\n    color: #c0cddc;\n    font-size: 26px;\n    margin-left:70%;\n}\n.page-top li{\n    list-style-type:none;\n    color: #c0cddc;\n    font-size: 20px;\n}\n.page-top ul{\n    margin-top:5%;\n    margin-left:7%;\n}\n\n", ""]);
+exports.push([module.i, "\n.page-top i{\n    color: #c0cddc;\n    font-size: 26px;\n    margin-left:70%;\n}\n.page-top li{\n    list-style-type:none;\n    color: #c0cddc;\n    font-size: 20px;\n}\n.page-top ul{\n    margin-top:5%;\n    margin-left:7%;\n}\n.page-top a{\n    text-decoration:none;\n    color:#c0cddc;\n    margin-left: 35px;\n}\n.page-top a:hover{\n    text-decoration:none;\n    color:#abe7ed;\n}\n\n", ""]);
 
 // exports
 
@@ -42876,6 +42895,7 @@ var render = function() {
                     _c(
                       "a",
                       {
+                        staticClass: "btn",
                         attrs: { href: "" },
                         on: {
                           click: function($event) {
@@ -42883,7 +42903,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_c("i", { staticClass: "icon-logout" })]
+                      [_vm._v("Logout")]
                     )
                   ])
                 : _vm._e()
@@ -43329,8 +43349,6 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(" ks ")]),
-                        _vm._v(" "),
                         _c(
                           "td",
                           { staticClass: "text-center" },
@@ -43414,8 +43432,6 @@ var staticRenderFns = [
         _c("th", [_vm._v(" Project Description ")]),
         _vm._v(" "),
         _c("th", [_vm._v(" Start Date ")]),
-        _vm._v(" "),
-        _c("th", [_vm._v(" Project Manager ")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v(" Tasks ")])
       ])
@@ -43685,21 +43701,23 @@ var render = function() {
                               }
                             },
                             _vm._l(_vm.users, function(user) {
-                              return _c(
-                                "option",
-                                {
-                                  key: user.user_id,
-                                  attrs: { "data-tokens": user.user_id },
-                                  domProps: { value: user.user_id }
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(user.first_name) +
-                                      " " +
-                                      _vm._s(user.last_name)
+                              return user.role_id != 1
+                                ? _c(
+                                    "option",
+                                    {
+                                      key: user.user_id,
+                                      attrs: { "data-tokens": user.user_id },
+                                      domProps: { value: user.user_id }
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(user.first_name) +
+                                          " " +
+                                          _vm._s(user.last_name)
+                                      )
+                                    ]
                                   )
-                                ]
-                              )
+                                : _vm._e()
                             }),
                             0
                           )
@@ -43790,8 +43808,6 @@ var render = function() {
                             " " + _vm._s(project.start_date.split(" ")[0]) + " "
                           )
                         ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(" ks ")]),
                         _vm._v(" "),
                         _c("td", [
                           _c(
@@ -43984,8 +44000,6 @@ var staticRenderFns = [
         _c("th", [_vm._v(" Project Description ")]),
         _vm._v(" "),
         _c("th", [_vm._v(" Start Date ")]),
-        _vm._v(" "),
-        _c("th", [_vm._v(" Project Team ")]),
         _vm._v(" "),
         _c("th", [_vm._v(" Modify ")])
       ])
@@ -44365,35 +44379,25 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _c(
+                        _vm._l(_vm.teamUsers, function(user) {
+                          return _c(
                             "option",
                             {
-                              attrs: { value: "", selected: "", disabled: "" }
+                              key: user.user_id,
+                              domProps: { value: user.user_id }
                             },
-                            [_vm._v("Select user...")]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.teamUsers, function(user) {
-                            return _c(
-                              "option",
-                              {
-                                key: user.user_id,
-                                domProps: { value: user.user_id }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                          " +
-                                    _vm._s(user.first_name) +
-                                    " " +
-                                    _vm._s(user.last_name) +
-                                    "\n                                      "
-                                )
-                              ]
-                            )
-                          })
-                        ],
-                        2
+                            [
+                              _vm._v(
+                                "\n                                          " +
+                                  _vm._s(user.first_name) +
+                                  " " +
+                                  _vm._s(user.last_name) +
+                                  "\n                                      "
+                              )
+                            ]
+                          )
+                        }),
+                        0
                       )
                     ]),
                     _vm._v(" "),
@@ -45603,44 +45607,6 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "labelPassword" } }, [
-                          _vm._v("Password")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.user.password,
-                              expression: "user.password"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "password",
-                            required: "",
-                            id: "labelPassword",
-                            name: "password",
-                            placeholder: "Enter password"
-                          },
-                          domProps: { value: _vm.user.password },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.user,
-                                "password",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
                         _c("label", { attrs: { for: "labelUsername" } }, [
                           _vm._v("Username")
                         ]),
@@ -45677,6 +45643,81 @@ var render = function() {
                           }
                         })
                       ]),
+                      _vm._v(" "),
+                      !_vm.edit
+                        ? _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "labelPassword" } }, [
+                              _vm._v("Password")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.password,
+                                  expression: "user.password"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "password",
+                                required: "",
+                                id: "labelPassword",
+                                name: "password",
+                                placeholder: "Enter password"
+                              },
+                              domProps: { value: _vm.user.password },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.user,
+                                    "password",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        : _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "labelPassword" } }, [
+                              _vm._v("Password")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.password,
+                                  expression: "user.password"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "password",
+                                id: "labelPassword",
+                                name: "password",
+                                placeholder: "Enter password"
+                              },
+                              domProps: { value: _vm.user.password },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.user,
+                                    "password",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -45987,7 +46028,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            " /\n                                        "
+                            " /\r\n                                        "
                           ),
                           _c(
                             "a",
@@ -46179,11 +46220,11 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                                " +
+                                          "\r\n                                                " +
                                             _vm._s(user.first_name) +
                                             " " +
                                             _vm._s(user.last_name) +
-                                            "\n                                            "
+                                            "\r\n                                            "
                                         )
                                       ]
                                     )
@@ -46209,7 +46250,7 @@ var render = function() {
                             {
                               staticClass: "btn green",
                               attrs: { type: "submit" },
-                              on: { click: _vm.hideModal }
+                              on: { click: _vm.hideModalTeam }
                             },
                             [_vm._v("Save")]
                           )
@@ -62663,8 +62704,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/entel/laravel/JiraApp/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/entel/laravel/JiraApp/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

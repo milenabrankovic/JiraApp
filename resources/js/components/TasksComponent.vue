@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <label for="assignedTo">Assigned to</label>
                                     <select class="bs-select form-control input-small" id="assignedTo" v-model="task.user_id">
-                                    <option value="" selected disabled>Select user...</option>
+                                   
                                         <option v-for="user in teamUsers" v-bind:key="user.user_id" :value="user.user_id">
                                             {{user.first_name}} {{user.last_name}}
                                         </option>

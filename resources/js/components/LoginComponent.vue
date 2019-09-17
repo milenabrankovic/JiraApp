@@ -40,7 +40,12 @@
             params: {
               username: app.username,
               password: app.password
-            }
+            },
+            success: function (data) {},
+            error: function (err) {this.error=true;},
+            rememberMe: true,
+            redirect: '/dashboard',
+            fetchUser: true,
         });   
       }
     }
