@@ -67,6 +67,7 @@ class ProjectController extends Controller
         $project->name = $request->project['project_name'];
         $project->description = $request->project['project_description'];
         $project->start_date = $request->project['start_date'];
+        $project->end_date = $request->project['end_date'];
         
         if($project->save())
         {   
@@ -147,6 +148,7 @@ class ProjectController extends Controller
         $project->name = $request->get('project')['project_name'];
         $project->description = $request->get('project')['project_description'];
         $project->start_date = $request->get('project')['start_date'];
+        $project->end_date = $request->get('project')['end_date'];
         
         if($project->save())
         {

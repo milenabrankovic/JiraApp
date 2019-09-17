@@ -1,4 +1,5 @@
 <template>
+<div class="page-content">
     <div class="portlet light">
         <div class="page-head">
             <div class="page-title">
@@ -14,6 +15,7 @@
         <div v-if="$auth.check() && $auth.user().role_id == 2">
             User
         </div>
+    </div>
     </div>
 </template>
 

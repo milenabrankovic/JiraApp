@@ -1,4 +1,6 @@
 <template>
+<div class="page-content">
+<flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
     <div class="portlet light">
         <div class="page-head">
             <div class="page-title">
@@ -8,6 +10,12 @@
         <div class="portlet-title">
             <div id="prefix_14383248406261" class="custom-alerts alert alert-success">Here you can configure your company name and sprint properties.</div>
         </div>
+
+        <form method="post" @submit.prevent="activateSprint">
+            <input type="hidden" name="_token" :value="csrf">
+            <button type="submit" class="btn btn-info">Check active sprints</button>
+        </form>
+        <br/>
         <form  @submit.prevent="updateInfo" method="POST" role="form">
         <input type="hidden" name="_token" :value="csrf">
         
@@ -23,8 +31,9 @@
             <label for="sprint_points">Sprint points</label>
             <input type="number" required class="form-control" id="sprint_points" name="sprint_points" placeholder="Enter sprint points" v-model="info.sprint_points">
         </div>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn green">Save</button>
         </form>
+    </div>
     </div>
 </template>
 
@@ -61,6 +70,17 @@ export default {
             axios.post('http://jira-app.com/api/info_update', {info: currentObject.info})
             .then(function (response) {
                 currentObject.flash(response.data.msg, response.data.status);
+                //console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        },
+        activateSprint(){
+            const currentObject = this;
+            axios.post('http://jira-app.com/activateSprint')
+            .then(function (response) {
+                currentObject.flash("Sprints updated successfully", 'success');
                 //console.log(response);
             })
             .catch(function (error) {

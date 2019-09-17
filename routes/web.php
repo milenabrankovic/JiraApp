@@ -32,4 +32,4 @@ Route::get('/dashboard', 'FrontendController@dashboard')->name('dashboard');
     Route::get('auth/refresh', 'AuthController@refresh');
   });
 
-  Route::get('/test', 'AuthController@test');
+  Route::post('/activateSprint', 'Admin\ConfController@activateSprint');

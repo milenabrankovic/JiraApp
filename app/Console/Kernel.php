@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\DB;
 use App\Models\Sprint;
+use App\Models\Project;
 use App\Models\Sprint_Info;
 use Carbon\Carbon;
 
@@ -34,15 +35,22 @@ class Kernel extends ConsoleKernel
             $sprint_length = $sprint_info->length;
             $active_sprints = Sprint::where('active', 1)->get();
             $current_date = Carbon::now()->startOfDay();
-
+            
             foreach($active_sprints as $sprint){
 
+                $project = Project::where('project_id', $sprint->project_id)->first();
+
                 $sprint_date = Carbon::parse($sprint->start_date);
+                $project_end_date = Carbon::parse($project->end_date);
 
-                if(Carbon::now() >= $sprint_date->addDays($sprint_length)){
-
+                if(Carbon::now() >= $project_end_date)
+                {   
                     Sprint::where(['project_id'=> $sprint->project_id, 'active'=> 1])->update(['active'=>0]);
-                    $new_sprint = new Sprint;
+                }
+                else if((Carbon::now() >= $sprint_date->addDays($sprint_length)))
+                {
+                    Sprint::where(['project_id'=> $sprint->project_id, 'active'=> 1])->update(['active'=>0]);
+                    $new_sprint = new Sprint();
                     $new_sprint->start_date = $current_date->format('Y-m-d H:i:s');
                     $new_sprint->sprint_info_id = $sprint_info->sprint_info_id;
                     $new_sprint->project_id = $sprint->project_id;

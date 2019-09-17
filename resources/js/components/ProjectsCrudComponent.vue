@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="page-content">
+        <flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
         <div class="portlet light ">
             <div class="page-head">
             <div class="page-title">
@@ -44,6 +45,10 @@
                                         <input type="date" required  class="form-control" id="labelStartDate" name="start_date" size="16"  v-model="project.start_date">
                                     </div>
                                     <div class="form-group">
+                                        <label for="labelEndDate">End Date</label>
+                                        <input type="date" required  class="form-control" id="labelEndDate" name="end_date" size="16"  v-model="project.end_date">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="multiple_user" class="control-label">Choose Employees</label><br/>
                                         <select class="form-control" id="multiple_user" multiple  v-model="selectedUsers">
                                             <option v-for="user in users" v-bind:key="user.user_id" :data-tokens="user.user_id" :value="user.user_id" v-if="user.role_id != 1">{{user.first_name}} {{user.last_name}}</option>
@@ -68,6 +73,7 @@
                                     <th> Project Name</th>
                                     <th> Project Description </th>
                                     <th> Start Date </th>
+                                    <th> End Date </th>
                                     <th> Modify </th>
                                 </tr>
                             </thead>
@@ -79,6 +85,7 @@
                                     <td> {{project.name}} </td>
                                     <td> {{project.description}} </td>
                                     <td> {{project.start_date.split(' ')[0]}} </td>
+                                    <td> {{project.end_date.split(' ')[0]}} </td>
                                     <td> 
                                         <a data-toggle="modal" @click="editModal(project)" href="#project_modal"><i class="icon-pencil font-green" data-toggle="modal" ></i></a> /
                                         <a href="#delete_project_modal" @click="openDeleteModal(project)" data-toggle="modal" style="color:red;"><i class="icon-trash"></i></a>
@@ -114,6 +121,7 @@
                 <div class="clearfix margin-bottom-20"> </div>
             </div>
         </div>
+        </div>
 </template>
 
 <script>
@@ -132,6 +140,7 @@ export default {
                 project_name: '',
                 project_description: '',
                 start_date: '',
+                end_date: '',
                 usersByProject: []
             },
             users: [],
@@ -164,7 +173,7 @@ export default {
         createProject(event){
             //this.selectedUsers = $("#multiple").val();
             axios.post('http://jira-app.com/api/project', {project: this.project, selectedUsers: this.selectedUsers})
-            .then(response => {console.log(response); this.fetchProjects();});
+            .then(response => {this.fetchProjects();});
         },
         editProject(){
             axios.put('http://jira-app.com/api/project/'+this.project.project_id, {project:this.project, selectedUsers: this.selectedUsers})
@@ -184,6 +193,7 @@ export default {
             this.project.project_name = '';
             this.project.project_description = '';
             this.project.start_date = '';
+            this.project.end_date = '';
             this.selectedUsers = [];
             $('#multiple').attr('data-placeholder', 'Choose Employee');
             $('.filter-option-inner-inner').text('Nothing selected');
@@ -200,6 +210,7 @@ export default {
             this.project.project_name = project.name;
             this.project.project_description = project.description;
             this.project.start_date = project.start_date.split(' ')[0];
+            this.project.end_date = project.end_date.split(' ')[0];
             var niz = [];
             var inner = '';
             axios.get('http://jira-app.com/api/users_by_project', {params: {project_id: project.project_id}})

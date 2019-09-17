@@ -1,4 +1,6 @@
 <template>
+<div class="page-content">
+ <flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
   <div class="portlet light ">
       <div class="page-head">
         <div class="page-title">
@@ -249,6 +251,7 @@
         </div>
     </div>
   </div>
+</div>  
 </template>
 
 <script>
@@ -298,7 +301,7 @@ export default {
                  .then(response => this.userProjects = response.data);
 
             axios.get('http://jira-app.com/api/tasks_by_project', {params:{user_id:this.$auth.user().user_id, project_id: 0}})
-                 .then(response => this.tasksByProject = response.data);
+                 .then(response => {console.log(response.data);this.tasksByProject = response.data});
 
             axios.get('http://jira-app.com/api/tasks_by_parent', {params:{user_id:this.$auth.user().user_id, project_id: 0}})
                  .then(response => this.tasksByParent = response.data);
@@ -310,7 +313,7 @@ export default {
         },
         changeTasks(){
             axios.get('http://jira-app.com/api/tasks_by_project', {params:{user_id:this.$auth.user().user_id, project_id: this.selectedProject}})
-                 .then(response => this.tasksByProject = response.data);
+                 .then(response => {this.tasksByProject = response.data});
         },
         changeTasksParent(){
             axios.get('http://jira-app.com/api/tasks_by_parent', {params:{user_id:this.$auth.user().user_id, project_id: this.selectedProjectParent}})

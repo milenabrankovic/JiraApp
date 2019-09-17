@@ -21,6 +21,7 @@ class Project extends JsonResource
             "name" => $this->name,
             "description" => $this->description,
             "start_date" => $this->start_date,
+            "end_date" => $this->end_date,
             "company_id" => $this->company_id,
             "created_at" => $this->created_at,            
             "updated_at" => $this->updated_at
