@@ -23,23 +23,6 @@
                 </form>
                 <div class="copyright"> {{ new Date().getFullYear() }} © Powered by Jira.</div>
               </div>
-              <form class="login-form" @submit.prevent="login" method="post">
-                      
-                  <h3 class="form-title font-green">Log In</h3>
-                  <h4 class="form-title font-green text-center">{{company_name}}</h4>
-                  
-                  <div class="form-group">
-                      <label class="control-label visible-ie8 visible-ie9">Username</label>
-                      <input class="form-control form-control-solid placeholder-no-fix" type="text" id="username" v-model="username" placeholder="Username" name="username"  required/> </div>
-                      <div class="form-group">
-                      <label class="control-label visible-ie8 visible-ie9">Password</label>
-                      <input class="form-control form-control-solid placeholder-no-fix" type="password" id="password" v-model="password" placeholder="Password" name="password" required/> </div>
-                      
-                    <div class="form-actions">
-                      <button type="submit" class="btn green uppercase ">Login</button>
-                  </div>
-              </form>
-              <div class="copyright"> {{ new Date().getFullYear() }} © Powered by Jira. </div>
           </div>
         </div>
 </template>
@@ -55,22 +38,14 @@
     },
     created(){
         this.fetchData();
-<<<<<<< HEAD
     },  
-=======
-    },
->>>>>>> 1fb10efec973b9133ce52a4e36acf8765634a816
     methods: {
       fetchData(){
             axios.get('http://jira-app.com/api/info')
                 .then(response => 
                 {
-<<<<<<< HEAD
                     this.company_name = response.data.info.company.name;
                     
-=======
-                  this.company_name = response.data.info.company.name;
->>>>>>> 1fb10efec973b9133ce52a4e36acf8765634a816
                 });
       },
       login(){
@@ -95,13 +70,7 @@
   
 </script>
 <style>
-<<<<<<< HEAD
   #loginForm{
     margin: 0 auto;
   }
-=======
- #loginForm{
-    margin: 0 auto;
- }
->>>>>>> 1fb10efec973b9133ce52a4e36acf8765634a816
 </style>

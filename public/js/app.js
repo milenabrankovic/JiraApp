@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-  module.exports = {
+module.exports = {
     
     request: function (req, token) {
         this.options.http._setHeaders.call(this, req, {Authorization: 'Bearer ' + token});
@@ -3091,6 +3091,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3885,6 +3886,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3908,6 +3915,7 @@ __webpack_require__.r(__webpack_exports__);
       selectedProject: '',
       selectedProjectParent: '',
       selectedStatus: '',
+      isParent: '',
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
@@ -3925,6 +3933,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.fetchData();
+    this.checkParent();
   },
   methods: {
     fetchData: function fetchData() {
@@ -3961,8 +3970,19 @@ __webpack_require__.r(__webpack_exports__);
         return _this.active_sprint_id = response.data.sprint_id;
       });
     },
-    changeTasks: function changeTasks() {
+    checkParent: function checkParent() {
       var _this2 = this;
+
+      axios.get('http://jira-app.com/api/check_parent', {
+        params: {
+          user_id: this.$auth.user().user_id
+        }
+      }).then(function (response) {
+        _this2.isParent = response.data.length;
+      });
+    },
+    changeTasks: function changeTasks() {
+      var _this3 = this;
 
       axios.get('http://jira-app.com/api/tasks_by_project', {
         params: {
@@ -3970,11 +3990,11 @@ __webpack_require__.r(__webpack_exports__);
           project_id: this.selectedProject
         }
       }).then(function (response) {
-        _this2.tasksByProject = response.data;
+        _this3.tasksByProject = response.data;
       });
     },
     changeTasksParent: function changeTasksParent() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get('http://jira-app.com/api/tasks_by_parent', {
         params: {
@@ -3982,7 +4002,7 @@ __webpack_require__.r(__webpack_exports__);
           project_id: this.selectedProjectParent
         }
       }).then(function (response) {
-        return _this3.tasksByParent = response.data;
+        return _this4.tasksByParent = response.data;
       });
     },
     createTaskModal: function createTaskModal() {
@@ -4015,7 +4035,7 @@ __webpack_require__.r(__webpack_exports__);
       this.getTeamUsers(); //console.log(this.task);
     },
     createTask: function createTask() {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.post('http://jira-app.com/api/create_task', {
         params: {
@@ -4024,22 +4044,22 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         console.log(response);
 
-        _this4.fetchData();
+        _this5.fetchData();
       });
     },
     editTaskParent: function editTaskParent(task) {
-      var _this5 = this;
+      var _this6 = this;
 
       axios.put('http://jira-app.com/api/edit_task', {
         params: {
           task: this.task
         }
       }).then(function (response) {
-        _this5.fetchData();
+        _this6.fetchData();
       });
     },
     getTeamUsers: function getTeamUsers() {
-      var _this6 = this;
+      var _this7 = this;
 
       axios.get('http://jira-app.com/api/team_users', {
         params: {
@@ -4047,11 +4067,11 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         console.log(response);
-        _this6.teamUsers = response.data;
+        _this7.teamUsers = response.data;
       });
     },
     editStatus: function editStatus() {
-      var _this7 = this;
+      var _this8 = this;
 
       axios.put('http://jira-app.com/api/edit_status', {
         params: {
@@ -4059,7 +4079,7 @@ __webpack_require__.r(__webpack_exports__);
           status_id: this.selectedStatus
         }
       }).then(function (response) {
-        _this7.fetchData();
+        _this8.fetchData();
       });
     },
     hideModal: function hideModal() {
@@ -4338,7 +4358,6 @@ __webpack_require__.r(__webpack_exports__);
     editUser: function editUser() {
       var _this4 = this;
 
-      console.log('EDIT');
       axios.put('http://jira-app.com/api/user/' + this.user.user_id, {
         user: this.user
       }).then(function (response) {
@@ -4387,7 +4406,7 @@ __webpack_require__.r(__webpack_exports__);
       $('.modal-backdrop.in').hide(); // removes the overlay
     },
     hideModalTeam: function hideModalTeam() {
-      $('#user_team').modal('hide');
+      $('#team_modal').modal('hide');
       $('.modal-backdrop.in').hide();
     },
     teamModal: function teamModal(user) {
@@ -8917,7 +8936,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".flash__message {\r\n  box-sizing: border-box;\r\n  padding: 15px 30px 15px 15px;\r\n  margin-bottom: 10px;\r\n  border: 1px solid transparent;\r\n  border-radius: 4px;\r\n  background-color: #cccccc;\r\n  position: relative;\r\n}\r\n\r\n.flash__message.success {\r\n  color: #3c763d;\r\n  background-color: #dff0d8;\r\n  border-color: #d6e9c6;\r\n}\r\n\r\n.flash__message.warning {\r\n  color: #8a6d3b;\r\n  background-color: #fcf8e3;\r\n  border-color: #faebcc;\r\n}\r\n\r\n.flash__message.error {\r\n  color: #a94442;\r\n  background-color: #f2dede;\r\n  border-color: #ebccd1;\r\n}\r\n\r\n.flash__message.info {\r\n  color: #37516A;\r\n  background-color: #F2F5FE;\r\n  border-color: rgb(223, 227, 240);\r\n}\r\n\r\n.flash__close-button {\r\n  box-sizing: border-box;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  color: inherit;\r\n  -webkit-appearance: none;\r\n     -moz-appearance: none;\r\n          appearance: none;\r\n  background-color: transparent;\r\n  background: none;\r\n  border: none;\r\n  cursor: pointer;\r\n  font-size: 18px;\r\n  line-height: 10px;\r\n  margin: 0;\r\n  padding: 8px;\r\n}\r\n\r\n.flash__close-button:active,.flash__close-button:focus {\r\n  outline: none;\r\n}\r\n", ""]);
+exports.push([module.i, ".flash__message {\n  box-sizing: border-box;\n  padding: 15px 30px 15px 15px;\n  margin-bottom: 10px;\n  border: 1px solid transparent;\n  border-radius: 4px;\n  background-color: #cccccc;\n  position: relative;\n}\n\n.flash__message.success {\n  color: #3c763d;\n  background-color: #dff0d8;\n  border-color: #d6e9c6;\n}\n\n.flash__message.warning {\n  color: #8a6d3b;\n  background-color: #fcf8e3;\n  border-color: #faebcc;\n}\n\n.flash__message.error {\n  color: #a94442;\n  background-color: #f2dede;\n  border-color: #ebccd1;\n}\n\n.flash__message.info {\n  color: #37516A;\n  background-color: #F2F5FE;\n  border-color: rgb(223, 227, 240);\n}\n\n.flash__close-button {\n  box-sizing: border-box;\n  position: absolute;\n  top: 0px;\n  right: 0px;\n  color: inherit;\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  background-color: transparent;\n  background: none;\n  border: none;\n  cursor: pointer;\n  font-size: 18px;\n  line-height: 10px;\n  margin: 0;\n  padding: 8px;\n}\n\n.flash__close-button:active,.flash__close-button:focus {\n  outline: none;\n}\n", ""]);
 
 // exports
 
@@ -42896,11 +42915,11 @@ var render = function() {
       _vm._m(1),
       _vm._v(" "),
       _vm.$auth.check() && _vm.$auth.user().role_id == 1
-        ? _c("div", [_vm._v("\r\n            Admin\r\n        ")])
+        ? _c("div", [_vm._v("\n            Admin\n        ")])
         : _vm._e(),
       _vm._v(" "),
       _vm.$auth.check() && _vm.$auth.user().role_id == 2
-        ? _c("div", [_vm._v("\r\n            User\r\n        ")])
+        ? _c("div", [_vm._v("\n            User\n        ")])
         : _vm._e()
     ])
   ])
@@ -43023,115 +43042,119 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "login" }, [
     _c("div", { staticClass: "content", attrs: { id: "loginForm" } }, [
-      _vm.error
-        ? _c("div", { staticClass: "alert alert-danger" }, [
-            _c("p", [
-              _vm._v(
-                "There was an error, unable to sign in with those credentials."
-              )
+      _c("div", [
+        _vm.error
+          ? _c("div", { staticClass: "alert alert-danger" }, [
+              _c("p", [
+                _vm._v(
+                  "There was an error, unable to sign in with those credentials."
+                )
+              ])
             ])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "form",
-        {
-          staticClass: "login-form",
-          attrs: { method: "post" },
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.login($event)
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            staticClass: "login-form",
+            attrs: { method: "post" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.login($event)
+              }
             }
-          }
-        },
-        [
-          _c("h3", { staticClass: "form-title font-green" }, [
-            _vm._v("Log In")
-          ]),
-          _vm._v(" "),
-          _c("h4", { staticClass: "form-title font-green text-center" }, [
-            _vm._v(_vm._s(_vm.company_name))
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "label",
-              { staticClass: "control-label visible-ie8 visible-ie9" },
-              [_vm._v("Username")]
-            ),
+          },
+          [
+            _c("h3", { staticClass: "form-title font-green" }, [
+              _vm._v("Log In")
+            ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.username,
-                  expression: "username"
-                }
-              ],
-              staticClass: "form-control form-control-solid placeholder-no-fix",
-              attrs: {
-                type: "text",
-                id: "username",
-                placeholder: "Username",
-                name: "username",
-                required: ""
-              },
-              domProps: { value: _vm.username },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.username = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "label",
-              { staticClass: "control-label visible-ie8 visible-ie9" },
-              [_vm._v("Password")]
-            ),
+            _c("h4", { staticClass: "form-title font-green text-center" }, [
+              _vm._v(_vm._s(_vm.company_name))
+            ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.password,
-                  expression: "password"
-                }
-              ],
-              staticClass: "form-control form-control-solid placeholder-no-fix",
-              attrs: {
-                type: "password",
-                id: "password",
-                placeholder: "Password",
-                name: "password",
-                required: ""
-              },
-              domProps: { value: _vm.password },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label visible-ie8 visible-ie9" },
+                [_vm._v("Username")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.username,
+                    expression: "username"
                   }
-                  _vm.password = $event.target.value
+                ],
+                staticClass:
+                  "form-control form-control-solid placeholder-no-fix",
+                attrs: {
+                  type: "text",
+                  id: "username",
+                  placeholder: "Username",
+                  name: "username",
+                  required: ""
+                },
+                domProps: { value: _vm.username },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.username = $event.target.value
+                  }
                 }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _vm._m(0)
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "copyright" }, [
-        _vm._v(" " + _vm._s(new Date().getFullYear()) + " © Powered by Jira. ")
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label visible-ie8 visible-ie9" },
+                [_vm._v("Password")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.password,
+                    expression: "password"
+                  }
+                ],
+                staticClass:
+                  "form-control form-control-solid placeholder-no-fix",
+                attrs: {
+                  type: "password",
+                  id: "password",
+                  placeholder: "Password",
+                  name: "password",
+                  required: ""
+                },
+                domProps: { value: _vm.password },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.password = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "copyright" }, [
+          _vm._v(" " + _vm._s(new Date().getFullYear()) + " © Powered by Jira.")
+        ])
       ])
     ])
   ])
@@ -44250,20 +44273,22 @@ var render = function() {
         _vm._v(" "),
         _vm._m(1),
         _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn green",
-            staticStyle: { float: "right" },
-            attrs: { "data-toggle": "modal", href: "#create_task_modal" },
-            on: {
-              click: function($event) {
-                return _vm.createTaskModal()
-              }
-            }
-          },
-          [_vm._v(" + New task ")]
-        ),
+        _vm.isParent != 0
+          ? _c(
+              "a",
+              {
+                staticClass: "btn green",
+                staticStyle: { float: "right" },
+                attrs: { "data-toggle": "modal", href: "#create_task_modal" },
+                on: {
+                  click: function($event) {
+                    return _vm.createTaskModal()
+                  }
+                }
+              },
+              [_vm._v(" + New task ")]
+            )
+          : _vm._e(),
         _vm._v(" "),
         _c(
           "div",
@@ -44500,7 +44525,7 @@ var render = function() {
                                   expression: "task.status_id"
                                 }
                               ],
-                              staticClass: "bs-select form-control input-small",
+                              staticClass: "bs-select form-control ",
                               attrs: {
                                 id: "select_task_status_edit",
                                 disabled: ""
@@ -44535,9 +44560,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\r\n                                             " +
+                                    "\n                                             " +
                                       _vm._s(status.name) +
-                                      "\r\n                                        "
+                                      "\n                                        "
                                   )
                                 ]
                               )
@@ -44562,7 +44587,7 @@ var render = function() {
                                   expression: "task.user_id"
                                 }
                               ],
-                              staticClass: "bs-select form-control input-small",
+                              staticClass: "bs-select form-control ",
                               attrs: { id: "assignedTo" },
                               on: {
                                 change: function($event) {
@@ -44585,25 +44610,56 @@ var render = function() {
                                 }
                               }
                             },
-                            _vm._l(_vm.teamUsers, function(user) {
-                              return _c(
+                            [
+                              _c(
                                 "option",
                                 {
-                                  key: user.user_id,
-                                  domProps: { value: user.user_id }
+                                  attrs: {
+                                    disabled: "",
+                                    selected: "",
+                                    value: ""
+                                  }
+                                },
+                                [_vm._v("Choose employee")]
+                              ),
+                              _vm._v(" "),
+                              _vm._l(_vm.teamUsers, function(user) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: user.user_id,
+                                    domProps: { value: user.user_id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(user.first_name) +
+                                        " " +
+                                        _vm._s(user.last_name) +
+                                        "\n                                        "
+                                    )
+                                  ]
+                                )
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                {
+                                  key: _vm.$auth.user().user_id,
+                                  domProps: { value: _vm.$auth.user().user_id }
                                 },
                                 [
                                   _vm._v(
-                                    "\r\n                                            " +
-                                      _vm._s(user.first_name) +
+                                    "\n                                            " +
+                                      _vm._s(_vm.$auth.user().first_name) +
                                       " " +
-                                      _vm._s(user.last_name) +
-                                      "\r\n                                        "
+                                      _vm._s(_vm.$auth.user().last_name) +
+                                      "\n                                        "
                                   )
                                 ]
                               )
-                            }),
-                            0
+                            ],
+                            2
                           )
                         ]),
                         _vm._v(" "),
@@ -44704,9 +44760,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                        " +
+                            "\n                        " +
                               _vm._s(project.name) +
-                              "\r\n                    "
+                              "\n                    "
                           )
                         ]
                       )
@@ -44894,9 +44950,9 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\r\n                                    " +
+                                          "\n                                    " +
                                             _vm._s(status.name) +
-                                            "\r\n                                "
+                                            "\n                                "
                                         )
                                       ]
                                     )
@@ -44999,9 +45055,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                        " +
+                            "\n                        " +
                               _vm._s(project.name) +
-                              "\r\n                    "
+                              "\n                    "
                           )
                         ]
                       )
@@ -45339,8 +45395,7 @@ var render = function() {
                                           expression: "task.status_id"
                                         }
                                       ],
-                                      staticClass:
-                                        "bs-select form-control input-small",
+                                      staticClass: "bs-select form-control",
                                       attrs: { id: "select_task_status_edit" },
                                       on: {
                                         change: function($event) {
@@ -45377,9 +45432,9 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\r\n                                        " +
+                                            "\n                                        " +
                                               _vm._s(status.name) +
-                                              "\r\n                                    "
+                                              "\n                                    "
                                           )
                                         ]
                                       )
@@ -45406,8 +45461,7 @@ var render = function() {
                                           expression: "task.user_id"
                                         }
                                       ],
-                                      staticClass:
-                                        "bs-select form-control input-small",
+                                      staticClass: "bs-select form-control",
                                       attrs: { id: "assignedTo" },
                                       on: {
                                         change: function($event) {
@@ -45435,25 +45489,50 @@ var render = function() {
                                         }
                                       }
                                     },
-                                    _vm._l(_vm.teamUsers, function(user) {
-                                      return _c(
+                                    [
+                                      _vm._l(_vm.teamUsers, function(user) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            key: user.user_id,
+                                            domProps: { value: user.user_id }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                        " +
+                                                _vm._s(user.first_name) +
+                                                " " +
+                                                _vm._s(user.last_name) +
+                                                "\n                                    "
+                                            )
+                                          ]
+                                        )
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
                                         "option",
                                         {
-                                          key: user.user_id,
-                                          domProps: { value: user.user_id }
+                                          key: _vm.$auth.user().user_id,
+                                          domProps: {
+                                            value: _vm.$auth.user().user_id
+                                          }
                                         },
                                         [
                                           _vm._v(
-                                            "\r\n                                        " +
-                                              _vm._s(user.first_name) +
+                                            "\n                                            " +
+                                              _vm._s(
+                                                _vm.$auth.user().first_name
+                                              ) +
                                               " " +
-                                              _vm._s(user.last_name) +
-                                              "\r\n                                    "
+                                              _vm._s(
+                                                _vm.$auth.user().last_name
+                                              ) +
+                                              "\n                                        "
                                           )
                                         ]
                                       )
-                                    }),
-                                    0
+                                    ],
+                                    2
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -46305,7 +46384,7 @@ var render = function() {
                               ]
                             ),
                             _vm._v(
-                              " /\r\n                                        "
+                              " /\n                                        "
                             ),
                             _c(
                               "a",
@@ -46508,11 +46587,11 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\r\n                                                " +
+                                            "\n                                                " +
                                               _vm._s(user.first_name) +
                                               " " +
                                               _vm._s(user.last_name) +
-                                              "\r\n                                            "
+                                              "\n                                            "
                                           )
                                         ]
                                       )
@@ -62997,8 +63076,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\JiraApp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/entel/laravel/JiraApp/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/entel/laravel/JiraApp/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

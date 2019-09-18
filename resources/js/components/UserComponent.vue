@@ -1,10 +1,6 @@
 <template>
 <div class="page-content">
-<<<<<<< HEAD
 <flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
-=======
-    <flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
->>>>>>> 1fb10efec973b9133ce52a4e36acf8765634a816
         <div class="portlet light ">
             <div class="page-head">
             <div class="page-title">
@@ -280,7 +276,7 @@ export default {
             $('.modal-backdrop.in' ).hide(); // removes the overlay
         },
         hideModalTeam(){
-            $('#user_team').modal('hide');
+            $('#team_modal').modal('hide');
             $('.modal-backdrop.in' ).hide();
         },
         teamModal(user){
