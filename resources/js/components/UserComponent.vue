@@ -1,6 +1,5 @@
 <template>
 <div class="page-content">
-<flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
         <div class="portlet light ">
             <div class="page-head">
             <div class="page-title">
@@ -194,6 +193,7 @@ export default {
     data(){
         return{
             test: '1',
+            jwt: '',
             users: [],
             user: {
                 first_name: '',
@@ -216,6 +216,7 @@ export default {
         });
         this.fetchUsers();
         this.fetchRoles();
+        this.jwt = this.$auth;
     },
     watch:{
         $route (to, from){

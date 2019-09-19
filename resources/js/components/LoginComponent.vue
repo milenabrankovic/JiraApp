@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <flash-message transitionIn="animated swing" class="myCustomClass"></flash-message>
         <div class="content" id="loginForm">
               <!-- BEGIN LOGIN FORM -->
               <div  >

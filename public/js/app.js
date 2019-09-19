@@ -3092,6 +3092,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4288,7 +4289,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   head: {
@@ -4299,6 +4299,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       test: '1',
+      jwt: '',
       users: [],
       user: {
         first_name: '',
@@ -4320,6 +4321,7 @@ __webpack_require__.r(__webpack_exports__);
     });
     this.fetchUsers();
     this.fetchRoles();
+    this.jwt = this.$auth;
   },
   watch: {
     $route: function $route(to, from) {
@@ -43040,124 +43042,136 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "login" }, [
-    _c("div", { staticClass: "content", attrs: { id: "loginForm" } }, [
-      _c("div", [
-        _vm.error
-          ? _c("div", { staticClass: "alert alert-danger" }, [
-              _c("p", [
-                _vm._v(
-                  "There was an error, unable to sign in with those credentials."
-                )
+  return _c(
+    "div",
+    { staticClass: "login" },
+    [
+      _c("flash-message", {
+        staticClass: "myCustomClass",
+        attrs: { transitionIn: "animated swing" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "content", attrs: { id: "loginForm" } }, [
+        _c("div", [
+          _vm.error
+            ? _c("div", { staticClass: "alert alert-danger" }, [
+                _c("p", [
+                  _vm._v(
+                    "There was an error, unable to sign in with those credentials."
+                  )
+                ])
               ])
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            staticClass: "login-form",
-            attrs: { method: "post" },
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.login($event)
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              staticClass: "login-form",
+              attrs: { method: "post" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.login($event)
+                }
               }
-            }
-          },
-          [
-            _c("h3", { staticClass: "form-title font-green" }, [
-              _vm._v("Log In")
-            ]),
-            _vm._v(" "),
-            _c("h4", { staticClass: "form-title font-green text-center" }, [
-              _vm._v(_vm._s(_vm.company_name))
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                { staticClass: "control-label visible-ie8 visible-ie9" },
-                [_vm._v("Username")]
-              ),
+            },
+            [
+              _c("h3", { staticClass: "form-title font-green" }, [
+                _vm._v("Log In")
+              ]),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.username,
-                    expression: "username"
-                  }
-                ],
-                staticClass:
-                  "form-control form-control-solid placeholder-no-fix",
-                attrs: {
-                  type: "text",
-                  id: "username",
-                  placeholder: "Username",
-                  name: "username",
-                  required: ""
-                },
-                domProps: { value: _vm.username },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.username = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                { staticClass: "control-label visible-ie8 visible-ie9" },
-                [_vm._v("Password")]
-              ),
+              _c("h4", { staticClass: "form-title font-green text-center" }, [
+                _vm._v(_vm._s(_vm.company_name))
+              ]),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.password,
-                    expression: "password"
-                  }
-                ],
-                staticClass:
-                  "form-control form-control-solid placeholder-no-fix",
-                attrs: {
-                  type: "password",
-                  id: "password",
-                  placeholder: "Password",
-                  name: "password",
-                  required: ""
-                },
-                domProps: { value: _vm.password },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  { staticClass: "control-label visible-ie8 visible-ie9" },
+                  [_vm._v("Username")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.username,
+                      expression: "username"
                     }
-                    _vm.password = $event.target.value
+                  ],
+                  staticClass:
+                    "form-control form-control-solid placeholder-no-fix",
+                  attrs: {
+                    type: "text",
+                    id: "username",
+                    placeholder: "Username",
+                    name: "username",
+                    required: ""
+                  },
+                  domProps: { value: _vm.username },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.username = $event.target.value
+                    }
                   }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _vm._m(0)
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "copyright" }, [
-          _vm._v(" " + _vm._s(new Date().getFullYear()) + " © Powered by Jira.")
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  { staticClass: "control-label visible-ie8 visible-ie9" },
+                  [_vm._v("Password")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password,
+                      expression: "password"
+                    }
+                  ],
+                  staticClass:
+                    "form-control form-control-solid placeholder-no-fix",
+                  attrs: {
+                    type: "password",
+                    id: "password",
+                    placeholder: "Password",
+                    name: "password",
+                    required: ""
+                  },
+                  domProps: { value: _vm.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.password = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "copyright" }, [
+            _vm._v(
+              " " + _vm._s(new Date().getFullYear()) + " © Powered by Jira."
+            )
+          ])
         ])
       ])
-    ])
-  ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -45757,790 +45771,398 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "page-content" },
-    [
-      _c("flash-message", {
-        staticClass: "myCustomClass",
-        attrs: { transitionIn: "animated swing" }
-      }),
+  return _c("div", { staticClass: "page-content" }, [
+    _c("div", { staticClass: "portlet light " }, [
+      _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "portlet light " }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn green",
-            staticStyle: { float: "right" },
-            attrs: { "data-toggle": "modal", href: "#user_modal" },
-            on: { click: _vm.createModal }
-          },
-          [_vm._v(" + New user ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "modal fade",
-            attrs: { tabindex: "-1", role: "dialog", id: "user_modal" }
-          },
-          [
-            _c(
-              "div",
-              { staticClass: "modal-dialog", attrs: { role: "document" } },
-              [
-                _c("div", { staticClass: "modal-content" }, [
-                  _c("div", { staticClass: "modal-header" }, [
-                    _vm._m(2),
-                    _vm._v(" "),
-                    !_vm.edit
-                      ? _c("h5", { staticClass: "modal-title" }, [
-                          _vm._v("New User")
-                        ])
-                      : _c("h5", { staticClass: "modal-title" }, [
-                          _vm._v("Edit User")
-                        ])
-                  ]),
+      _vm._m(1),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn green",
+          staticStyle: { float: "right" },
+          attrs: { "data-toggle": "modal", href: "#user_modal" },
+          on: { click: _vm.createModal }
+        },
+        [_vm._v(" + New user ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: { tabindex: "-1", role: "dialog", id: "user_modal" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _vm._m(2),
                   _vm._v(" "),
-                  _c(
-                    "form",
-                    {
-                      attrs: { role: "form", method: "post", id: "user_form" },
-                      on: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                          _vm.edit ? _vm.editUser() : _vm.createUser()
-                        }
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "modal-body" }, [
-                        _c("input", {
-                          attrs: { type: "hidden", name: "_token" },
-                          domProps: { value: _vm.csrf }
-                        }),
-                        _vm._v(" "),
-                        _vm.edit
-                          ? _c("input", {
-                              attrs: {
-                                type: "hidden",
-                                name: "_method",
-                                value: "put"
-                              }
-                            })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.edit
-                          ? _c("input", {
-                              attrs: { type: "hidden", id: "user_id_to_edit" }
-                            })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("label", { attrs: { for: "labelFirstName" } }, [
-                            _vm._v("First Name")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.user.first_name,
-                                expression: "user.first_name"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              id: "labelFirstName",
-                              name: "first_name",
-                              placeholder: "Enter first name"
-                            },
-                            domProps: { value: _vm.user.first_name },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.user,
-                                  "first_name",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("label", { attrs: { for: "labelLastName" } }, [
-                            _vm._v("Last Name")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.user.last_name,
-                                expression: "user.last_name"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              required: "",
-                              id: "labelLastName",
-                              name: "last_name",
-                              placeholder: "Enter last name"
-                            },
-                            domProps: { value: _vm.user.last_name },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.user,
-                                  "last_name",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("label", { attrs: { for: "labelEmail" } }, [
-                            _vm._v("Email")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.user.email,
-                                expression: "user.email"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "email",
-                              required: "",
-                              id: "labelEmail",
-                              name: "email",
-                              placeholder: "Enter email"
-                            },
-                            domProps: { value: _vm.user.email },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.user, "email", $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("label", { attrs: { for: "labelUsername" } }, [
-                            _vm._v("Username")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.user.username,
-                                expression: "user.username"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              required: "",
-                              id: "labelUsername",
-                              name: "username",
-                              placeholder: "Enter username"
-                            },
-                            domProps: { value: _vm.user.username },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.user,
-                                  "username",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        !_vm.edit
-                          ? _c("div", { staticClass: "form-group" }, [
-                              _c("label", { attrs: { for: "labelPassword" } }, [
-                                _vm._v("Password")
-                              ]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.user.password,
-                                    expression: "user.password"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  type: "password",
-                                  required: "",
-                                  id: "labelPassword",
-                                  name: "password",
-                                  placeholder: "Enter password"
-                                },
-                                domProps: { value: _vm.user.password },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.user,
-                                      "password",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("div", { staticClass: "form-group" }, [
-                              _c("label", { attrs: { for: "labelPassword" } }, [
-                                _vm._v("Password")
-                              ]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.user.password,
-                                    expression: "user.password"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  type: "password",
-                                  id: "labelPassword",
-                                  name: "password",
-                                  placeholder: "Enter password"
-                                },
-                                domProps: { value: _vm.user.password },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.user,
-                                      "password",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "form-group",
-                            attrs: { id: "rolediv" }
-                          },
-                          [
-                            _c(
-                              "label",
-                              {
-                                staticClass: "control-label",
-                                attrs: { for: "role" }
-                              },
-                              [_vm._v("Choose Role")]
-                            ),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.user.role,
-                                    expression: "user.role"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: { id: "role", title: "Choose Role" },
-                                on: {
-                                  change: function($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call($event.target.options, function(o) {
-                                        return o.selected
-                                      })
-                                      .map(function(o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.$set(
-                                      _vm.user,
-                                      "role",
-                                      $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
-                                    )
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "option",
-                                  {
-                                    attrs: {
-                                      value: "",
-                                      selected: "",
-                                      disabled: ""
-                                    }
-                                  },
-                                  [_vm._v("Select Role...")]
-                                ),
-                                _vm._v(" "),
-                                _vm._l(_vm.roles, function(role) {
-                                  return _c(
-                                    "option",
-                                    {
-                                      key: role.role_id,
-                                      attrs: { "data-tokens": role.role_id },
-                                      domProps: { value: role.role_id }
-                                    },
-                                    [_vm._v(_vm._s(role.name))]
-                                  )
-                                })
-                              ],
-                              2
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm.user.role != 1
-                          ? _c(
-                              "div",
-                              {
-                                staticClass: "form-group",
-                                attrs: { id: "leaderdiv" }
-                              },
-                              [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "control-label",
-                                    attrs: { for: "leader" }
-                                  },
-                                  [_vm._v("Choose Leader")]
-                                ),
-                                _c("br"),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.user.leader,
-                                        expression: "user.leader"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: {
-                                      id: "leader",
-                                      title: "Choose Leader"
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.user,
-                                          "leader",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "option",
-                                      {
-                                        attrs: {
-                                          value: "",
-                                          selected: "",
-                                          disabled: ""
-                                        }
-                                      },
-                                      [_vm._v("Select Leader...")]
-                                    ),
-                                    _vm._v(" "),
-                                    _vm._l(_vm.users, function(user) {
-                                      return user.role_id != 1
-                                        ? _c(
-                                            "option",
-                                            {
-                                              key: user.user_id,
-                                              attrs: {
-                                                "data-tokens": user.user_id
-                                              },
-                                              domProps: { value: user.user_id }
-                                            },
-                                            [
-                                              _vm._v(
-                                                _vm._s(user.first_name) +
-                                                  " " +
-                                                  _vm._s(user.last_name)
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e()
-                                    })
-                                  ],
-                                  2
-                                )
-                              ]
-                            )
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "modal-footer" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn dark btn-outline",
-                            attrs: { type: "button", "data-dismiss": "modal" }
-                          },
-                          [_vm._v("Close")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: !_vm.edit,
-                                expression: "!edit"
-                              }
-                            ],
-                            staticClass: "btn green",
-                            attrs: {
-                              type: "submit",
-                              id: "modal_submit_button"
-                            },
-                            on: { click: _vm.hideModal }
-                          },
-                          [_vm._v("Create")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.edit,
-                                expression: "edit"
-                              }
-                            ],
-                            staticClass: "btn green",
-                            attrs: { type: "submit" },
-                            on: { click: _vm.hideModal }
-                          },
-                          [_vm._v("Update")]
-                        )
+                  !_vm.edit
+                    ? _c("h5", { staticClass: "modal-title" }, [
+                        _vm._v("New User")
                       ])
-                    ]
-                  )
-                ])
-              ]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _c("div", { staticClass: "portlet-body" }, [
-          _c("div", { staticClass: "table-scrollable" }, [
-            _c("table", { staticClass: "table table-hover" }, [
-              _vm._m(4),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                [
-                  _vm.users && !_vm.users.length
-                    ? _c("tr", { staticClass: "no-data" }, [
-                        _c(
-                          "td",
-                          {
-                            staticClass: "text-center",
-                            attrs: { colspan: "7" }
-                          },
-                          [_vm._v("Users not found")]
-                        )
+                    : _c("h5", { staticClass: "modal-title" }, [
+                        _vm._v("Edit User")
                       ])
-                    : _vm._l(_vm.users, function(user) {
-                        return _c("tr", { key: user.user_id }, [
-                          _c("td", [
-                            _vm._v(" " + _vm._s(user.first_name) + " ")
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _vm._v(" " + _vm._s(user.last_name) + " ")
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(" " + _vm._s(user.username) + " ")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(" " + _vm._s(user.email) + " ")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(" " + _vm._s(user.name) + " ")]),
-                          _vm._v(" "),
-                          user.name == "user"
-                            ? _c("td", [
-                                _c(
-                                  "a",
-                                  {
-                                    attrs: {
-                                      "data-toggle": "modal",
-                                      href: "#team_modal"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.teamModal(user)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "icon-users font-green",
-                                      staticStyle: { "margin-left": "10px" },
-                                      attrs: { "data-toggle": "modal" }
-                                    })
-                                  ]
-                                )
-                              ])
-                            : _c("td"),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c(
-                              "a",
-                              {
-                                attrs: {
-                                  "data-toggle": "modal",
-                                  href: "#user_modal"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.editModal(user)
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "icon-pencil font-green",
-                                  attrs: { "data-toggle": "modal" }
-                                })
-                              ]
-                            ),
-                            _vm._v(
-                              " /\n                                        "
-                            ),
-                            _c(
-                              "a",
-                              {
-                                staticStyle: { color: "red" },
-                                attrs: {
-                                  href: "#delete_user_modal",
-                                  "data-toggle": "modal"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.openDeleteModal(user)
-                                  }
-                                }
-                              },
-                              [_c("i", { staticClass: "icon-trash" })]
-                            )
-                          ])
-                        ])
-                      })
-                ],
-                2
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "modal fade",
-                attrs: {
-                  tabindex: "-1",
-                  role: "dialog",
-                  id: "delete_user_modal"
-                }
-              },
-              [
+                ]),
+                _vm._v(" "),
                 _c(
-                  "div",
-                  { staticClass: "modal-dialog", attrs: { role: "document" } },
+                  "form",
+                  {
+                    attrs: { role: "form", method: "post", id: "user_form" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.edit ? _vm.editUser() : _vm.createUser()
+                      }
+                    }
+                  },
                   [
-                    _c("div", { staticClass: "modal-content" }, [
-                      _vm._m(5),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("input", {
+                        attrs: { type: "hidden", name: "_token" },
+                        domProps: { value: _vm.csrf }
+                      }),
                       _vm._v(" "),
-                      _c(
-                        "form",
-                        {
-                          attrs: { role: "form", method: "post" },
-                          on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                              return _vm.deleteUser($event)
-                            }
-                          }
-                        },
-                        [
-                          _c("input", {
-                            attrs: { type: "hidden", name: "_token" },
-                            domProps: { value: _vm.csrf }
-                          }),
-                          _vm._v(" "),
-                          _c("input", {
+                      _vm.edit
+                        ? _c("input", {
                             attrs: {
                               type: "hidden",
                               name: "_method",
-                              value: "delete"
+                              value: "put"
                             }
-                          }),
-                          _vm._v(" "),
-                          _c("input", {
-                            attrs: { type: "hidden", id: "user_id_to_delete" }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "modal-footer" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn dark btn-outline",
-                                attrs: {
-                                  type: "button",
-                                  "data-dismiss": "modal"
-                                }
-                              },
-                              [_vm._v("Close")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn red-haze",
-                                attrs: { type: "submit" },
-                                on: { click: _vm.hideModal }
-                              },
-                              [_vm._v("Delete")]
-                            )
-                          ])
-                        ]
-                      )
-                    ])
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "modal fade",
-                attrs: { tabindex: "-1", role: "dialog", id: "team_modal" }
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "modal-dialog", attrs: { role: "document" } },
-                  [
-                    _c("div", { staticClass: "modal-content" }, [
-                      _vm._m(6),
+                          })
+                        : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "form",
-                        {
-                          attrs: { role: "form", method: "post" },
+                      _vm.edit
+                        ? _c("input", {
+                            attrs: { type: "hidden", id: "user_id_to_edit" }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "labelFirstName" } }, [
+                          _vm._v("First Name")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.first_name,
+                              expression: "user.first_name"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "labelFirstName",
+                            name: "first_name",
+                            placeholder: "Enter first name"
+                          },
+                          domProps: { value: _vm.user.first_name },
                           on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                              return _vm.editTeam($event)
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.user,
+                                "first_name",
+                                $event.target.value
+                              )
                             }
                           }
-                        },
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "labelLastName" } }, [
+                          _vm._v("Last Name")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.last_name,
+                              expression: "user.last_name"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            required: "",
+                            id: "labelLastName",
+                            name: "last_name",
+                            placeholder: "Enter last name"
+                          },
+                          domProps: { value: _vm.user.last_name },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.user,
+                                "last_name",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "labelEmail" } }, [
+                          _vm._v("Email")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.email,
+                              expression: "user.email"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "email",
+                            required: "",
+                            id: "labelEmail",
+                            name: "email",
+                            placeholder: "Enter email"
+                          },
+                          domProps: { value: _vm.user.email },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.user, "email", $event.target.value)
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "labelUsername" } }, [
+                          _vm._v("Username")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.username,
+                              expression: "user.username"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            required: "",
+                            id: "labelUsername",
+                            name: "username",
+                            placeholder: "Enter username"
+                          },
+                          domProps: { value: _vm.user.username },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.user,
+                                "username",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      !_vm.edit
+                        ? _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "labelPassword" } }, [
+                              _vm._v("Password")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.password,
+                                  expression: "user.password"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "password",
+                                required: "",
+                                id: "labelPassword",
+                                name: "password",
+                                placeholder: "Enter password"
+                              },
+                              domProps: { value: _vm.user.password },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.user,
+                                    "password",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        : _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "labelPassword" } }, [
+                              _vm._v("Password")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.password,
+                                  expression: "user.password"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "password",
+                                id: "labelPassword",
+                                name: "password",
+                                placeholder: "Enter password"
+                              },
+                              domProps: { value: _vm.user.password },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.user,
+                                    "password",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group", attrs: { id: "rolediv" } },
                         [
-                          _c("div", { staticClass: "modal-body" }, [
-                            _c("input", {
-                              attrs: { type: "hidden", name: "_token" },
-                              domProps: { value: _vm.csrf }
-                            }),
-                            _vm._v(" "),
-                            _c("input", {
-                              attrs: {
-                                type: "hidden",
-                                name: "_method",
-                                value: "put"
+                          _c(
+                            "label",
+                            {
+                              staticClass: "control-label",
+                              attrs: { for: "role" }
+                            },
+                            [_vm._v("Choose Role")]
+                          ),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.role,
+                                  expression: "user.role"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { id: "role", title: "Choose Role" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.user,
+                                    "role",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
                               }
-                            }),
-                            _vm._v(" "),
-                            _c("input", {
-                              attrs: {
-                                type: "hidden",
-                                id: "user_id_to_update_team"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "form-group" }, [
+                            },
+                            [
+                              _c(
+                                "option",
+                                {
+                                  attrs: {
+                                    value: "",
+                                    selected: "",
+                                    disabled: ""
+                                  }
+                                },
+                                [_vm._v("Select Role...")]
+                              ),
+                              _vm._v(" "),
+                              _vm._l(_vm.roles, function(role) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: role.role_id,
+                                    attrs: { "data-tokens": role.role_id },
+                                    domProps: { value: role.role_id }
+                                  },
+                                  [_vm._v(_vm._s(role.name))]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm.user.role != 1
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "form-group",
+                              attrs: { id: "leaderdiv" }
+                            },
+                            [
                               _c(
                                 "label",
-                                { staticClass: "control-label col-md-3" },
-                                [_vm._v("Team")]
+                                {
+                                  staticClass: "control-label",
+                                  attrs: { for: "leader" }
+                                },
+                                [_vm._v("Choose Leader")]
                               ),
+                              _c("br"),
                               _vm._v(" "),
                               _c(
                                 "select",
@@ -46549,12 +46171,15 @@ var render = function() {
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: _vm.team,
-                                      expression: "team"
+                                      value: _vm.user.leader,
+                                      expression: "user.leader"
                                     }
                                   ],
                                   staticClass: "form-control",
-                                  attrs: { multiple: "" },
+                                  attrs: {
+                                    id: "leader",
+                                    title: "Choose Leader"
+                                  },
                                   on: {
                                     change: function($event) {
                                       var $$selectedVal = Array.prototype.filter
@@ -46568,78 +46193,430 @@ var render = function() {
                                             "_value" in o ? o._value : o.value
                                           return val
                                         })
-                                      _vm.team = $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
+                                      _vm.$set(
+                                        _vm.user,
+                                        "leader",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
                                     }
                                   }
                                 },
-                                _vm._l(_vm.users, function(user) {
-                                  return user.role_id != 1
-                                    ? _c(
-                                        "option",
-                                        {
-                                          key: user.user_id,
-                                          attrs: {
-                                            "data-tokens": user.user_id
+                                [
+                                  _c(
+                                    "option",
+                                    {
+                                      attrs: {
+                                        value: "",
+                                        selected: "",
+                                        disabled: ""
+                                      }
+                                    },
+                                    [_vm._v("Select Leader...")]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.users, function(user) {
+                                    return user.role_id != 1
+                                      ? _c(
+                                          "option",
+                                          {
+                                            key: user.user_id,
+                                            attrs: {
+                                              "data-tokens": user.user_id
+                                            },
+                                            domProps: { value: user.user_id }
                                           },
-                                          domProps: { value: user.user_id }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                " +
+                                          [
+                                            _vm._v(
                                               _vm._s(user.first_name) +
-                                              " " +
-                                              _vm._s(user.last_name) +
-                                              "\n                                            "
-                                          )
-                                        ]
-                                      )
-                                    : _vm._e()
-                                }),
-                                0
+                                                " " +
+                                                _vm._s(user.last_name)
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  })
+                                ],
+                                2
                               )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "modal-footer" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn dark btn-outline",
-                                attrs: {
-                                  type: "button",
-                                  "data-dismiss": "modal"
-                                }
-                              },
-                              [_vm._v("Close")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn green",
-                                attrs: { type: "submit" },
-                                on: { click: _vm.hideModalTeam }
-                              },
-                              [_vm._v("Save")]
-                            )
-                          ])
-                        ]
+                            ]
+                          )
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn dark btn-outline",
+                          attrs: { type: "button", "data-dismiss": "modal" }
+                        },
+                        [_vm._v("Close")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.edit,
+                              expression: "!edit"
+                            }
+                          ],
+                          staticClass: "btn green",
+                          attrs: { type: "submit", id: "modal_submit_button" },
+                          on: { click: _vm.hideModal }
+                        },
+                        [_vm._v("Create")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.edit,
+                              expression: "edit"
+                            }
+                          ],
+                          staticClass: "btn green",
+                          attrs: { type: "submit" },
+                          on: { click: _vm.hideModal }
+                        },
+                        [_vm._v("Update")]
                       )
                     ])
                   ]
                 )
-              ]
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _vm._m(3),
+      _vm._v(" "),
+      _c("div", { staticClass: "portlet-body" }, [
+        _c("div", { staticClass: "table-scrollable" }, [
+          _c("table", { staticClass: "table table-hover" }, [
+            _vm._m(4),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              [
+                _vm.users && !_vm.users.length
+                  ? _c("tr", { staticClass: "no-data" }, [
+                      _c(
+                        "td",
+                        { staticClass: "text-center", attrs: { colspan: "7" } },
+                        [_vm._v("Users not found")]
+                      )
+                    ])
+                  : _vm._l(_vm.users, function(user) {
+                      return _c("tr", { key: user.user_id }, [
+                        _c("td", [_vm._v(" " + _vm._s(user.first_name) + " ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" " + _vm._s(user.last_name) + " ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" " + _vm._s(user.username) + " ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" " + _vm._s(user.email) + " ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" " + _vm._s(user.name) + " ")]),
+                        _vm._v(" "),
+                        user.name == "user"
+                          ? _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    "data-toggle": "modal",
+                                    href: "#team_modal"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.teamModal(user)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "icon-users font-green",
+                                    staticStyle: { "margin-left": "10px" },
+                                    attrs: { "data-toggle": "modal" }
+                                  })
+                                ]
+                              )
+                            ])
+                          : _c("td"),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                "data-toggle": "modal",
+                                href: "#user_modal"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.editModal(user)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "icon-pencil font-green",
+                                attrs: { "data-toggle": "modal" }
+                              })
+                            ]
+                          ),
+                          _vm._v(
+                            " /\n                                        "
+                          ),
+                          _c(
+                            "a",
+                            {
+                              staticStyle: { color: "red" },
+                              attrs: {
+                                href: "#delete_user_modal",
+                                "data-toggle": "modal"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.openDeleteModal(user)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "icon-trash" })]
+                          )
+                        ])
+                      ])
+                    })
+              ],
+              2
             )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "clearfix margin-bottom-20" })
-      ])
-    ],
-    1
-  )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: { tabindex: "-1", role: "dialog", id: "delete_user_modal" }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "modal-dialog", attrs: { role: "document" } },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        attrs: { role: "form", method: "post" },
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.deleteUser($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("input", {
+                          attrs: { type: "hidden", name: "_token" },
+                          domProps: { value: _vm.csrf }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          attrs: {
+                            type: "hidden",
+                            name: "_method",
+                            value: "delete"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          attrs: { type: "hidden", id: "user_id_to_delete" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-footer" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn dark btn-outline",
+                              attrs: { type: "button", "data-dismiss": "modal" }
+                            },
+                            [_vm._v("Close")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn red-haze",
+                              attrs: { type: "submit" },
+                              on: { click: _vm.hideModal }
+                            },
+                            [_vm._v("Delete")]
+                          )
+                        ])
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: { tabindex: "-1", role: "dialog", id: "team_modal" }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "modal-dialog", attrs: { role: "document" } },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        attrs: { role: "form", method: "post" },
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.editTeam($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c("input", {
+                            attrs: { type: "hidden", name: "_token" },
+                            domProps: { value: _vm.csrf }
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              type: "hidden",
+                              name: "_method",
+                              value: "put"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              type: "hidden",
+                              id: "user_id_to_update_team"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              { staticClass: "control-label col-md-3" },
+                              [_vm._v("Team")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.team,
+                                    expression: "team"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { multiple: "" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.team = $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  }
+                                }
+                              },
+                              _vm._l(_vm.users, function(user) {
+                                return user.role_id != 1
+                                  ? _c(
+                                      "option",
+                                      {
+                                        key: user.user_id,
+                                        attrs: { "data-tokens": user.user_id },
+                                        domProps: { value: user.user_id }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                                " +
+                                            _vm._s(user.first_name) +
+                                            " " +
+                                            _vm._s(user.last_name) +
+                                            "\n                                            "
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              }),
+                              0
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-footer" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn dark btn-outline",
+                              attrs: { type: "button", "data-dismiss": "modal" }
+                            },
+                            [_vm._v("Close")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn green",
+                              attrs: { type: "submit" },
+                              on: { click: _vm.hideModalTeam }
+                            },
+                            [_vm._v("Save")]
+                          )
+                        ])
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "clearfix margin-bottom-20" })
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
