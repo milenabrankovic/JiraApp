@@ -10,7 +10,7 @@
       <div class="portlet-title">
         <div id="prefix_14383248406266" class="custom-alerts alert alert-success">Here you can manipulate with tasks and see list of your tasks as same as list of tasks that you assigned to your team sorted by projects.</div>
     </div>
-        <a class="btn green" data-toggle="modal" style="float:right" href="#create_task_modal" @click="createTaskModal()"> + New task </a>
+        <a class="btn green" data-toggle="modal" style="float:right" href="#create_task_modal" @click="createTaskModal()" v-if="isParent!=0"> + New task </a>
         <div class="modal fade" tabindex="-1" role="dialog"   id="create_task_modal">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -46,7 +46,7 @@
                                 </div> 
                                 <div class="form-group">
                                     <label for="select_task_status_edit">Status</label>
-                                    <select class="bs-select form-control input-small" id="select_task_status_edit" disabled v-model="task.status_id">
+                                    <select class="bs-select form-control " id="select_task_status_edit" disabled v-model="task.status_id">
                                         <option v-for="status in statuses" v-bind:key="status.status_id" :value="status.status_id">
                                              {{status.name}}
                                         </option>
@@ -54,10 +54,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="assignedTo">Assigned to</label>
-                                    <select class="bs-select form-control input-small" id="assignedTo" v-model="task.user_id">
-                                   
+                                    <select class="bs-select form-control " id="assignedTo" v-model="task.user_id">
+                                        <option disabled selected value="">Choose employee</option>
                                         <option v-for="user in teamUsers" v-bind:key="user.user_id" :value="user.user_id">
                                             {{user.first_name}} {{user.last_name}}
+                                        </option>
+                                        <option v-bind:key="$auth.user().user_id" :value="$auth.user().user_id">
+                                            {{$auth.user().first_name}} {{$auth.user().last_name}}
                                         </option>
                                     </select>
                                 </div>
@@ -222,7 +225,7 @@
                             </div> 
                             <div class="form-group">
                                 <label for="select_task_status_edit">Status</label>
-                                <select class="bs-select form-control input-small" id="select_task_status_edit" v-model="task.status_id">
+                                <select class="bs-select form-control" id="select_task_status_edit" v-model="task.status_id">
                                     <option v-for="status in statuses" v-bind:key="status.status_id" :value="status.status_id">
                                         {{status.name}}
                                     </option>
@@ -230,10 +233,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="assignedTo">Assigned to</label>
-                                <select class="bs-select form-control input-small" id="assignedTo" v-model="task.user_id">
+                                <select class="bs-select form-control" id="assignedTo" v-model="task.user_id">
                                     <option v-for="user in teamUsers" v-bind:key="user.user_id" :value="user.user_id">
                                         {{user.first_name}} {{user.last_name}}
                                     </option>
+                                    <option v-bind:key="$auth.user().user_id" :value="$auth.user().user_id">
+                                            {{$auth.user().first_name}} {{$auth.user().last_name}}
+                                        </option>
                                 </select>
                             </div>
                            <br/>
@@ -278,6 +284,7 @@ export default {
             selectedProject: '',
             selectedProjectParent: '',
             selectedStatus: '',
+            isParent: '',
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content') 
         }
     },
@@ -294,6 +301,7 @@ export default {
     },
     created(){
         this.fetchData();
+        this.checkParent();
     },
     methods:{
         fetchData(){
@@ -310,6 +318,10 @@ export default {
                  .then(response => this.statuses = response.data);
             axios.get('http://jira-app.com/api/active_sprint')
                  .then(response => this.active_sprint_id = response.data.sprint_id);
+        },
+        checkParent(){
+            axios.get('http://jira-app.com/api/check_parent', {params:{user_id:this.$auth.user().user_id}})
+                 .then(response => {this.isParent = response.data.length; });
         },
         changeTasks(){
             axios.get('http://jira-app.com/api/tasks_by_project', {params:{user_id:this.$auth.user().user_id, project_id: this.selectedProject}})

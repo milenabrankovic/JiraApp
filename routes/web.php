@@ -21,6 +21,7 @@ Route::get('/dashboard', 'FrontendController@dashboard')->name('dashboard');
   Route::get('/user_projects', 'FrontendController@user_projects');
   Route::get('/tasks', 'FrontendController@tasks');
   Route::get('/login', 'FrontendController@login')->name('login');
+  Route::get('/error', 'FrontendController@error')->name('error');
 
 
   Route::post('auth/login', 'AuthController@login')->name('login');
@@ -33,3 +34,4 @@ Route::get('/dashboard', 'FrontendController@dashboard')->name('dashboard');
   });
 
   Route::post('/activateSprint', 'Admin\ConfController@activateSprint');
+  Route::get('/test', 'FrontendController@test');

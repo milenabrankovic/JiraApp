@@ -56,7 +56,7 @@ export default {
         fetchData(){
             axios.get('http://jira-app.com/api/info')
                 .then(response => 
-                {
+                {   console.log(response);
                     this.info.company_name = response.data.info.company.name;
                     this.info.sprint_length = response.data.info.sprint.length;
                     this.info.sprint_points = response.data.info.sprint.points;

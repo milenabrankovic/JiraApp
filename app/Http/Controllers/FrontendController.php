@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class FrontendController extends Controller
 {
@@ -51,5 +53,16 @@ class FrontendController extends Controller
     {
         return view('login');
     }
+
+    public function error()
+    {
+        return view('error');
+    }
+
+    // public function test()
+    // {
+    //     $user = User::find(Auth::user()->user_id);
+    //     dd($user);
+    // }
 
 }

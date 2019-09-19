@@ -1,28 +1,13 @@
 <?php
-
 namespace App\Http\Middleware;
-use App\Models\User;
-
-use JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
-use Illuminate\Support\Facades\Auth;
-
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role_id === 1) {
+        if(Auth::user()->role_id === 2) {
             return $next($request);
         }
         else {

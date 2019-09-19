@@ -194,6 +194,7 @@ export default {
     data(){
         return{
             test: '1',
+            jwt: '',
             users: [],
             user: {
                 first_name: '',
@@ -216,6 +217,7 @@ export default {
         });
         this.fetchUsers();
         this.fetchRoles();
+        this.jwt = this.$auth;
     },
     watch:{
         $route (to, from){
@@ -276,7 +278,7 @@ export default {
             $('.modal-backdrop.in' ).hide(); // removes the overlay
         },
         hideModalTeam(){
-            $('#user_team').modal('hide');
+            $('#team_modal').modal('hide');
             $('.modal-backdrop.in' ).hide();
         },
         teamModal(user){

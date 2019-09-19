@@ -65,6 +65,14 @@ class UserController extends Controller
         
         return $users;
     }
+
+    public function check_parent(Request $request)
+    {
+        $parent_id = $request->get('user_id');
+        $users = User::where('parent_id', $parent_id)->get();
+
+        return $users;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -82,6 +90,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {   
+        $validator = Validator::make($request->all(), [ 
+            'user.first_name' => 'required',
+            'user.last_name' => 'required',
+            'user.username' => 'required',
+            'user.email' => 'required',
+            'user.password' => 'required',
+            'user.role' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+
+            //pass validator errors as errors object for ajax response
+            //return response()->json(['errors'=>$validator->errors()]);
+            return response()->json([
+                'status' => 'error',
+                'msg'    => 'Invalid input'
+            ], 200);
+        }
+
         $user = $this->user;
         $user->first_name = $request->user['first_name'];
         $user->last_name = $request->user['last_name'];

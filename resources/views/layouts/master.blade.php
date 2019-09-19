@@ -14,6 +14,13 @@
                     <header-component></header-component>
                     <nav-component></nav-component>
                     <div class="page-content-wrapper">
+                            @if (\Session::has('msg'))
+                            <div class="alert alert-success">
+                                <ul>
+                                    <li>{!! \Session::get('msg') !!}</li>
+                                </ul>
+                            </div>
+                        @endif
                         <keep-alive>
                                 <router-view></router-view>
                         </keep-alive>
