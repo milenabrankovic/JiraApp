@@ -33,5 +33,5 @@ Route::get('/dashboard', 'FrontendController@dashboard')->name('dashboard');
     Route::get('auth/refresh', 'AuthController@refresh');
   });
 
-  Route::post('/activateSprint', 'Admin\ConfController@activateSprint');
+  Route::get('/activateSprint', 'Admin\ConfController@activateSprint');
   Route::get('/test', 'FrontendController@test');

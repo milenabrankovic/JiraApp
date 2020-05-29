@@ -6,9 +6,9 @@
                 <div class="page-logo">
                     <a href="/" style="color:#fff; text-decoration:none"><h3>{{company_name}}</h3></a>
                 </div>
-                <div class="page-top">
+                <div class="page-top" >
                     <ul>
-                        <li v-if="$auth.check()" class="pull-right">
+                        <li v-if="$auth.check()" class="pull-right"  style="text-align: center;">
                             {{$auth.user().first_name}} {{$auth.user().last_name}}
                             <a href="" class="btn" @click="logout()">Logout</a>
                         </li>

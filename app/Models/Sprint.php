@@ -10,7 +10,7 @@ class Sprint extends Model
 
     public $primaryKey = 'sprint_id';
 
-
+    protected $fillable = ['sprint_info_id'];
 
     public function tasks()
     {

@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => 'auth:api'], function() {
 
     //admin
-    Route::group(['middleware' => 'auth.role'], function() {
+   // Route::group(['middleware' => 'auth.role'], function() {
         Route::resource('user', 'Admin\UserController');
         Route::resource('project', 'Admin\ProjectController');
         Route::get('team', 'Admin\UserController@team');
@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth:api'], function() {
         Route::get('roles', 'Admin\UserController@roles')->name('user.roles');
         Route::get('team', 'Admin\UserController@team')->name('user.team');
         Route::get('projects_by_user', 'Admin\ProjectController@projects_by_user');
-    });
+    //});
     
     //user
     Route::get('tasks_by_project', 'TaskController@tasks_by_project');
@@ -39,7 +39,6 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::put('edit_task', 'TaskController@edit_task');
     Route::post('create_task', 'TaskController@create_task');
     Route::get('active_sprint', 'TaskController@active_sprint');
-
 });
 
 

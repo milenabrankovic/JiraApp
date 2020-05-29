@@ -21,11 +21,30 @@ class ConfController extends Controller
             $sprint_length = $sprint_info->length;
             $active_sprints = Sprint::where('active', 1)->get();
             $current_date = Carbon::now()->startOfDay();
-            
+
+            $projects = Project::where('start_date', $current_date)->get();
+           /// dd($current_date->format('Y-m-d H:i:s'));
+
+            foreach($projects as $project)
+            {
+                $check = Sprint::where('project_id', $project->project_id)->first();
+                //dd($check);
+                if($check == null)
+                {
+                    $sprint = new Sprint;
+                    $sprint->start_date = $current_date->format('Y-m-d H:i:s');
+                    $sprint->sprint_info_id = $sprint_info->sprint_info_id;
+                    $sprint->project_id = $project->project_id;
+                    $sprint->active = 1;
+                    $sprint->save();
+                }
+               
+            }
+
             foreach($active_sprints as $sprint){
-
+               
                 $project = Project::where('project_id', $sprint->project_id)->first();
-
+                //dd($project);
                 $sprint_date = Carbon::parse($sprint->start_date);
                 $project_end_date = Carbon::parse($project->end_date);
 

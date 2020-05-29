@@ -35,6 +35,19 @@ class Kernel extends ConsoleKernel
             $sprint_length = $sprint_info->length;
             $active_sprints = Sprint::where('active', 1)->get();
             $current_date = Carbon::now()->startOfDay();
+
+            $projects = Project::where('start_date', $current_date)->get();
+           /// dd($current_date->format('Y-m-d H:i:s'));
+
+            foreach($projects as $project)
+            {
+                $sprint = new Sprint;
+                $sprint->start_date = $current_date->format('Y-m-d H:i:s');
+                $sprint->sprint_info_id = $sprint_info->sprint_info_id;
+                $sprint->project_id = $project->project_id;
+                $sprint->active = 1;
+                $sprint->save();
+            }
             
             foreach($active_sprints as $sprint){
 
