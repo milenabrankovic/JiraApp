@@ -10,6 +10,7 @@ class Sprint extends Model
 
     public $primaryKey = 'sprint_id';
 
+    protected $fillable = ['sprint_info_id'];
 
     public function tasks()
     {
@@ -19,5 +20,10 @@ class Sprint extends Model
     public function sprint_info()
     {
         return $this->belongsTo('App\Models\Sprint_Info', 'sprint_info_id');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo('App\Models\Project', 'project_id');
     }
 }

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\User;
 use App\Models\Company;
 use App\Http\Resources\Project as ProjectResource;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -34,6 +36,13 @@ class ProjectController extends Controller
         return ProjectResource::collection($projects);
     }
 
+    public function projects_by_user(Request $request)
+    {   
+        $id = $request->get('id');
+        $projects = User::find($id)->project;
+
+        return $projects;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -52,21 +61,23 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {   
-        
+        //return ($request->get('selectedUsers'));
         $project = $this->project;
 
         $project->name = $request->project['project_name'];
         $project->description = $request->project['project_description'];
         $project->start_date = $request->project['start_date'];
+        $project->end_date = $request->project['end_date'];
         
         if($project->save())
-        {
+        {   
+            //return $project->project_id;
             //return new ProjectResource($project);
             
-            if($request->selectedUsers != null && count($request->selectedUsers)>0) //users je name attr; provera da li je projekat dodeljen zaposlenom
+            if($request->get('selectedUsers') != null) //users je name attr; provera da li je projekat dodeljen zaposlenom
             {
               // $this->assign_employee($request, $project->project_id);
-                $users = $request->selectedUsers;
+                $users = $request->get('selectedUsers');
                 $data = [];
                 
                 foreach($users as $user)
@@ -133,18 +144,19 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {   
         $project = Project::findOrFail($id);
-        
-        $project->name = $request->input('name');
-        $project->description = $request->input('description');
-        $project->start_date = $request->input('start_date');
+
+        $project->name = $request->get('project')['project_name'];
+        $project->description = $request->get('project')['project_description'];
+        $project->start_date = $request->get('project')['start_date'];
+        $project->end_date = $request->get('project')['end_date'];
         
         if($project->save())
         {
             //return new ProjectResource($project);
-            
-            if($request->input('users') != null) //users je name attr; provera da li je projekat dodeljen zaposlenom
+           
+            if($request->get('selectedUsers') != null) //users je name attr; provera da li je projekat dodeljen zaposlenom
             {
-                $users_new = $request->input('users');
+                $users_new = $request->get('selectedUsers');
                 $users_old = \DB::table('project_user')->select('user_id')->where('project_id', $project->project_id)->get()->toArray();
 
                 $array_new = [];
@@ -154,16 +166,15 @@ class ProjectController extends Controller
                     $array_old [] = $old->user_id;
                 }
 
-                foreach($users_new as $new){
-                    $array_new [] = $new['user_id'];
-                }
+                // foreach($users_new as $new){
+                //     $array_new [] = $new['user_id'];
+                // }
                 
-                $result_delete = array_diff($array_old,$array_new);
-                $result_add = array_diff($array_new,$array_old);
+                $result_delete = array_diff($array_old,$users_new);
+                $result_add = array_diff($users_new,$array_old);
 
-                $data_delete = [];
                 $data_add = [];
-                
+
                 foreach($result_delete as $id_delete)
                 {
                     \DB::table('project_user')
@@ -179,7 +190,7 @@ class ProjectController extends Controller
                         'user_id' => $id_add
                     ];
                 }
-
+                
                 \DB::table('project_user')->insert($data_add);
                 
             }
@@ -198,6 +209,9 @@ class ProjectController extends Controller
 
         if($project->delete())
         {
+            DB::table('project_user')->where('project_id', $id)->delete();
+            DB::table('task')->where('project_id', $id)->delete();
+            
             return new ProjectResource($project);
         }
     }

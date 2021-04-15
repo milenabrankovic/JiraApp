@@ -1,9 +1,6 @@
 @extends('layouts.master')
 
-@section('title')
+{{-- @section('title')
     Configuration
-@endsection
-
-@section('content')
-    <conf-component></conf-component>
-@endsection
+@endsection --}}
+<conf-component></conf-component>
